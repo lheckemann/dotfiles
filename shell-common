@@ -1,0 +1,48 @@
+if ps -q "$SSH_AGENT_PID" && [ -w "$SSH_AUTH_SOCK" ] ; then
+    SSH_ENV="$HOME/.ssh/agent_env"
+    function start_agent {
+        /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
+        chmod 600 "${SSH_ENV}"
+        . "${SSH_ENV}" > /dev/null
+        /usr/bin/ssh-add
+    }
+
+    # Source SSH settings, if applicable
+    if [ -f "${SSH_ENV}" ]; then
+        . "${SSH_ENV}" > /dev/null
+        #ps ${SSH_AGENT_PID} doesn't work under cywgin
+        ps -ef | grep ${SSH_AGENT_PID} | grep ssh-agent$ > /dev/null || {
+            start_agent
+        }
+    else
+        start_agent
+    fi
+fi
+
+alias open=xdg-open
+alias o=xdg-open
+alias :q=exit
+export EDITOR=vim
+alias tmux=tmux\ -2
+alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
+
+_PB_ENV=~/perl5/perlbrew/etc/bashrc
+[ -f "$_PB_ENV" ] && source "$_PB_ENV"
+
+TERM_EM=$(basename -- "$(ps -ocommand= -p $PPID | awk '{ print $1 }')")
+case $TERM_EM in
+    konsole|lxterminal|gnome-terminal-server)
+        export TERM=xterm-256color ;;
+esac
+
+
+
+#export ANDROID_HOME=$HOME/software/android-sdk-linux
+#
+#android() {
+#    export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
+#    unset -f android
+#    android "$@"
+#}
+
+#bind -f ~/.inputrc

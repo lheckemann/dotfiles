@@ -1,0 +1,12 @@
+XTerm*foreground: grey
+XTerm*background: black
+XTerm*metaSendsEscape: true
+XTerm*allowWindowOps: true
+XTerm*termName: xterm-256color
+
+UXTerm*foreground: grey
+UXTerm*background: black
+UXTerm*metaSendsEscape: true
+!UXTerm*allowWindowOps: true
+UXTerm*termName: xterm-256color
+UXTerm*font: -misc-fixedpl-medium-r-semicondensed--13-120-75-75-c-60-iso10646-1 
