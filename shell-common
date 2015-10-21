@@ -1,5 +1,4 @@
-set -x
-if ! ps -q "$SSH_AGENT_PID" && [ -w "$SSH_AUTH_SOCK" ] ; then
+if ! ps aux | grep -v grep | grep "$SSH_AGENT_PID" &>/dev/null && [ -w "$SSH_AUTH_SOCK" ] ; then
     SSH_ENV="$HOME/.ssh/agent_env"
     function start_agent {
         /usr/bin/ssh-agent | sed 's/^echo/#echo/' > "${SSH_ENV}"
@@ -47,4 +46,3 @@ esac
 #}
 
 #bind -f ~/.inputrc
-set +x
