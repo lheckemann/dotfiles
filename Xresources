@@ -1,3 +1,6 @@
+! To allow this file to be overwritten by setup.sh
+! c30aa1879bc864389e1f88f1562751d3
+
 XTerm*foreground: grey
 XTerm*background: black
 XTerm*metaSendsEscape: true

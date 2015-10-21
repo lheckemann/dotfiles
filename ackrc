@@ -1,0 +1,6 @@
+# Allow dotfiles to overwrite this file:
+# c30aa1879bc864389e1f88f1562751d3
+
+--ignore-dir=.ropeproject
+--ignore-file=ext:swp
+--pager=less -r
