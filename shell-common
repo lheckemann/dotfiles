@@ -35,7 +35,37 @@ case $TERM_EM in
         export TERM=xterm-256color ;;
 esac
 
+add_to_path() {
+    local path_arr already_there OLDIFS
+    case $SHELL in
+    */bash)
+        IFS=: read -a path_arr <<< "$PATH"
+        ;;
+    */zsh)
+        OLDIFS="$IFS"
+        IFS=:
+        echo $PATH | read -A path_arr
+        IFS=$OLDIFS
+        ;;
+    esac
+    while [ -n "$1" ] ; do
+        already_there=false
+        for item in "${path_arr[@]}" ; do
+            if [ "$1" = "$item" ] ; then
+                already_there=true
+                break
+            fi
+        done
+        if ! $already_there ; then
+            PATH=$1:$PATH
+        fi
+        shift
+    done
+}
 
+for p in ~/bin ~/.local/bin ; do
+    [ -d $p ] && add_to_path $p
+done
 
 #export ANDROID_HOME=$HOME/software/android-sdk-linux
 #
