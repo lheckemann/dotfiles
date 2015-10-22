@@ -1,3 +1,4 @@
+SHELL=/bin/zsh
 # Lines configured by zsh-newuser-install
 #HISTFILE=~/.histfile
 #HISTSIZE=5000
