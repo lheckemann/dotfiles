@@ -63,6 +63,7 @@ noremap <C-x> :Make<Up><CR>
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.
 :command -nargs=* Make make <args> | cwindow 3
+:command StripSpace %s/\s\+$//g
 
 colors jellybeans
 set laststatus=2
