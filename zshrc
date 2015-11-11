@@ -84,5 +84,6 @@ alias j=jump
 setopt AUTO_PUSHD
 setopt CHASE_LINKS
 unsetopt SHARE_HISTORY
+unsetopt NOMATCH
 
 source ${DOTFILES_PATH:-~/dotfiles/}shell-common
