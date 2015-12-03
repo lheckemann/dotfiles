@@ -64,6 +64,7 @@ noremap <C-x> :Make<Up><CR>
 " If no errors, it closes any open cwindow.
 :command -nargs=* Make make <args> | cwindow 3
 :command StripSpace %s/\s\+$//g
+:command W w
 
 colors jellybeans
 set laststatus=2
