@@ -1,0 +1,2 @@
+xset fp+ "$DOTFILES_HOME/fonts"
+xset fp rehash
