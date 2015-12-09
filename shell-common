@@ -24,6 +24,8 @@ alias o=xdg-open
 alias :q=exit
 export EDITOR=vim
 alias tmux=tmux\ -2
+alias ls="ls --color=auto"
+alias grep="grep --color=auto"
 alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
 
 _PB_ENV=~/perl5/perlbrew/etc/bashrc
@@ -36,16 +38,21 @@ case $TERM_EM in
 esac
 
 add_to_path() {
-    local path_arr already_there OLDIFS
+    local path_arr already_there OLDIFS shell
+    shell="$(ps -o comm= $$)"
     case $SHELL in
-    */bash)
-        IFS=: read -a path_arr <<< "$PATH"
-        ;;
-    */zsh)
+    *zsh)
         OLDIFS="$IFS"
         IFS=:
         echo $PATH | read -A path_arr
         IFS=$OLDIFS
+        ;;
+    *bash)
+        IFS=: read -a path_arr <<< "$PATH"
+        ;;
+    *)
+        # Fall back to adding it unconditionally
+        export PATH="$1:$PATH"
         ;;
     esac
     while [ -n "$1" ] ; do
@@ -66,13 +73,3 @@ add_to_path() {
 for p in ~/bin ~/.local/bin ; do
     [ -d $p ] && add_to_path $p
 done
-
-#export ANDROID_HOME=$HOME/software/android-sdk-linux
-#
-#android() {
-#    export PATH=$ANDROID_HOME/tools:$ANDROID_HOME/platform-tools:$PATH
-#    unset -f android
-#    android "$@"
-#}
-
-#bind -f ~/.inputrc

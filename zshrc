@@ -1,4 +1,3 @@
-SHELL=/bin/zsh
 # Lines configured by zsh-newuser-install
 #HISTFILE=~/.histfile
 #HISTSIZE=5000
@@ -10,79 +9,61 @@ SHELL=/bin/zsh
 ## The following lines were added by compinstall
 #zstyle :compinstall filename '/home/linus/.zshrc'
 #
-#autoload -Uz compinit
-#compinit
-## End of lines added by compinstall
+ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
+[ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
+autoload -Uz compinit compaudit
+compinit -D -d "$ZSH_CACHE/compdump"
 
-# Path to your oh-my-zsh installation.
-export ZSH=$HOME/software/oh-my-zsh
-
-# Set name of the theme to load.
-# Look in ~/.oh-my-zsh/themes/
-# Optionally, if you set this to "random", it'll load a random theme each
-# time that oh-my-zsh is loaded.
-ZSH_THEME="agnoster"
+################
+# Fancy prompt #
+################
 PROMPT_DIR_BG=19
 PROMPT_DIR_FG=33
 PROMPT_VCS_CLEAN_BG=22
 PROMPT_VCS_CLEAN_FG=black
 PROMPT_VCS_DIRTY_BG=58
 PROMPT_VCS_DIRTY_FG=black
+source $DOTFILES_HOME/zsh/agnoster.zsh-theme
 
-# Uncomment the following line to use case-sensitive completion.
-# CASE_SENSITIVE="true"
+##############
+# Completion #
+##############
 
-# Uncomment the following line to use hyphen-insensitive completion. Case
-# sensitive completion must be off. _ and - will be interchangeable.
-HYPHEN_INSENSITIVE="true"
+# Hyphen and case-insensitive completion
+zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*'
 
-# Uncomment the following line to disable bi-weekly auto-update checks.
-# DISABLE_AUTO_UPDATE="true"
+# Highlight current menu element
+zstyle ':completion:*:*:*:*:*' menu select
 
-# Uncomment the following line to change how often to auto-update (in days).
-# export UPDATE_ZSH_DAYS=13
+# Enable caching
+zstyle ':completion::complete:*' use-cache 1
+zstyle ':completion::complete:*' cache-path "$ZSH_CACHE"
 
-# Uncomment the following line to disable auto-setting terminal title.
-DISABLE_AUTO_TITLE="true"
+# Fancy kill completion menu                                   pid      user          comm     etime
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#) #([^ ]#) #([0-9:]#)*=0=0=0=01;36=0=0'
+zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,etime -w -w"
 
-# Uncomment the following line to enable command auto-correction.
-ENABLE_CORRECTION="true"
+# Menu completion colours matching ls
+eval $(dircolors)
+zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
 
-# Uncomment the following line to display red dots whilst waiting for completion.
-COMPLETION_WAITING_DOTS="true"
+############
+# Bindings #
+############
+bindkey -e # Emacs
+bindkey '^r' history-incremental-search-backward
+b() {
+    [ -n "$1" ] && bindkey "$1" "$2"
+}
+b "${terminfo[kcuu1]}" up-line-or-search # Up
+b "${terminfo[kcud1]}" down-line-or-search # Down
+# TODO add ctrl-right|left mapping to forward|backward-word
+b "${terminfo[kcbt]}" reverse-menu-complete # Shift-Tab
+unfunction b
 
-# Uncomment the following line if you want to disable marking untracked files
-# under VCS as dirty. This makes repository status check for large repositories
-# much, much faster.
-DISABLE_UNTRACKED_FILES_DIRTY="true"
-
-# Uncomment the following line if you want to change the command execution time
-# stamp shown in the history command output.
-# The optional three formats: "mm/dd/yyyy"|"dd.mm.yyyy"|"yyyy-mm-dd"
-# HIST_STAMPS="mm/dd/yyyy"
-
-# Would you like to use another custom folder than $ZSH/custom?
-# ZSH_CUSTOM=/path/to/new-custom-folder
-
-# Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
-# Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
-# Example format: plugins=(rails git textmate ruby lighthouse)
-# Add wisely, as too many plugins slow down shell startup.
-plugins=(git zshmarks)
-source $ZSH/oh-my-zsh.sh
-
-# Set personal aliases, overriding those provided by oh-my-zsh libs,
-# plugins, and themes. Aliases can be placed here, though oh-my-zsh
-# users are encouraged to define aliases within the ZSH_CUSTOM folder.
-# For a full list of active aliases, run `alias`.
-#
-# Example aliases
-# alias zshconfig="mate ~/.zshrc"
-# alias ohmyzsh="mate ~/.oh-my-zsh"
 alias j=jump
 
-setopt AUTO_PUSHD
-setopt CHASE_LINKS
+setopt AUTO_PUSHD PUSHD_IGNORE_DUPS CHASE_LINKS HIST_IGNORE_DUPS EXTENDED_HISTORY
 unsetopt SHARE_HISTORY
 unsetopt NOMATCH
 
