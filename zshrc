@@ -35,7 +35,7 @@ zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path "$ZSH_CACHE"
 
 # Fancy kill completion menu                                   pid      user          comm     etime
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#) #([^ ]#) #([0-9:]#)*=0=0=0=01;36=0=0'
+zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#) #([^ ]#) #([0-9:]#)*=0=0=0=00;36=0=0'
 zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,etime -w -w"
 
 # Menu completion colours matching ls
