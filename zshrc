@@ -55,7 +55,16 @@ b "${terminfo[kcud1]}" down-line-or-search # Down
 b "${terminfo[kcbt]}" reverse-menu-complete # Shift-Tab
 unfunction b
 
+###########
+# Aliases #
+###########
+
+source "$DOTFILES_HOME/zsh/zshmarks/init.zsh"
 alias j=jump
+
+###########
+# Options #
+###########
 
 setopt AUTO_PUSHD PUSHD_IGNORE_DUPS CHASE_LINKS HIST_IGNORE_DUPS EXTENDED_HISTORY
 unsetopt SHARE_HISTORY

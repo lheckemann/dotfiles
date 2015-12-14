@@ -165,8 +165,12 @@ prompt_hg() {
 # Dir: current working directory
 PROMPT_DIR_BG=${PROMPT_DIR_BG:-blue}
 PROMPT_DIR_FG=${PROMPT_DIR_FG:-black}
+PROMPT_MAX_DIRLEN=${PROMPT_MAX_DIRLEN:-40}
+PROMPT_CHOPPED_DIRLEN=$(( $PROMPT_MAX_DIRLEN - 2 ))
 prompt_dir() {
-  prompt_segment $PROMPT_DIR_BG $PROMPT_DIR_FG '%~'
+  local wd="${${(%):-%~}}"
+  [ "${#wd}" -gt "$PROMPT_MAX_DIRLEN" ] && wd="..${wd:(-$PROMPT_CHOPPED_DIRLEN)}"
+  prompt_segment $PROMPT_DIR_BG $PROMPT_DIR_FG "$wd"
 }
 
 # Virtualenv: current working virtualenv
