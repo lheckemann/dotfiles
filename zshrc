@@ -1,3 +1,4 @@
+: ${DOTFILES_HOME:=~/dotfiles}
 ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
 [ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
 
@@ -70,4 +71,4 @@ setopt AUTO_PUSHD PUSHD_IGNORE_DUPS CHASE_LINKS HIST_IGNORE_DUPS EXTENDED_HISTOR
 unsetopt SHARE_HISTORY
 unsetopt NOMATCH
 
-source ${DOTFILES_PATH:-~/dotfiles/}shell-common
+source "$DOTFILES_HOME/shell-common"
