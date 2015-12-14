@@ -1,18 +1,9 @@
-# Lines configured by zsh-newuser-install
-#HISTFILE=~/.histfile
-#HISTSIZE=5000
-#SAVEHIST=5000
-#setopt appendhistory autocd beep extendedglob nomatch
-#unsetopt notify
-#bindkey -v
-## End of lines configured by zsh-newuser-install
-## The following lines were added by compinstall
-#zstyle :compinstall filename '/home/linus/.zshrc'
-#
 ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
 [ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
-autoload -Uz compinit compaudit
-compinit -D -d "$ZSH_CACHE/compdump"
+
+HISTFILE=~/.zsh_history
+HISTSIZE=5000
+SAVEHIST=5000
 
 ################
 # Fancy prompt #
@@ -28,6 +19,9 @@ source $DOTFILES_HOME/zsh/agnoster.zsh-theme
 ##############
 # Completion #
 ##############
+
+autoload -Uz compinit
+compinit -D -d "$ZSH_CACHE/compdump"
 
 # Hyphen and case-insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-zA-Z-_}={A-Za-z_-}' 'r:|[._-]=* r:|=*'
