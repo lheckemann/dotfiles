@@ -74,4 +74,4 @@ for p in ~/bin ~/.local/bin ; do
     [ -d $p ] && add_to_path $p
 done
 
-[ -f "$DOTFILES_HOME/shell-local" ] && source "$DOTFILES_HOME/shell-local"
+! [ -f "$DOTFILES_HOME/shell-local" ] || source "$DOTFILES_HOME/shell-local"
