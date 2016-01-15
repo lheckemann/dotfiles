@@ -17,7 +17,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
-Bundle 'jalcine/cmake.vim'
+Plugin 'jalcine/cmake.vim'
+Plugin 'davidhalter/jedi-vim'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
