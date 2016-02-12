@@ -52,3 +52,5 @@ ln -sf "$DOTFILES_HOME/vim" ~/.vim
 ln -sf "$DOTFILES_HOME/tmux.conf" ~/.tmux.conf
 ln -sf "$DOTFILES_HOME/tmux" ~/.tmux
 
+git submodule init
+git submodule update

@@ -8,7 +8,7 @@ set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
 Plugin 'docunext/closetag.vim'
-Plugin 'othree/html5.vim'
+"Plugin 'othree/html5.vim'
 "Plugin 'wookiehangover/jshint.vim'
 "Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
@@ -17,7 +17,8 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
-Bundle 'jalcine/cmake.vim'
+Plugin 'davidhalter/jedi-vim'
+Plugin 'justmao945/vim-clang'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -30,12 +31,12 @@ noremap <C-x> :Make<Up><CR>
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.
-:command -nargs=* Make make <args> | cwindow 3
-:command StripSpace %s/\s\+$//g
-:command W w
-:command Wq wq
-:command -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
-:command -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
+command -nargs=* Make make <args> | cwindow 3
+command StripSpace %s/\s\+$//g
+command W w
+command Wq wq
+command -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
+command -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
 
 colors jellybeans
 
