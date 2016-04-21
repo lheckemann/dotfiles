@@ -63,6 +63,8 @@ unfunction b
 source "$DOTFILES_HOME/zsh/zshmarks/init.zsh"
 alias j=jump
 
+[[ -f "$DOTFILES_HOME/zsh/local" ]] && source "$DOTFILES_HOME/zsh/local"
+
 ###########
 # Options #
 ###########
