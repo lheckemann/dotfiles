@@ -1,2 +1,5 @@
 xset fp+ "$DOTFILES_HOME/fonts"
 xset fp rehash
+
+[ -e ~/.xmodmap ] && xmodmap ~/.xmodmap
+[ -e ~/.Xmodmap ] && xmodmap ~/.Xmodmap
