@@ -38,6 +38,7 @@ command Wq wq
 command -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
 command -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
 
+let g:jellybeans_background_color_256=233
 colors jellybeans
 
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
