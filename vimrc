@@ -12,7 +12,8 @@ Plugin 'docunext/closetag.vim'
 "Plugin 'wookiehangover/jshint.vim'
 "Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
-Plugin 'bling/vim-airline'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
 Plugin 'tpope/vim-fugitive'
 Plugin 'nanotech/jellybeans.vim'
 Plugin 'ervandew/supertab'
@@ -39,7 +40,8 @@ command -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expa
 command -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
 
 let g:jellybeans_background_color_256=233
-colors jellybeans
+let g:airline_theme='jellybeans'
+colorscheme jellybeans
 
 autocmd CursorMovedI * if pumvisible() == 0|pclose|endif
 autocmd InsertLeave * if pumvisible() == 0|pclose|endif
