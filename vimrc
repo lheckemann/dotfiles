@@ -32,12 +32,12 @@ noremap <C-x> :Make<Up><CR>
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.
-command -nargs=* Make make <args> | cwindow 3
-command StripSpace %s/\s\+$//g
-command W w
-command Wq wq
-command -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
-command -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
+command! -nargs=* Make make <args> | cwindow 3
+command! StripSpace %s/\s\+$//g
+command! W w
+command! Wq wq
+command! -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
+command! -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
 
 let g:jellybeans_background_color_256=233
 let g:airline_theme='jellybeans'
