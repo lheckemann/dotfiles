@@ -65,5 +65,6 @@ set tabstop=13
 set textwidth=80
 set viminfo='100,<100,s10,h
 set scrolloff=7 " Scroll when the cursor is within 7 lines of the bottom/top of the screen
+set splitbelow splitright
 " Indent HTML by two spaces
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
