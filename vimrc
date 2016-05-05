@@ -33,11 +33,12 @@ noremap <C-x> :Make<Up><CR>
 " opens a 3 line error window if any errors are found.
 " If no errors, it closes any open cwindow.
 command! -nargs=* Make make <args> | cwindow 3
-command! StripSpace %s/\s\+$//g
+command! StripSpace %s/\s\+$//ge
 command! W w
 command! Wq wq
 command! -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
 command! -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
+command! PdPreview !x-www-browser "data:text/html;charset=utf8,$(pandoc % -t html --standalone | perl -pe 's/\n/\%0a/g')"
 
 let g:jellybeans_background_color_256=233
 let g:airline_theme='jellybeans'
