@@ -57,16 +57,19 @@ set laststatus=2 " Always show a status line
 set modeline
 set mouse=a
 set nofoldenable
-set shiftwidth=4
 set showcmd
 set showmatch " Bracket matching highlight
-set smartindent
+set shiftwidth=4
 set softtabstop=4
 set tabstop=13
+set smartindent
 set textwidth=80
 set viminfo='100,<100,s10,h
-set scrolloff=7 " Scroll when the cursor is within 7 lines of the bottom/top of the screen
+set scrolloff=1
 set splitbelow splitright
+set incsearch
+set wildmenu
+set formatoptions+=j
 " Indent HTML by two spaces
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 let g:airline_powerline_fonts=1
