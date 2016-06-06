@@ -28,6 +28,7 @@ noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-f> :NERDTreeFind<CR>
 noremap <C-c> :CtrlPTag<CR>
 noremap <C-x> :Make<Up><CR>
+noremap <Tab> gt
 
 " Command Make will call make and then cwindow which
 " opens a 3 line error window if any errors are found.
