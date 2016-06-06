@@ -39,7 +39,7 @@ command! W w
 command! Wq wq
 command! -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
 command! -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
-command! PdPreview !x-www-browser "data:text/html;base64,$(pandoc % -t html --standalone | base64)"
+command! PdPreview !x-www-browser "data:text/html;base64,$(pandoc % -t html5 --standalone | base64)"
 
 let g:jellybeans_background_color_256=233
 let g:airline_theme='jellybeans'
