@@ -62,6 +62,29 @@ unfunction b
 
 source "$DOTFILES_HOME/zsh/zshmarks/init.zsh"
 alias j=jump
+wait_for() {
+    local wait_pid
+    if [[ $1 =~ ^[0-9]+$ ]] ; then
+        if ps $1 > /dev/null ; then
+            wait_pid=$1
+        else
+            print -- "PID given but process does not exist."
+            return -1
+        fi
+    else
+        # We only want one process, so let's get the newest and hope it's the
+        # right one :)
+        if ! wait_pid=$(pgrep -xn $1) ; then
+            print -- "$1: process not found"
+            return -1
+        fi
+    fi
+    print "Waiting for PID $wait_pid."
+    ps "$wait_pid"
+    while ps $wait_pid > /dev/null ; do
+        sleep 1
+    done
+}
 
 [[ -f "$DOTFILES_HOME/zsh/local" ]] && source "$DOTFILES_HOME/zsh/local"
 
