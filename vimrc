@@ -74,3 +74,4 @@ set formatoptions+=j
 " Indent HTML by two spaces
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 let g:airline_powerline_fonts=1
+let NERDTreeIgnore=['\~$', '\.pyc$']
