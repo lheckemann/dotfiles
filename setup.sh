@@ -26,7 +26,7 @@ backup() {
 
 for rc in \
     ~/.bashrc ~/.zshrc ~/.Xresources ~/.ackrc ~/.vimrc ~/.vim ~/.tmux.conf \
-    ~/.tmux ~/.xsessionrc
+    ~/.tmux ~/.xsessionrc ~/.config/awesome
 do
     backup "$rc" || exit -1
 done
@@ -51,6 +51,7 @@ ln -sf "$DOTFILES_HOME/vimrc" ~/.vimrc
 ln -sf "$DOTFILES_HOME/vim" ~/.vim
 ln -sf "$DOTFILES_HOME/tmux.conf" ~/.tmux.conf
 ln -sf "$DOTFILES_HOME/tmux" ~/.tmux
+ln -sf "$DOTFILES_HOME/awesome" ~/.config/awesome
 
 git submodule init
 git submodule update
