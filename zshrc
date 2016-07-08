@@ -3,8 +3,8 @@ ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
 [ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
 
 HISTFILE=~/.zsh_history
-HISTSIZE=5000
-SAVEHIST=5000
+HISTSIZE=50000
+SAVEHIST=50000
 
 ################
 # Fancy prompt #
