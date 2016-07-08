@@ -3,4 +3,4 @@
 
 --ignore-dir=.ropeproject
 --ignore-file=ext:swp
---pager=less -r
+--pager=less -RFSX
