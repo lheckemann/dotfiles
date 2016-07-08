@@ -75,3 +75,10 @@ set formatoptions+=j
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 let g:airline_powerline_fonts=1
 let NERDTreeIgnore=['\~$', '\.pyc$']
+
+if exists("$TMUX")
+    " normal mode: block
+    let &t_EI = "\<Esc>[0 q"
+    " insert mode: vertical line
+    let &t_SI = "\<Esc>[6 q"
+endif
