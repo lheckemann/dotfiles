@@ -7,7 +7,7 @@ set nocompatible              " be iMproved, required
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
 Plugin 'gmarik/Vundle.vim'
-Plugin 'docunext/closetag.vim'
+"Plugin 'docunext/closetag.vim'
 "Plugin 'othree/html5.vim'
 "Plugin 'wookiehangover/jshint.vim'
 "Plugin 'scrooloose/nerdcommenter'
