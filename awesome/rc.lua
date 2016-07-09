@@ -283,7 +283,7 @@ globalkeys = awful.util.table.join(
     awful.key({ }, "XF86MonBrightnessUp", function() awful.util.spawn_with_shell("xbacklight +10") end),
     awful.key({ }, "XF86MonBrightnessDown", function() awful.util.spawn_with_shell("xbacklight -10") end),
     awful.key({ }, "XF86AudioRaiseVolume", function() awful.util.spawn_with_shell("pactl set-sink-volume 0 +2%") end),
-    awful.key({ }, "XF86AudioLowerVolume", function() awful.util.spawn_with_shell("pactl set-sink-volume 0 -2%") end)
+    awful.key({ }, "XF86AudioLowerVolume", function() awful.util.spawn_with_shell("pactl set-sink-volume 0 -2%") end),
     awful.key({ }, "XF86AudioPlay", function() awful.util.spawn_with_shell("playerctl play-pause") end),
     awful.key({ }, "XF86AudioNext", function() awful.util.spawn_with_shell("music-seek +") end),
     awful.key({ }, "XF86AudioPrev", function() awful.util.spawn_with_shell("music-seek -") end)
