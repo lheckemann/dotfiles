@@ -17,7 +17,7 @@ esac
 add_to_path() {
     local path_arr already_there OLDIFS shell
     shell="$(ps -o comm= $$)"
-    case $SHELL in
+    case "$shell" in
     *zsh)
         OLDIFS="$IFS"
         IFS=:
