@@ -128,38 +128,21 @@ prompt_git() {
 }
 
 prompt_hg() {
-  local rev status
-  if $(hg id >/dev/null 2>&1); then
-    if $(hg prompt >/dev/null 2>&1); then
-      if [[ $(hg prompt "{status|unknown}") = "?" ]]; then
-        # if files are not added
-        prompt_segment ${PROMPT_VCS_UNTRACKED_BG} ${PROMPT_VCS_UNTRACKED_FG}
-        st='±'
-      elif [[ -n $(hg prompt "{status|modified}") ]]; then
-        # if any modification
-        prompt_segment ${PROMPT_VCS_DIRTY_BG} ${PROMPT_VCS_DIRTY_FG}
-        st='±'
-      else
-        # if working copy is clean
-        prompt_segment ${PROMPT_VCS_CLEAN_BG} ${PROMPT_VCS_CLEAN_FG}
-      fi
-      echo -n $(hg prompt "☿ {rev}@{branch}") $st
-    else
-      st=""
-      rev=$(hg id -n 2>/dev/null | sed 's/[^-0-9]//g')
-      branch=$(hg id -b 2>/dev/null)
-      if `hg st | grep -q "^\?"`; then
-        prompt_segment ${PROMPT_VCS_UNTRACKED_BG} ${PROMPT_VCS_UNTRACKED_FG}
-        st='±'
-      elif `hg st | grep -q "^[MA]"`; then
-        prompt_segment ${PROMPT_VCS_DIRTY_BG} ${PROMPT_VCS_DIRTY_FG}
-        st='±'
-      else
-        prompt_segment ${PROMPT_VCS_CLEAN_BG} ${PROMPT_VCS_CLEAN_FG}
-      fi
-      echo -n "☿ $rev@$branch" $st
-    fi
+  local rev st id branch
+  id="$(hg id --num --branch 2>/dev/null)" || return
+  st=""
+  rev=${id%%[ +]*}
+  branch=${id##* }
+  if [[ -n $(hg status --unknown) ]] ; then
+    prompt_segment ${PROMPT_VCS_UNTRACKED_BG} ${PROMPT_VCS_UNTRACKED_FG}
+    st='±'
+  elif [[ $id == *+\ * ]]; then
+    prompt_segment ${PROMPT_VCS_DIRTY_BG} ${PROMPT_VCS_DIRTY_FG}
+    st='±'
+  else
+    prompt_segment ${PROMPT_VCS_CLEAN_BG} ${PROMPT_VCS_CLEAN_FG}
   fi
+  echo -n "☿ $rev@$branch" $st
 }
 
 # Dir: current working directory
