@@ -6,9 +6,6 @@ alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
 
-_PB_ENV=~/perl5/perlbrew/etc/bashrc
-[ -f "$_PB_ENV" ] && source "$_PB_ENV"
-
 TERM_EM=$(basename -- "$(ps -ocommand= -p $PPID | awk '{ print $1 }')")
 case $TERM_EM in
     konsole|lxterminal|gnome-terminal-server)
