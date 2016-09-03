@@ -2,7 +2,6 @@ alias open=xdg-open
 alias o=xdg-open
 alias :q=exit
 export EDITOR=vim
-alias tmux=tmux\ -2
 alias ls="ls --color=auto"
 alias grep="grep --color=auto"
 alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
@@ -14,6 +13,8 @@ TERM_EM=$(basename -- "$(ps -ocommand= -p $PPID | awk '{ print $1 }')")
 case $TERM_EM in
     konsole|lxterminal|gnome-terminal-server)
         export TERM=xterm-256color ;;
+    fbterm)
+        export TERM=fbterm ;;
 esac
 
 add_to_path() {
