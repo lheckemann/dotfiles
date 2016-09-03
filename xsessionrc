@@ -6,3 +6,4 @@ xset fp rehash
 
 pgrep -U $UID redshift || redshift &
 pgrep -U $UID xscreensaver || xscreensaver &
+pgrep -U $UID nm-applet || nm-applet &
