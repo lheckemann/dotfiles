@@ -4,6 +4,8 @@ xset fp rehash
 [ -e ~/.xmodmap ] && xmodmap ~/.xmodmap
 [ -e ~/.Xmodmap ] && xmodmap ~/.Xmodmap
 
+setxkbmap -option ctrl:nocaps
+
 pgrep -U $UID redshift || redshift &
 pgrep -U $UID xscreensaver || xscreensaver &
 pgrep -U $UID nm-applet || nm-applet &
