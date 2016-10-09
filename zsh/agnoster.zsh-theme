@@ -176,6 +176,7 @@ prompt_status() {
   [[ $RETVAL -ne 0 ]] && symbols+="%{%F{red}%}✘"
   [[ $UID -eq 0 ]] && symbols+="%{%F{yellow}%}⚡"
   [[ $(jobs -l | wc -l) -gt 0 ]] && symbols+="%{%F{cyan}%}⚙"
+  type systemd-tty-ask-password-agent &>/dev/null && [[ -n $(systemd-tty-ask-password-agent --list) ]] && symbols+="%{%F{yellow}%}🔑"
 
   [[ -n "$symbols" ]] && prompt_segment black default "$symbols"
 }
