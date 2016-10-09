@@ -7,5 +7,4 @@ xset fp rehash
 setxkbmap -option caps:escape
 
 pgrep -U $UID redshift || redshift &
-pgrep -U $UID xscreensaver || xscreensaver &
 pgrep -U $UID nm-applet || nm-applet &

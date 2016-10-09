@@ -44,6 +44,7 @@ if [[ -z "$SSH_AGENT_PID" ]] ||
 then
     eval $(ssh-agent -a "/run/user/$UID/ssh-agent.sock")
 fi
+xautolock -locker 'i3lock -c 006060' -time 10 &
 
 # TODO: GPG agent?
 
