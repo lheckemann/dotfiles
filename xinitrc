@@ -33,17 +33,20 @@ fi
 [[ -r $HOME/.xsessionrc ]] && . "$HOME/.xsessionrc"
 xhost "+si:localuser:$(id -un)"
 
+if ssh-add -l &>/dev/null ; [[ $? = 2 ]]
+then
+    export SSH_AUTH_SOCK="/run/user/$UID/ssh-agent.sock"
+    if ssh-add -l &>/dev/null; [[ $? = 2 ]]
+    then
+        eval $(ssh-agent -a "/run/user/$UID/ssh-agent.sock")
+    fi
+fi
+
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export DBUS_SESSION_BUS_ADDRESS="unix:path=/run/user/$UID/dbus-session.sock"
 dbus-daemon --session "--address=$DBUS_SESSION_BUS_ADDRESS" &
 
-if [[ -z "$SSH_AGENT_PID" ]] ||
-   ! ps "$SSH_AGENT_PID" &>/dev/null ||
-   [[ ! -w $SSH_AUTH_SOCK ]]
-then
-    eval $(ssh-agent -a "/run/user/$UID/ssh-agent.sock")
-fi
 xautolock -locker 'i3lock -c 006060' -time 10 &
 
 # TODO: GPG agent?
