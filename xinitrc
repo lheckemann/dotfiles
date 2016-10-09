@@ -47,4 +47,4 @@ fi
 
 # TODO: GPG agent?
 
-exec awesome
+exec i3
