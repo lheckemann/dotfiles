@@ -20,6 +20,7 @@ Plugin 'ervandew/supertab'
 Plugin 'kien/ctrlp.vim'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'justmao945/vim-clang'
+Plugin 'ludovicchabant/vim-lawrencium'
 call vundle#end()            " required
 filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
@@ -71,6 +72,7 @@ set splitbelow splitright
 set incsearch
 set wildmenu
 set formatoptions+=j
+set notitle
 " Indent HTML by two spaces
 "autocmd Filetype html setlocal ts=2 sts=2 sw=2
 let g:airline_powerline_fonts=1
