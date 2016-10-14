@@ -105,7 +105,7 @@ bindsym $mod+5 workspace 5: chat
 
 bindsym $mod+6 workspace 6: ssh
 assign [instance="SphalTerm"] → 6: ssh
-exec st -c SphalTerm
+exec st -c SphalTerm -e ssh sphal
 
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
