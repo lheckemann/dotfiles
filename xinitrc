@@ -50,6 +50,7 @@ pgrep -U $UID redshift || redshift &
 pgrep -U $UID nm-applet || nm-applet &
 synclient TapButton1=1 TapButton2=3 TapButton3=2 HorizTwoFingerScroll=1 AccelFactor=0.08
 xautolock -locker 'i3lock -c 006060' -time 10 &
+ssh-add -l &>/dev/null ; [[ $? = 1 ]] && ssh-add -c &
 
 # TODO: GPG agent?
 
