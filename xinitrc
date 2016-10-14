@@ -29,7 +29,6 @@ else
 fi
 
 [[ $1 = failsafe ]] && exec x-terminal-emulator
-[[ -r $HOME/.Xresources ]] && xrdb -merge "$HOME/.Xresources"
 [[ -r $HOME/.xsessionrc ]] && . "$HOME/.xsessionrc"
 xhost "+si:localuser:$(id -un)"
 

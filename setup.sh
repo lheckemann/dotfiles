@@ -25,7 +25,7 @@ backup() {
 }
 
 for rc in \
-    ~/.bashrc ~/.zshrc ~/.Xresources ~/.ackrc ~/.vimrc ~/.vim ~/.tmux.conf \
+    ~/.bashrc ~/.zshrc ~/.ackrc ~/.vimrc ~/.vim ~/.tmux.conf \
     ~/.tmux ~/.xsessionrc ~/.xinitrc ~/.config/i3
 do
     backup "$rc" || exit -1
@@ -45,7 +45,6 @@ EOF
 echo "source '$DOTFILES_HOME/bashrc'" >> ~/.bashrc
 echo "source '$DOTFILES_HOME/zshrc'" >> ~/.zshrc
 echo ". '$DOTFILES_HOME/xsessionrc'" >> ~/.xsessionrc
-ln -sf "$DOTFILES_HOME/Xresources" ~/.Xresources
 ln -sf "$DOTFILES_HOME/ackrc" ~/.ackrc
 ln -sf "$DOTFILES_HOME/vimrc" ~/.vimrc
 ln -sf "$DOTFILES_HOME/vim" ~/.vim
