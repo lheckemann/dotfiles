@@ -110,4 +110,9 @@ setopt AUTO_PUSHD PUSHD_IGNORE_DUPS CHASE_LINKS HIST_IGNORE_DUPS EXTENDED_HISTOR
 unsetopt SHARE_HISTORY
 unsetopt NOMATCH
 
+zshaddhistory() {
+    [[ $* =~ reboot ]] && return 1
+    return 0
+}
+
 source "$DOTFILES_HOME/shell-common"
