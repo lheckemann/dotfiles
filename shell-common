@@ -1,7 +1,7 @@
 alias open=xdg-open
 alias o=xdg-open
 alias :q=exit
-export EDITOR=vim
+export EDITOR=nvim
 alias grep="grep --color=auto"
 alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
 
