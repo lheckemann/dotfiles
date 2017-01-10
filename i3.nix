@@ -15,7 +15,7 @@ in pkgs.stdenv.mkDerivation {
     mkdir -p $out/i3
     cp ${config} $out/i3/config
     substituteInPlace $out/i3/config --replace I3STATUS_CONFIG ${statusConfig}
-    ln -s ${pkgs.i3}/bin/i3 $out/bin/xsession
-    wrapProgram $out/bin/xsession --add-flags "-c $out/i3/config"
+    ln -s ${pkgs.i3}/bin/i3 $out/bin/i3
+    wrapProgram $out/bin/i3 --add-flags "-c $out/i3/config"
   '';
 }
