@@ -6,6 +6,7 @@ let
   xsession = pkgs.writeScriptBin "xsession" ''
     #!${pkgs.stdenv.shell}
     ${redshift}/bin/redshift -l 55:4 -t 5500:2800 &
+    [[ -r $HOME/.background-image ]] && ${pkgs.feh}/bin/feh --bg-scale $HOME/.background-image
     exec ${i3}/bin/i3
   '';
 in
