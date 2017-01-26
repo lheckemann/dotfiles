@@ -1,0 +1,12 @@
+Files: locker/lockscript/lock.*
+Copyright: 2016 Fabián Alexis
+           2017 Linus Heckemann
+License: CC-BY-SA-3.0
+
+Files: zsh/agnoster.zsh-theme
+Copyright: 2016 Isaac Wolkerstorfer
+License: Unknown
+
+Files: *
+Copyright: 2017 Linus Heckemann
+License: BSD
