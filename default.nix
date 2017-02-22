@@ -31,6 +31,7 @@ in
       dia
       gnome3.eog
       evince
+      fbterm
       firefox
       gimp
       gitg
