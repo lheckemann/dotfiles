@@ -100,6 +100,10 @@ ls() {
     fi
 }
 
+closure() {
+    nix-store -qR "$@" | xargs du -chd0 | sort -h
+}
+
 [[ -f "$DOTFILES_HOME/zsh/local" ]] && source "$DOTFILES_HOME/zsh/local"
 
 ###########
