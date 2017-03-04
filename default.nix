@@ -45,6 +45,7 @@ in
       libreoffice
       lightdm # for dm-tool
       man-pages
+      mupdf
       mpv
       mumble
       gnome3.nautilus
