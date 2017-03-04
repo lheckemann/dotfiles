@@ -1,3 +1,4 @@
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1
 set backspace=2
 set colorcolumn=80,100,120
 set completeopt=menu,preview,longest
@@ -22,12 +23,6 @@ set notitle
 let g:airline_powerline_fonts=1
 let g:jellybeans_background_color_256=233
 let g:airline_theme='jellybeans'
-if exists("$TMUX")
-    " normal mode: block
-    let &t_EI = "\<Esc>[0 q"
-    " insert mode: vertical line
-    let &t_SI = "\<Esc>[5 q"
-endif
 colors pablo
 silent! colors jellybeans
 
