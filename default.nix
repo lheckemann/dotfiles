@@ -15,6 +15,9 @@ let
         -context_key XF86LaunchB &
     exec ${i3}/bin/i3
   '';
+  ssh = pkgs.openssh.overrideDerivation (orig: {
+    patches = orig.patches ++ [ ./ssh-paranoid-confirm.patch ];
+  });
 in
   pkgs.symlinkJoin {
     name = "linus-env";
@@ -22,6 +25,7 @@ in
       neovim
       xsession
       lock
+      ssh
     ] ++ (with pkgs; [
       arandr
       bind # for dig
