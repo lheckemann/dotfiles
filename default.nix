@@ -29,6 +29,7 @@ in
     ] ++ (with pkgs; [
       arandr
       bind # for dig
+      binutils # mostly for strings
       borgbackup
       chromium
       compton
