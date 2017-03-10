@@ -38,6 +38,7 @@ in
       evince
       fbterm
       firefox
+      gdb
       gimp
       gitg
       gnupg
