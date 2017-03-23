@@ -34,10 +34,6 @@ in
           name = "rust-vim";
           filename_regex = "\(.*\.rs\|Cargo\.\(toml\|lock\)\)$";
         }
-        {
-          names = [ "haskell-vim" "neco-ghc" "vim-proc" ];
-          ft_regex = "haskell";
-        }
       ];
       vam.knownPlugins = pkgs.vimPlugins // (with pkgs.vimUtils; {
         jellybeans = buildVimPluginFrom2Nix {
