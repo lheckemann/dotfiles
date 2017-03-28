@@ -18,6 +18,12 @@ let
   ssh = pkgs.openssh.overrideDerivation (orig: {
     patches = orig.patches ++ [ ./ssh-paranoid-confirm.patch ];
   });
+  htop = pkgs.htop.overrideAttrs (orig: {
+    patches = [./htop-stripstore.patch];
+    postPatch = ''
+      touch linux/LinuxProcessList.h
+    '';
+  });
 in
   pkgs.symlinkJoin {
     name = "linus-env";
@@ -26,6 +32,7 @@ in
       xsession
       lock
       ssh
+      htop
     ] ++ (with pkgs; [
       arandr
       bind # for dig
