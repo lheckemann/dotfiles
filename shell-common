@@ -5,6 +5,15 @@ export EDITOR=nvim
 alias grep="grep --color=auto"
 alias cmake="PATH=/usr/lib/ccache:$PATH cmake"
 
+technical-details() {
+    printf '- System: '
+    nixos-version
+    printf '- Nix version: '
+    nix-env --version
+    printf '- Nixpkgs version: '
+    nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion
+}
+
 TERM_EM=$(basename -- "$(ps -ocommand= -p $PPID | awk '{ print $1 }')")
 case $TERM_EM in
     konsole|lxterminal|gnome-terminal-server)
