@@ -78,5 +78,7 @@ in
       vlc
       xsel
       zeal
+
+      pkgs.i3
     ]);
   }
