@@ -68,6 +68,7 @@ in
       nmap
       pavucontrol
       potrace
+      ripgrep
       kvm
       scrot
       sqlite
