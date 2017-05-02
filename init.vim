@@ -26,6 +26,8 @@ let g:airline_theme='jellybeans'
 colors pablo
 silent! colors jellybeans
 
+let g:deoplete#enable_at_startup=1
+
 let NERDTreeIgnore=['\~$', '\.pyc$']
 noremap <C-n> :NERDTreeToggle<CR>
 noremap <C-f> :NERDTreeFind<CR>
