@@ -25,23 +25,22 @@ let
     '';
   });
 in
-  pkgs.symlinkJoin {
-    name = "linus-env";
-    paths = [
+  {
+    inherit 
       neovim
       xsession
       lock
       ssh
-      htop
-    ] ++ (with pkgs; [
+      htop;
+    inherit (pkgs)
       arandr
-      bind # for dig
+      audacity
       binutils # mostly for strings
       borgbackup
       chromium
       compton
       dia
-      gnome3.eog
+      digikam
       evince
       fbterm
       firefox
@@ -51,7 +50,6 @@ in
       gnupg
       syncthing
       syncthing-inotify
-      idea.idea-community
       inotify-tools
       kakoune
       keepassx2
@@ -61,11 +59,12 @@ in
       mupdf
       mpv
       mumble
-      gnome3.nautilus
       ncdu
       nethack
       nix-repl
+      nixops
       nmap
+      nox
       pavucontrol
       potrace
       ripgrep
@@ -79,7 +78,11 @@ in
       vlc
       xsel
       zeal
-
-      pkgs.i3
-    ]);
+      i3
+      endless-sky
+      ;
+    inherit (pkgs.gnome3) eog;
+    inherit (pkgs.idea) idea-community;
+    inherit (pkgs.gnome3) nautilus;
+    inherit (pkgs.bind) dnsutils;
   }
