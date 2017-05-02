@@ -14,6 +14,10 @@ technical-details() {
     nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion
 }
 
+store() {
+    readlink -f $(which "$@")
+}
+
 TERM_EM=$(basename -- "$(ps -ocommand= -p $PPID | awk '{ print $1 }')")
 case $TERM_EM in
     konsole|lxterminal|gnome-terminal-server)
