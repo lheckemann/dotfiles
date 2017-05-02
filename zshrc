@@ -6,17 +6,6 @@ HISTFILE=~/.zsh_history
 HISTSIZE=50000
 SAVEHIST=50000
 
-################
-# Fancy prompt #
-################
-PROMPT_DIR_BG=19
-PROMPT_DIR_FG=33
-PROMPT_VCS_CLEAN_BG=22
-PROMPT_VCS_CLEAN_FG=black
-PROMPT_VCS_DIRTY_BG=58
-PROMPT_VCS_DIRTY_FG=black
-source $DOTFILES_HOME/zsh/agnoster.zsh-theme
-
 ##############
 # Completion #
 ##############
