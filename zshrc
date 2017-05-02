@@ -75,20 +75,6 @@ wait_for() {
     done
 }
 
-ls() {
-    if [[ $# = 1 ]]
-    then
-        if [[ -f "$1" ]]
-        then
-            less "$1"
-        else
-            "$(whence -p ls)" --color=auto "$1"
-        fi
-    else
-        "$(whence -p ls)" --color=auto $*
-    fi
-}
-
 closure() {
     nix-store -qR "$@" | xargs du -chd0 | sort -h
 }
