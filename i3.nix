@@ -12,10 +12,9 @@ in pkgs.stdenv.mkDerivation {
 
   buildCommand = ''
     mkdir -p $out/bin
-    mkdir -p $out/i3
-    cp ${config} $out/i3/config
-    substituteInPlace $out/i3/config --replace I3STATUS_CONFIG ${statusConfig}
+    mkdir -p $out/etc
+    substitute ${config} $out/etc/i3.conf --replace I3STATUS_CONFIG ${statusConfig}
     ln -s ${pkgs.i3}/bin/i3 $out/bin/
-    wrapProgram $out/bin/i3 --add-flags "-c $out/i3/config"
+    wrapProgram $out/bin/i3 --add-flags "-c ~/.nix-profile/etc/i3.conf"
   '';
 }

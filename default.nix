@@ -2,7 +2,7 @@ let
   pkgs = import <nixpkgs> {};
   neovim = import ./neovim.nix { inherit pkgs; };
   redshift = pkgs.redshift;
-  i3 = import ./i3.nix { inherit pkgs; };
+  i3Configured = import ./i3.nix { inherit pkgs; };
   lock = import ./locker;
   xsession = pkgs.writeScriptBin "xsession" ''
     #!${pkgs.stdenv.shell}
@@ -13,7 +13,7 @@ let
         -horizontal_padding 10 \
         -dmenu ${pkgs.dmenu}/bin/dmenu \
         -context_key XF86LaunchB &
-    exec ${i3}/bin/i3
+    exec ${i3Configured}/bin/i3
   '';
   ssh = pkgs.openssh.overrideDerivation (orig: {
     patches = orig.patches ++ [ ./ssh-paranoid-confirm.patch ];
@@ -30,6 +30,7 @@ in
       neovim
       xsession
       lock
+      i3Configured
       ssh
       htop;
     inherit (pkgs)
@@ -78,9 +79,9 @@ in
       vlc
       xsel
       zeal
-      i3
       endless-sky
       ;
+    i3 = pkgs.lib.lowPrio pkgs.i3;
     inherit (pkgs.gnome3) eog;
     inherit (pkgs.idea) idea-community;
     inherit (pkgs.gnome3) nautilus;
