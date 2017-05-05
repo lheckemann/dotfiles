@@ -93,7 +93,7 @@ in
       endless-sky
       ;
     i3 = pkgs.lib.lowPrio pkgs.i3;
-    inherit (pkgs.gnome3) eog;
+    inherit (pkgs.gnome3) eog dconf;
     inherit (pkgs.idea) idea-community;
     inherit (pkgs.gnome3) nautilus;
     inherit (pkgs.bind) dnsutils;
