@@ -1,11 +1,12 @@
 let
   pkgs = import <nixpkgs> {};
+  inherit (pkgs) stdenv writeScriptBin;
   neovim = import ./neovim.nix { inherit pkgs; };
   redshift = pkgs.redshift;
   i3Configured = import ./i3.nix { inherit pkgs; };
   lock = import ./locker;
-  xsession = pkgs.writeScriptBin "xsession" ''
-    #!${pkgs.stdenv.shell}
+  xsession = writeScriptBin "xsession" ''
+    #!${stdenv.shell}
     ${redshift}/bin/redshift -l 56:-4 -t 5500:2800 &
     [[ -r $HOME/.background-image ]] && ${pkgs.feh}/bin/feh --bg-scale $HOME/.background-image
     ${pkgs.dunst}/bin/dunst \
@@ -24,6 +25,13 @@ let
       touch linux/LinuxProcessList.h
     '';
   });
+  polybar = pkgs.polybar.override {
+    i3Support = true;
+  };
+  polybarConfigured = writeScriptBin "polybar" ''
+    #!${stdenv.shell}
+    exec ${polybar}/bin/polybar -c ${./polybar.ini} "$@"
+  '';
 in
   {
     inherit 
@@ -31,6 +39,7 @@ in
       xsession
       lock
       i3Configured
+      polybarConfigured
       ssh
       htop;
     inherit (pkgs)
@@ -65,6 +74,8 @@ in
       nix-repl
       nixops
       nmap
+      noto-fonts
+      noto-fonts-emoji
       nox
       pavucontrol
       potrace
