@@ -164,4 +164,4 @@ bindsym XF86MonBrightnessUp exec "xbacklight +10"
 bindsym XF86MonBrightnessDown exec "xbacklight -10"
 bindsym $mod+BackSpace exec "lock"
 
-exec polybar default
+exec polybar top
