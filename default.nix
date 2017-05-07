@@ -32,6 +32,10 @@ let
     #!${stdenv.shell}
     exec ${polybar}/bin/polybar -c ${./polybar.ini} "$@"
   '';
+  tmuxConfigured = writeScriptBin "tmux" ''
+    #!${stdenv.shell}
+    exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} "$@"
+  '';
 in
   {
     inherit 
@@ -41,7 +45,9 @@ in
       i3Configured
       polybarConfigured
       ssh
-      htop;
+      htop
+      tmuxConfigured
+      ;
     inherit (pkgs)
       arandr
       audacity
