@@ -9,6 +9,8 @@ in
       customRC = (builtins.readFile ./init.vim) + ''
         let g:deoplete#sources#clang#libclang_path='${clang}/lib/libclang.so'
         let g:deoplete#sources#clang#clang_header='${clang}/lib/clang/${clangVersion}/include'
+        let g:racer_cmd = "${pkgs.rustracer}/bin/racer"
+        let g:racer_experimental_completer = 1
       '';
       vam.pluginDictionaries = [
         {
@@ -24,6 +26,7 @@ in
             "vim-nix"
             "rust-vim"
             "deoplete-clang"
+            "vim-racer"
           ];
         }
         {
@@ -55,6 +58,17 @@ in
             sha256 = "0qnjpsnxlw71awd8w6ax78xhgnd8340lvli5di3b6az3sn5y63p7";
           };
           dependencies = [];
+        };
+
+        vim-racer = buildVimPluginFrom2Nix {
+          name = "vim-racer-2017-05-08";
+          src = pkgs.fetchgit {
+            url = "https://github.com/racer-rust/vim-racer";
+            rev = "34b7f2a261f1a7147cd87aff564acb17d0172c02";
+            sha256 = "13xcbw7mw3y4jwrjszjyvil9fdhqisf8awah4cx0zs8narlajzqm";
+          };
+          dependencies = [];
+
         };
       });
     };
