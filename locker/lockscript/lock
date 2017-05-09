@@ -6,14 +6,14 @@ image_file=/run/user/$UID/screen_lock.png
 resolution=$(@xdpyinfo@/bin/xdpyinfo | grep dimensions | awk '{print $2}')
 w=${resolution%%x*}
 h=${resolution##*x}
-blurSize=3
+blurSize=4
 @gstreamer@/bin/gst-launch-1.0 -q \
     videomixer name=mix ! \
     pngenc snapshot=true compression-level=1 ! filesink "location=/dev/stdout" \
     \
     ximagesrc use-damage=true show-pointer=true ! \
-    videoscale method=4 ! video/x-raw,width=$((w>>$blurSize)),height=$((h>>$blurSize)) ! \
-    videoscale method=4 ! video/x-raw,width=$w,height=$h ! \
+    videoscale method=0 ! video/x-raw,width=$((w>>$blurSize)),height=$((h>>$blurSize)) ! \
+    videoscale method=0 ! video/x-raw,width=$w,height=$h ! \
     videoconvert ! \
     mix. \
     \
