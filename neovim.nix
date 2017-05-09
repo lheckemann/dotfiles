@@ -25,7 +25,6 @@ in
             "jellybeans"
             "vim-nix"
             "rust-vim"
-            "vim-racer"
           ];
         }
         {
@@ -33,8 +32,8 @@ in
           ft_regex = "python";
         }
         {
-          name = "rust-vim";
-          filename_regex = "\(.*\.rs\|Cargo\.\(toml\|lock\)\)$";
+          name = "vim-racer";
+          filename_regex = ''\(.*\.rs\|Cargo\.\(toml\|lock\)\)'' + "$";
         }
       ];
       vam.knownPlugins = pkgs.vimPlugins // (with pkgs.vimUtils; {
