@@ -25,7 +25,6 @@ in
             "jellybeans"
             "vim-nix"
             "rust-vim"
-            "deoplete-clang"
             "vim-racer"
           ];
         }
@@ -46,16 +45,6 @@ in
             repo = "jellybeans.vim";
             rev = "fd089ca8a242263f61ae7bddce55a007d535bc65";
             sha256 = "00knmhmfw9d04p076cy0k5hglk7ly36biai8p9b6l9762irhzypp";
-          };
-          dependencies = [];
-        };
-
-        deoplete-clang = buildVimPluginFrom2Nix {
-          name = "deoplete-clang-2016-12-29";
-          src = pkgs.fetchgit {
-            url = "https://github.com/zchee/deoplete-clang";
-            rev = "29dd29be59e1a800c3f6b99520305b86bfb512fc";
-            sha256 = "0qnjpsnxlw71awd8w6ax78xhgnd8340lvli5di3b6az3sn5y63p7";
           };
           dependencies = [];
         };
