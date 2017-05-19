@@ -36,6 +36,11 @@ let
     #!${stdenv.shell}
     exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} "$@"
   '';
+  nox = pkgs.nox.overrideAttrs (orig: {
+    src = ./nox;
+    buildInputs = orig.buildInputs ++ [ pkgs.git ];
+    PBR_VERSION = orig.version;
+  });
 in
   {
     inherit 
@@ -47,6 +52,7 @@ in
       ssh
       htop
       tmuxConfigured
+      nox
       ;
     inherit (pkgs)
       arandr
@@ -82,7 +88,6 @@ in
       nmap
       noto-fonts
       noto-fonts-emoji
-      nox
       pavucontrol
       potrace
       ripgrep

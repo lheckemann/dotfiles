@@ -2,5 +2,5 @@
 	path = zsh/zshmarks
 	url = https://github.com/jocelynmallon/zshmarks
 [submodule "nixpkgs-overlay/nox"]
-	path = nixpkgs-overlay/nox
+	path = nox
 	url = https://github.com/lheckemann/nox/
