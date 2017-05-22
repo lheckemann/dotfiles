@@ -1,6 +1,0 @@
-#!/bin/bash
-#xinput set-prop bcm5974 "Synaptics Two-Finger Scrolling" 1 1
-#xinput set-prop bcm5972 "Synaptics Tap Action" 0 0 0 0 1 3 2
-#xinput set-prop bcm5972 "Synaptics Palm Detection" 1
-#xinput set-prop bcm5972 "Synaptics Coasting Speed" 20 20
-synclient CoastingFriction=150 TapButton1=1 TapButton2=3 TapButton3=2 PalmDetect=1 CoastingSpeed=20 PalmMinWidth=80 PalmMinZ=250
