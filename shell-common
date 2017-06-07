@@ -11,6 +11,8 @@ technical-details() {
     nix-env --version
     printf '- Nixpkgs version: '
     nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion
+    printf '- Sandboxing enabled: '
+    grep build-use-sandbox /etc/nix/nix.conf | sed s/.*=//
 }
 
 store() {
