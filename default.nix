@@ -41,6 +41,11 @@ let
     buildInputs = orig.buildInputs ++ [ pkgs.git ];
     PBR_VERSION = orig.version;
   });
+  zshrc = pkgs.writeTextFile {
+    name = "zshrc";
+    text = builtins.readFile ./zshrc;
+    destination = "/etc/zshrc";
+  };
 in
   {
     inherit 
@@ -53,6 +58,7 @@ in
       htop
       tmuxConfigured
       nox
+      zshrc
       ;
     inherit (pkgs)
       arandr

@@ -1,4 +1,3 @@
-: ${DOTFILES_HOME:=~/dotfiles}
 ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
 [ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
 
@@ -23,10 +22,6 @@ zstyle ':completion:*:*:*:*:*' menu select
 zstyle ':completion::complete:*' use-cache 1
 zstyle ':completion::complete:*' cache-path "$ZSH_CACHE"
 
-# Fancy kill completion menu                                   pid      user          comm     etime
-zstyle ':completion:*:*:kill:*:processes' list-colors '=(#b) #([0-9]#) ([0-9a-z-]#) #([^ ]#) #([0-9:]#)*=0=0=0=00;36=0=0'
-zstyle ':completion:*:*:*:*:processes' command "ps -u $USER -o pid,user,comm,etime -w -w"
-
 # Menu completion colours matching ls
 eval $(dircolors)
 zstyle ':completion:*:default' list-colors "${(s.:.)LS_COLORS}"
@@ -41,16 +36,22 @@ b() {
 }
 b "${terminfo[kcuu1]}" up-line-or-search # Up
 b "${terminfo[kcud1]}" down-line-or-search # Down
-# TODO add ctrl-right|left mapping to forward|backward-word
 b "${terminfo[kcbt]}" reverse-menu-complete # Shift-Tab
 unfunction b
+
 
 ###########
 # Aliases #
 ###########
 
-source "$DOTFILES_HOME/zsh/zshmarks/init.zsh"
-alias j=jump
+export EDITOR=nvim
+alias grep="grep --color=auto"
+alias rg="rg -S"
+
+#############
+# Functions #
+#############
+
 wait_for() {
     local wait_pid
     if [[ $1 =~ ^[0-9]+$ ]] ; then
@@ -79,7 +80,21 @@ closure() {
     nix-store -qR "$@" | xargs du -chd0 | sort -h
 }
 
-[[ -f "$DOTFILES_HOME/zsh/local" ]] && source "$DOTFILES_HOME/zsh/local"
+
+technical-details() {
+    printf '- System: '
+    nixos-version
+    printf '- Nix version: '
+    nix-env --version
+    printf '- Nixpkgs version: '
+    nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion
+    printf '- Sandboxing enabled: '
+    grep build-use-sandbox /etc/nix/nix.conf | sed s/.*=//
+}
+
+storepath() {
+    readlink -f $(which "$@")
+}
 
 ###########
 # Options #
@@ -93,5 +108,3 @@ zshaddhistory() {
     [[ $* =~ reboot ]] && return 1
     return 0
 }
-
-source "$DOTFILES_HOME/shell-common"
