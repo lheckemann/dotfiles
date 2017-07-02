@@ -1,0 +1,36 @@
+From 913774e20010c6dd9c9208d4c28707159066f1ec Mon Sep 17 00:00:00 2001
+From: Linus Heckemann <git@sphalerite.org>
+Date: Wed, 28 Jun 2017 21:12:39 +0100
+Subject: [PATCH] x11: accept commands on stdin as well
+
+---
+ platform/x11/x11_main.c | 6 ++++++
+ 1 file changed, 6 insertions(+)
+
+diff --git a/platform/x11/x11_main.c b/platform/x11/x11_main.c
+index ecd4d809..f8fd30cf 100644
+--- a/platform/x11/x11_main.c
++++ b/platform/x11/x11_main.c
+@@ -1075,6 +1075,7 @@ int main(int argc, char **argv)
+ 		}
+ 
+ 		FD_SET(x11fd, &fds);
++		FD_SET(0, &fds);
+ 		if (select(x11fd + 1, &fds, NULL, NULL, timeout) < 0)
+ 		{
+ 			if (reloading)
+@@ -1083,6 +1084,11 @@ int main(int argc, char **argv)
+ 				reloading = 0;
+ 			}
+ 		}
++		if (FD_ISSET(0, &fds))
++		{
++			if (fread(buf, 1, 1, stdin) > 0 && buf[0] != '\n')
++				onkey(buf[0], 0);
++		}
+ 		if (!FD_ISSET(x11fd, &fds))
+ 		{
+ 			if (timeout == &tmo_advance_delay)
+-- 
+2.12.2
+

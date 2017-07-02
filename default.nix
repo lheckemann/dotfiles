@@ -46,6 +46,9 @@ let
     text = builtins.readFile ./zshrc;
     destination = "/etc/zshrc";
   };
+  mupdf = pkgs.mupdf.overrideAttrs (o: {
+    patches = (o.patches or []) ++ [./0001-x11-accept-commands-on-stdin-as-well.patch];
+  });
 in
   {
     inherit 
@@ -59,6 +62,7 @@ in
       tmuxConfigured
       nox
       zshrc
+      mupdf
       ;
     inherit (pkgs)
       arandr
@@ -84,7 +88,6 @@ in
       libreoffice
       lightdm # for dm-tool
       man-pages
-      mupdf
       mpv
       mumble
       ncdu
