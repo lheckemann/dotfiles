@@ -102,7 +102,7 @@ in
       ripgrep
       kvm
       scrot
-      sqlite
+      sqliteInteractive
       thunderbird
       tmuxp
       unzip
