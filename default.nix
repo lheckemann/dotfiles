@@ -34,7 +34,7 @@ let
   '';
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
-    exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} "$@"
+    exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} -S "/run/user/$(id -u)/tmux.1000" "$@"
   '';
   nox = pkgs.nox.overrideAttrs (orig: {
     src = ./nox;
