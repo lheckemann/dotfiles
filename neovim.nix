@@ -1,14 +1,8 @@
 { pkgs, ... }:
-let
-  clang = pkgs.llvmPackages.clang-unwrapped;
-  clangVersion = (builtins.parseDrvName clang.name).version;
-in
 (
   pkgs.neovim.override {
     configure = {
       customRC = (builtins.readFile ./init.vim) + ''
-        let g:deoplete#sources#clang#libclang_path='${clang}/lib/libclang.so'
-        let g:deoplete#sources#clang#clang_header='${clang}/lib/clang/${clangVersion}/include'
         let g:racer_cmd = "${pkgs.rustracer}/bin/racer"
         let g:racer_experimental_completer = 1
       '';
