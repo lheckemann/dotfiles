@@ -2,20 +2,6 @@ let
   pkgs = import <nixpkgs> {};
   inherit (pkgs) stdenv writeScriptBin;
   neovim = import ./neovim.nix { inherit pkgs; };
-  redshift = pkgs.redshift;
-  i3Configured = import ./i3.nix { inherit pkgs; };
-  lock = import ./locker;
-  xsession = writeScriptBin "xsession" ''
-    #!${stdenv.shell}
-    ${redshift}/bin/redshift -l 56:-4 -t 5500:2800 &
-    [[ -r $HOME/.background-image ]] && ${pkgs.feh}/bin/feh --bg-max $HOME/.background-image
-    ${pkgs.dunst}/bin/dunst \
-        -padding 5 \
-        -horizontal_padding 10 \
-        -dmenu ${pkgs.dmenu}/bin/dmenu \
-        -context_key XF86LaunchB &
-    exec ${i3Configured}/bin/i3
-  '';
   ssh = pkgs.openssh.overrideDerivation (orig: {
     patches = orig.patches ++ [ ./ssh-paranoid-confirm.patch ];
   });
@@ -25,13 +11,6 @@ let
       touch linux/LinuxProcessList.h
     '';
   });
-  polybar = pkgs.polybar.override {
-    i3Support = true;
-  };
-  polybarConfigured = writeScriptBin "polybar" ''
-    #!${stdenv.shell}
-    exec ${polybar}/bin/polybar -c ${./polybar.ini} "$@"
-  '';
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
     exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} -S "/run/user/$(id -u)/tmux.1000" "$@"
@@ -46,75 +25,40 @@ let
     text = builtins.readFile ./zshrc;
     destination = "/etc/zshrc";
   };
-  mupdf = pkgs.mupdf.overrideAttrs (o: {
-    patches = (o.patches or []) ++ [./0001-x11-accept-commands-on-stdin-as-well.patch];
-  });
 in
   {
-    inherit 
+    inherit
       neovim
-      xsession
-      lock
-      i3Configured
-      polybarConfigured
       ssh
       htop
       tmuxConfigured
       nox
       zshrc
-      mupdf
       ;
     inherit (pkgs)
-      arandr
-      audacity
       binutils # mostly for strings
       borgbackup
-      chromium
-      compton
-      dia
-      digikam
-      evince
       fbterm
-      firefox
+      fish
       gdb
-      gimp
-      gitg
       gnupg
       syncthing
       syncthing-inotify
       inotify-tools
-      kakoune
-      keepassx2
-      libreoffice
-      lightdm # for dm-tool
+      jq
       man-pages
-      mpv
-      mumble
       ncdu
       nethack
       nix-repl
       nixops
       nmap
-      noto-fonts
-      noto-fonts-emoji
-      pavucontrol
       potrace
       ripgrep
-      kvm
-      scrot
       sqliteInteractive
-      thunderbird
       tmuxp
       unzip
       usbutils
-      vlc
       xsel
-      zeal
-      endless-sky
       ;
-    i3 = pkgs.lib.lowPrio pkgs.i3;
-    inherit (pkgs.gnome3) eog dconf;
-    inherit (pkgs.idea) idea-community;
-    inherit (pkgs.gnome3) nautilus;
     inherit (pkgs.bind) dnsutils;
   }
