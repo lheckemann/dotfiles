@@ -58,7 +58,6 @@ in
       tmuxp
       unzip
       usbutils
-      xsel
       ;
     inherit (pkgs.bind) dnsutils;
   }

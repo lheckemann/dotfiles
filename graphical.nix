@@ -54,6 +54,7 @@ in import ./default.nix // {
     scrot
     thunderbird
     vlc
+    xsel
     zeal
     ;
     i3 = pkgs.lib.lowPrio pkgs.i3;
