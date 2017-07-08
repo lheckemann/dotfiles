@@ -43,6 +43,7 @@ in import ./default.nix // {
     firefox
     gimp
     gitg
+    gnupg # Override the non-graphical one from default.nix
     keepassx2
     kvm
     libreoffice

@@ -41,7 +41,6 @@ in
       fbterm
       fish
       gdb
-      gnupg
       syncthing
       syncthing-inotify
       inotify-tools
@@ -60,4 +59,5 @@ in
       usbutils
       ;
     inherit (pkgs.bind) dnsutils;
+    gnupg = pkgs.gnupg.override {guiSupport = false;};
   }
