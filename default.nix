@@ -2,9 +2,6 @@ let
   pkgs = import <nixpkgs> {};
   inherit (pkgs) stdenv writeScriptBin;
   neovim = import ./neovim.nix { inherit pkgs; };
-  ssh = pkgs.openssh.overrideDerivation (orig: {
-    patches = orig.patches ++ [ ./ssh-paranoid-confirm.patch ];
-  });
   htop = pkgs.htop.overrideAttrs (orig: {
     patches = [./htop-stripstore.patch];
     postPatch = ''
@@ -29,7 +26,6 @@ in
   {
     inherit
       neovim
-      ssh
       htop
       tmuxConfigured
       nox
