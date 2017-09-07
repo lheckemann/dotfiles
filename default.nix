@@ -41,6 +41,7 @@ in
       syncthing-inotify
       inotify-tools
       jq
+      lsof
       man-pages
       ncdu
       nethack
