@@ -1,5 +1,6 @@
 let
   pkgs = import <nixpkgs> {};
+  inherit (pkgs) writeScriptBin stdenv;
   i3Configured = import ./i3.nix { inherit pkgs; };
   lock = import ./locker;
   xsession = writeScriptBin "xsession" ''
