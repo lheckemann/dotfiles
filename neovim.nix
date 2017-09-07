@@ -11,7 +11,6 @@
           names = [
             "airline"
             "vim-airline-themes"
-            "neomake"
             "fugitive"
             "Supertab"
             "The_NERD_tree"
@@ -19,6 +18,7 @@
             "jellybeans"
             "vim-nix"
             "rust-vim"
+            "neomake"
           ];
         }
         {
@@ -43,6 +43,16 @@
             url = "https://github.com/racer-rust/vim-racer";
             rev = "34b7f2a261f1a7147cd87aff564acb17d0172c02";
             sha256 = "13xcbw7mw3y4jwrjszjyvil9fdhqisf8awah4cx0zs8narlajzqm";
+          };
+          dependencies = [];
+        };
+
+        neomake = buildVimPluginFrom2Nix { # created by nix#NixDerivation
+          name = "neomake-2017-07-25";
+          src = pkgs.fetchgit {
+            url = "https://github.com/benekastah/neomake";
+            rev = "0d1f1508ce2c9cfcffbf74a6bdea9c5766301fd6";
+            sha256 = "0wc9b63s4j80f6irf2g6dmk2nx8w9il4dccbgmzirchmymndw4vh";
           };
           dependencies = [];
 
