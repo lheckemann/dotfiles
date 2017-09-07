@@ -33,7 +33,7 @@ bindsym $mod+Return exec st
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+bindsym $mod+d exec --no-startup-id dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -163,5 +163,6 @@ bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ t
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
 bindsym $mod+BackSpace exec --no-startup-id "lock"
+bindsym $mod+t exec "emomenu"
 
 exec polybar top
