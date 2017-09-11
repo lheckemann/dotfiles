@@ -97,6 +97,19 @@ storepath() {
     readlink -f $(which "$@")
 }
 
+nix-env() {
+    local hasF=""
+    for arg in "$@"
+    do
+        [[ arg = "-f" ]] && hasF=1
+    done
+    if [[ -n "$hasF" ]]
+    then command nix-env "$@"
+    else command nix-env -f '<nixpkgs>' "$@"
+    fi
+
+}
+
 ###########
 # Options #
 ###########
