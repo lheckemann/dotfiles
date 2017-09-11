@@ -47,6 +47,7 @@ unfunction b
 export EDITOR=nvim
 alias grep="grep --color=auto"
 alias rg="rg -S"
+alias ix="curl -F 'f:1=<-' ix.io"
 
 #############
 # Functions #
