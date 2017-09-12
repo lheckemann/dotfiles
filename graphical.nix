@@ -12,7 +12,7 @@ let
         -padding 15 \
         -horizontal_padding 20 \
         -dmenu ${pkgs.dmenu}/bin/dmenu \
-        -fn "Liberation Sans 24" \
+        -fn "Liberation Sans 12" \
         -context_key XF86LaunchB &
     exec ${i3Configured}/bin/i3
   '';
