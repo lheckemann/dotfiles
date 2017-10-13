@@ -19,7 +19,7 @@ let
   });
   zshrc = pkgs.writeTextFile {
     name = "zshrc";
-    text = builtins.readFile ./zshrc;
+    text = builtins.readFile ./zshrc + builtins.readFile ./agnoster.zsh-theme;
     destination = "/etc/zshrc";
   };
 in
