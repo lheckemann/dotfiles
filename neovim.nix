@@ -29,6 +29,10 @@
           name = "vim-racer";
           filename_regex = ''\(.*\.rs\|Cargo\.\(toml\|lock\)\)'' + "$";
         }
+        {
+          names = ["haskell-vim"];
+          ft_regex = "haskell";
+        }
       ];
       vam.knownPlugins = pkgs.vimPlugins // (with pkgs.vimUtils; {
         jellybeans = buildVimPluginFrom2Nix {
