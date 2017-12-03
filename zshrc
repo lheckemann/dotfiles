@@ -48,6 +48,7 @@ export EDITOR=nvim
 alias grep="grep --color=auto"
 alias rg="rg -S"
 alias ix="curl -F 'sprunge=<-' sprunge.us"
+alias nixpkgs="nix-build --no-out-link '<nixpkgs>' -A"
 
 #############
 # Functions #
