@@ -94,7 +94,7 @@ exec st -c MainTerm -e sh -c 'tmux a || exec tmux'
 
 bindsym $mod+2 workspace 2
 
-bindsym $mod+3 workspace 3; exec "pgrep firefox || firefox"
+bindsym $mod+3 workspace 3; exec --no-startup-id "pgrep firefox || firefox"
 assign [class="Firefox"] → 3
 
 bindsym $mod+4 workspace 4
