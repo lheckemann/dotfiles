@@ -95,7 +95,7 @@ technical-details() {
 }
 
 storepath() {
-    readlink -f $(which "$@")
+    readlink -f $(whence -p "$@")
 }
 
 nix-env() {
