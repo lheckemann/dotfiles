@@ -42,10 +42,12 @@ in import ./default.nix // {
     dfeet
     dia
     endless-sky
+    emacs
     evince
     firefox
     gimp
     gitg
+    graphicsmagick
     gnupg # Override the non-graphical one from default.nix
     keepassx2
     kvm
@@ -56,6 +58,7 @@ in import ./default.nix // {
     noto-fonts-emoji
     pavucontrol
     scrot
+    sqliteman
     thunderbird
     vlc
     xsel

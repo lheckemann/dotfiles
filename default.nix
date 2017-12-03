@@ -33,21 +33,23 @@ in
       ;
     inherit (pkgs)
       binutils # mostly for strings
-      borgbackup
       fbterm
       fish
       gdb
       syncthing
       syncthing-inotify
       inotify-tools
+      indent
       jq
       lsof
       man-pages
       ncdu
       nethack
+      nix-index
       nix-repl
       nixops
       nmap
+      pandoc
       potrace
       ripgrep
       sqliteInteractive
@@ -57,4 +59,5 @@ in
       ;
     inherit (pkgs.bind) dnsutils;
     gnupg = pkgs.gnupg.override {guiSupport = false;};
+    texlive = pkgs.texlive.combined.scheme-small;
   }
