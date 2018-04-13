@@ -40,7 +40,7 @@ in import ./default.nix // {
     chromium
     compton
     dfeet
-    dia
+    dillo
     endless-sky
     evince
     firefox
