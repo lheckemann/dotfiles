@@ -162,12 +162,12 @@ prompt_dir() {
 PROMPT_VENV_BG=${PROMPT_VENV_BG:-blue}
 PROMPT_VENV_FG=${PROMPT_VENV_FG:-black}
 prompt_virtualenv() {
-  local virtualenv_path="$VIRTUAL_ENV"
+  local virtualenv_path="$VIRTUAL_ENV" shell_name="${name:-nix-shell}"
   if [[ -n $virtualenv_path && -n $VIRTUAL_ENV_DISABLE_PROMPT ]]; then
     prompt_segment $PROMPT_VENV_BG $PROMPT_VENV_FG "(`basename $virtualenv_path`)"
   fi
   if [[ $IN_NIX_SHELL ]]; then
-    prompt_segment $PROMPT_VENV_BG $PROMPT_VENV_FG "(${name:-nix-shell})"
+    prompt_segment $PROMPT_VENV_BG $PROMPT_VENV_FG "${shell_name%-*}"
   fi
 }
 
