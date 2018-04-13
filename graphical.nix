@@ -42,7 +42,6 @@ in import ./default.nix // {
     dfeet
     dia
     endless-sky
-    emacs
     evince
     firefox
     gimp
