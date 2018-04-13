@@ -57,6 +57,7 @@ in
       potrace
       ripgrep
       sqliteInteractive
+      sshuttle
       tmuxp
       unzip
       usbutils
