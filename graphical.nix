@@ -67,4 +67,5 @@ in import ./default.nix // {
     i3 = pkgs.lib.lowPrio pkgs.i3;
     inherit (pkgs.gnome3) eog dconf nautilus;
     inherit (pkgs.idea) idea-community;
+  emacs = pkgs.callPackage ./emacs.nix {};
 }
