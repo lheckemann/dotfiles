@@ -46,6 +46,7 @@ in
       jq
       lsof
       man-pages
+      moreutils
       ncdu
       nethack
       nix-index
