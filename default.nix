@@ -2,12 +2,6 @@ let
   pkgs = import <nixpkgs> {};
   inherit (pkgs) stdenv writeScriptBin;
   neovim = import ./neovim.nix { inherit pkgs; };
-  htop = pkgs.htop.overrideAttrs (orig: {
-    patches = [./htop-stripstore.patch];
-    postPatch = ''
-      touch linux/LinuxProcessList.h
-    '';
-  });
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
     exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} -S "/run/user/$(id -u)/tmux.1000" "$@"
@@ -26,7 +20,6 @@ in
   {
     inherit
       neovim
-      htop
       tmuxConfigured
       nox
       zshrc
@@ -38,6 +31,7 @@ in
       gdb
       syncthing
       syncthing-inotify
+      htop
       inotify-tools
       indent
       jq
