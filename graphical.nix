@@ -63,8 +63,7 @@ in import ./default.nix // {
     xsel
     zeal
     ;
-    inherit (pkgs.gnome3) eog dconf nautilus;
-    inherit (pkgs.idea) idea-community;
   i3 = pkgs.lib.lowPrio pkgs.i3;
+  inherit (pkgs.gnome3) eog dconf nautilus;
   emacs = pkgs.callPackage ./emacs.nix {};
 }
