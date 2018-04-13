@@ -91,20 +91,12 @@ bindsym $mod+a focus parent
 bindsym $mod+1 workspace 1
 assign [instance="MainTerm"] → 1
 exec st -c MainTerm -e sh -c 'tmux a || exec tmux'
-
 bindsym $mod+2 workspace 2
-
-bindsym $mod+3 workspace 3; exec --no-startup-id "pgrep firefox || firefox"
+bindsym $mod+3 workspace 3; exec --no-startup-id "pgrep firefox || MOZ_USE_XINPUT2=1 firefox"
 assign [class="Firefox"] → 3
-
 bindsym $mod+4 workspace 4
-assign [class="Gajim"] → 5
 bindsym $mod+5 workspace 5
-
 bindsym $mod+6 workspace 6
-assign [instance="SphalTerm"] → 6
-exec st -c SphalTerm -e ssh sphal
-
 bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
@@ -127,7 +119,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+Ctrl+e exit
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -163,6 +155,6 @@ bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ t
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
 bindsym $mod+BackSpace exec --no-startup-id "lock"
-bindsym $mod+t exec "emomenu"
+bindsym $mod+Shift+d exec "drama"
 
 exec polybar top

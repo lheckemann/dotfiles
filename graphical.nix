@@ -1,8 +1,8 @@
 let
   pkgs = import <nixpkgs> {};
   inherit (pkgs) writeScriptBin stdenv;
-  i3Configured = import ./i3.nix { inherit pkgs; };
   lock = import ./locker;
+  i3Configured = pkgs.callPackage ./i3.nix {};
   xsession = writeScriptBin "xsession" ''
     #!${stdenv.shell}
     export XCURSOR_PATH=/run/current-system/sw/share/icons
@@ -64,8 +64,8 @@ in import ./default.nix // {
     xsel
     zeal
     ;
-    i3 = pkgs.lib.lowPrio pkgs.i3;
     inherit (pkgs.gnome3) eog dconf nautilus;
     inherit (pkgs.idea) idea-community;
+  i3 = pkgs.lib.lowPrio pkgs.i3;
   emacs = pkgs.callPackage ./emacs.nix {};
 }
