@@ -40,7 +40,6 @@ in
       fish
       gdb
       syncthing
-      syncthing-inotify
       htop
       inotify-tools
       indent
