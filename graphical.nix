@@ -65,5 +65,8 @@ in import ./default.nix // {
     ;
   i3 = pkgs.lib.lowPrio pkgs.i3;
   inherit (pkgs.gnome3) eog dconf nautilus;
+  switch-user = pkgs.writeScriptBin "switch-user" ''
+    ${pkgs.dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
+  '';
   emacs = pkgs.callPackage ./emacs.nix {};
 }
