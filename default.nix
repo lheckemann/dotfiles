@@ -16,6 +16,15 @@ let
     text = builtins.readFile ./agnoster.zsh-theme + builtins.readFile ./zshrc;
     destination = "/etc/zshrc";
   };
+  openPort = pkgs.writeShellScriptBin "openport" ''
+    set -ex
+    [[ -n "$1" ]]
+    for prog in iptables ip6tables ; do
+      for protocol in tcp udp ; do
+        $prog -I INPUT 1 -p $protocol -m $protocol --dport "$1" -j ACCEPT
+      done
+    done
+  '';
 in
   {
     inherit
@@ -23,6 +32,7 @@ in
       tmuxConfigured
       nox
       zshrc
+      openPort
       ;
     inherit (pkgs)
       binutils # mostly for strings
