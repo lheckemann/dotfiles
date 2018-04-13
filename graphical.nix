@@ -69,4 +69,7 @@ in import ./default.nix // {
     ${pkgs.dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
   '';
   emacs = pkgs.callPackage ./emacs.nix {};
+  reconfigure = pkgs.writeShellScriptBin "reconfigure" ''
+    nix-env -f ~/dotfiles/graphical.nix -ir -I nixpkgs=$HOME/nixpkgs-live
+  '';
 }

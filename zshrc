@@ -1,3 +1,5 @@
+export EDITOR='emacs -nw'
+export SSH_AUTH_SOCK=/run/user/$UID/gnupg/S.gpg-agent.ssh
 ZSH_CACHE="${XDG_CACHE_HOME:=$HOME/.cache}/zsh"
 [ -d "$ZSH_CACHE" ] || mkdir -p "$ZSH_CACHE"
 
@@ -44,7 +46,6 @@ unfunction b
 # Aliases #
 ###########
 
-export EDITOR=nvim
 alias grep="grep --color=auto"
 alias rg="rg -S"
 alias ix="curl -F 'sprunge=<-' sprunge.us"
@@ -108,7 +109,6 @@ nix-env() {
     then command nix-env "$@"
     else command nix-env -f '<nixpkgs>' "$@"
     fi
-
 }
 
 ###########
