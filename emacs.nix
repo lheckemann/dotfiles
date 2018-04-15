@@ -26,6 +26,7 @@ let
   '';
   packagesFun = ps: [ emacsConfig agda-mode ] ++ (with ps; [
     evil markdown-mode nix-mode
+    haskell-mode
     sudo-edit
   ]);
 in emacsWithPackages packagesFun
