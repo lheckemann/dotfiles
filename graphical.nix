@@ -35,6 +35,7 @@ in import ./default.nix // {
     xsession
     ;
   inherit (pkgs)
+    alacritty
     arandr
     audacity
     chromium
@@ -43,6 +44,7 @@ in import ./default.nix // {
     dillo
     endless-sky
     evince
+    feh
     firefox
     gimp
     gitg
@@ -56,6 +58,7 @@ in import ./default.nix // {
     noto-fonts
     noto-fonts-emoji
     pavucontrol
+    rustracer
     scrot
     sqliteman
     thunderbird
@@ -64,7 +67,7 @@ in import ./default.nix // {
     zeal
     ;
   i3 = pkgs.lib.lowPrio pkgs.i3;
-  inherit (pkgs.gnome3) eog dconf nautilus;
+  inherit (pkgs.gnome3) eog dconf nautilus networkmanagerapplet;
   switch-user = pkgs.writeScriptBin "switch-user" ''
     ${pkgs.dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
   '';

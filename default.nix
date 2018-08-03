@@ -38,6 +38,7 @@ in
       binutils # mostly for strings
       fbterm
       fish
+      fzf
       gdb
       syncthing
       htop
@@ -56,11 +57,14 @@ in
       pandoc
       potrace
       ripgrep
+      scaleway-cli
       sqliteInteractive
+      sshfs
       sshuttle
       tmuxp
       unzip
       usbutils
+      youtube-dl
       ;
     inherit (pkgs.bind) dnsutils;
     gnupg = pkgs.gnupg.override {guiSupport = false;};
