@@ -2,7 +2,7 @@
 , emacsConfigText ? ''
     (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
     (setq mouse-wheel-progressive-speed nil)
-    (setq inhibit-startup-screen t)
+    (set-variable 'inhibit-startup-screen t)
     (setq whitespace-style '(tab-mark face trailing tabs))
     (global-whitespace-mode)
     (require 'evil)
