@@ -56,6 +56,7 @@ in
       sshfs
       sshuttle
       tmuxp
+      units
       unzip
       usbutils
       youtube-dl
