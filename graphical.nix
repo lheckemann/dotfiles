@@ -5,8 +5,9 @@ let
   i3Configured = pkgs.callPackage ./i3.nix {};
   xsession = writeScriptBin "xsession" ''
     #!${stdenv.shell}
-    export XCURSOR_PATH=/run/current-system/sw/share/icons
-    ${pkgs.redshift}/bin/redshift -l 56:-4 -t 5500:2800 &
+    export XCURSOR_PATH=/run/current-system/sw/share/icons \
+           SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
+    ${pkgs.redshift}/bin/redshift -l 48:11 -t 5500:2800 &
     [[ -r $HOME/.background-image ]] && ${pkgs.feh}/bin/feh --bg-max $HOME/.background-image
     ${pkgs.dunst}/bin/dunst \
         -padding 15 \
