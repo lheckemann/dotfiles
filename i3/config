@@ -145,6 +145,10 @@ mode "resize" {
         bindsym Escape mode "default"
 }
 
+bar {
+    status_command i3status -c I3STATUS_CONFIG
+}
+
 bindsym $mod+r mode "resize"
 
 new_window 1pixel
@@ -157,4 +161,3 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
 bindsym $mod+BackSpace exec --no-startup-id "lock"
 bindsym $mod+Shift+d exec "drama"
 
-exec polybar top

@@ -17,13 +17,6 @@ let
         -context_key XF86LaunchB &
     exec ${i3Configured}/bin/i3
   '';
-  polybar = pkgs.polybar.override {
-    i3Support = true;
-  };
-  polybarConfigured = writeScriptBin "polybar" ''
-    #!${stdenv.shell}
-    exec ${polybar}/bin/polybar -c ${./polybar.ini} "$@"
-  '';
   mupdf = pkgs.mupdf.overrideAttrs (o: {
     patches = (o.patches or []) ++ [./0001-x11-accept-commands-on-stdin-as-well.patch];
   });
@@ -32,7 +25,6 @@ in import ./default.nix // {
     i3Configured
     lock
     mupdf
-    polybarConfigured
     xsession
     ;
   inherit (pkgs)
@@ -51,6 +43,7 @@ in import ./default.nix // {
     gitg
     graphicsmagick
     gnupg # Override the non-graphical one from default.nix
+    i3status
     keepassx2
     kvm
     libreoffice
