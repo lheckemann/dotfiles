@@ -35,6 +35,7 @@ in import ./default.nix // {
     compton
     dfeet
     dillo
+    dmenu
     endless-sky
     evince
     feh
@@ -54,12 +55,16 @@ in import ./default.nix // {
     pavucontrol
     rustracer
     scrot
+    socat
     sqliteman
+    tdesktop
     thunderbird
     vlc
+    xidlehook
     xsel
     zeal
     ;
+  inherit (pkgs.xorg) xbacklight;
   i3 = pkgs.lib.lowPrio pkgs.i3;
   inherit (pkgs.gnome3) eog dconf nautilus networkmanagerapplet;
   switch-user = pkgs.writeScriptBin "switch-user" ''
@@ -69,4 +74,7 @@ in import ./default.nix // {
   reconfigure = pkgs.writeShellScriptBin "reconfigure" ''
     nix-env -f ~/dotfiles/graphical.nix -ir -I nixpkgs=$HOME/nixpkgs-live
   '';
+  st = pkgs.st.override {
+    patches = [ ./st-font.patch ];
+  };
 }

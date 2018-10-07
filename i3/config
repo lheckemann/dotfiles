@@ -158,6 +158,6 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAUL
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
-bindsym $mod+BackSpace exec --no-startup-id "lock"
+bindsym $mod+BackSpace exec --no-startup-id "echo -n $'\x02' | socat - unix-connect:$XDG_RUNTIME_DIR/idle.sock"
 bindsym $mod+Shift+d exec "drama"
-
+exec "xidlehook --time 5 --timer lock --socket $XDG_RUNTIME_DIR/idle.sock"
