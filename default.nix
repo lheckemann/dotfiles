@@ -42,6 +42,7 @@ in
       lsof
       man-pages
       moreutils
+      mosh
       ncdu
       nethack
       nix-index
@@ -58,7 +59,6 @@ in
       tmuxp
       units
       unzip
-      usbutils
       youtube-dl
       ;
     inherit (pkgs.bind) dnsutils;
