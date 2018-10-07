@@ -6,11 +6,6 @@ let
     #!${stdenv.shell}
     exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} -S "/run/user/$(id -u)/tmux.1000" "$@"
   '';
-  nox = pkgs.nox.overrideAttrs (orig: {
-    src = ./nox;
-    buildInputs = orig.buildInputs ++ [ pkgs.git ];
-    PBR_VERSION = orig.version;
-  });
   zshrc = pkgs.writeTextFile {
     name = "zshrc";
     text = builtins.readFile ./agnoster.zsh-theme + builtins.readFile ./zshrc;
@@ -30,7 +25,6 @@ in
     inherit
       neovim
       tmuxConfigured
-      nox
       zshrc
       openPort
       ;
