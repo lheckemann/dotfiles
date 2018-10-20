@@ -2,9 +2,15 @@ let
   pkgs = import <nixpkgs> {};
   inherit (pkgs) stdenv writeScriptBin;
   neovim = import ./neovim.nix { inherit pkgs; };
+  confs = pkgs.linkFarm "confs" [
+    { name = "etc/tmux.conf"; path = ./tmux.conf; }
+  ];
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
-    exec ${pkgs.tmux}/bin/tmux -f ${./tmux.conf} -S "/run/user/$(id -u)/tmux.1000" "$@"
+    exec ${pkgs.tmux}/bin/tmux -f ~/.nix-profile/etc/tmux.conf -S "/run/user/$(id -u)/tmux.1000" "$@"
+  '';
+  tmuxMan = pkgs.runCommandNoCC "tmux-man" {} ''
+    ln -s ${pkgs.tmux.man} $out
   '';
   zshrc = pkgs.writeTextFile {
     name = "zshrc";
@@ -23,8 +29,10 @@ let
 in
   {
     inherit
+      confs
       neovim
       tmuxConfigured
+      tmuxMan
       zshrc
       openPort
       ;
