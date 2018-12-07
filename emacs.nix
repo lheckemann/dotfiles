@@ -8,7 +8,7 @@
     (require 'evil)
     (evil-mode)
     (xterm-mouse-mode)
-    (require 'agda2)
+    (require 'magit)
   ''
 , haskellPackages
 , runCommandNoCC
@@ -19,14 +19,13 @@ let
     destination = "/share/emacs/site-lisp/default.el";
     text = emacsConfigText;
   };
-  agda = haskellPackages.Agda.data;
-  agda-mode = runCommandNoCC "agda-emacs" {} ''
-    mkdir -p $out/share/emacs/site-lisp/elpa/
-    ln -s ${agda}/share/*/*/${agda.name}/emacs-mode $out/share/emacs/site-lisp/elpa/${agda.name}
-  '';
-  packagesFun = ps: [ emacsConfig agda-mode ] ++ (with ps; [
+  packagesFun = ps: [ emacsConfig ] ++ (with ps; [
     evil markdown-mode nix-mode
     haskell-mode
     sudo-edit
+    magit
+    yaml-mode
+    rust-mode
+    coffee-mode
   ]);
 in emacsWithPackages packagesFun
