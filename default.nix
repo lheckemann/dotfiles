@@ -1,6 +1,5 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-  neovim = callPackage ./neovim.nix {};
   confs = linkFarm "confs" [
     { name = "etc/tmux.conf"; path = ./tmux.conf; }
   ];
@@ -33,7 +32,6 @@ in
   {
     inherit
       confs
-      neovim
       tmuxConfigured
       tmuxMan
       zshrc
