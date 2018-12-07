@@ -22,7 +22,6 @@ let
     xrdb -merge - <<EOF
     Xcursor.theme: Adwaita
     EOF
-    ${redshift}/bin/redshift -l 48:11 -t 5500:2800 &
     [[ -r $HOME/.background-image ]] && ${feh}/bin/feh --bg-max $HOME/.background-image
     ${dunst}/bin/dunst \
         -padding 15 \
@@ -68,6 +67,7 @@ in (callPackage ./default.nix {}) // {
     noto-fonts
     noto-fonts-emoji
     pavucontrol
+    redshift
     rustracer
     scrot
     socat

@@ -164,3 +164,4 @@ bindsym $mod+Shift+d exec "drama"
 bindsym $mod+Mod1+Right move workspace to output right
 bindsym $mod+Mod1+Left move workspace to output left
 exec "xidlehook --time 5 --timer lock --socket $XDG_RUNTIME_DIR/idle.sock --not-when-fullscreen"
+exec "redshift -l 48:11 -t 5500:2800"
