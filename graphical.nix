@@ -32,7 +32,7 @@ let
         -context_key XF86LaunchB &
     exec ${i3Configured}/bin/i3
   '';
-in import ./default.nix // {
+in (callPackage ./default.nix {}) // {
   mupdf = mupdf.overrideAttrs (o: {
     patches = (o.patches or []) ++ [./0001-x11-accept-commands-on-stdin-as-well.patch];
   });

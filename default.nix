@@ -1,23 +1,22 @@
+{ pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-  pkgs = import <nixpkgs> {};
-  inherit (pkgs) stdenv writeScriptBin;
-  neovim = import ./neovim.nix { inherit pkgs; };
-  confs = pkgs.linkFarm "confs" [
+  neovim = callPackage ./neovim.nix {};
+  confs = linkFarm "confs" [
     { name = "etc/tmux.conf"; path = ./tmux.conf; }
   ];
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
-    exec ${pkgs.tmux}/bin/tmux -f ~/.nix-profile/etc/tmux.conf -S "/run/user/$(id -u)/tmux.1000" "$@"
+    exec ${tmux}/bin/tmux -f ~/.nix-profile/etc/tmux.conf -S "/run/user/$(id -u)/tmux.1000" "$@"
   '';
-  tmuxMan = pkgs.runCommandNoCC "tmux-man" {} ''
-    ln -s ${pkgs.tmux.man} $out
+  tmuxMan = runCommandNoCC "tmux-man" {} ''
+    ln -s ${tmux.man} $out
   '';
-  zshrc = pkgs.writeTextFile {
+  zshrc = writeTextFile {
     name = "zshrc";
     text = builtins.readFile ./agnoster.zsh-theme + builtins.readFile ./zshrc;
     destination = "/etc/zshrc";
   };
-  openPort = pkgs.writeShellScriptBin "openport" ''
+  openPort = writeShellScriptBin "openport" ''
     set -ex
     [[ -n "$1" ]]
     for prog in iptables ip6tables ; do
@@ -25,6 +24,10 @@ let
         $prog -I INPUT 1 -p $protocol -m $protocol --dport "$1" -j ACCEPT
       done
     done
+  '';
+  nix-prefetch-github = writeShellScriptBin "nix-prefetch-github" ''
+    export PATH=${lib.escapeShellArg (lib.makeBinPath [git bash nix-prefetch-url])}
+    exec ${./nix-prefetch-github.sh}
   '';
 in
   {
@@ -74,7 +77,7 @@ in
       vdirsyncer
       youtube-dl
       ;
-    inherit (pkgs.bind) dnsutils;
-    gnupg = pkgs.gnupg.override {guiSupport = false;};
-    texlive = pkgs.texlive.combined.scheme-small;
+    inherit (bind) dnsutils;
+    gnupg = gnupg.override {guiSupport = false;};
+    texlive = texlive.combined.scheme-small;
   }
