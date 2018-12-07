@@ -146,7 +146,7 @@ mode "resize" {
 }
 
 bar {
-    status_command i3status -c I3STATUS_CONFIG
+    status_command wrap-i3status
 }
 
 bindsym $mod+r mode "resize"
@@ -160,4 +160,7 @@ bindsym XF86MonBrightnessUp exec --no-startup-id "xbacklight +10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "xbacklight -10"
 bindsym $mod+BackSpace exec --no-startup-id "echo -n $'\x02' | socat - unix-connect:$XDG_RUNTIME_DIR/idle.sock"
 bindsym $mod+Shift+d exec "drama"
-exec "xidlehook --time 5 --timer lock --socket $XDG_RUNTIME_DIR/idle.sock"
+
+bindsym $mod+Mod1+Right move workspace to output right
+bindsym $mod+Mod1+Left move workspace to output left
+exec "xidlehook --time 5 --timer lock --socket $XDG_RUNTIME_DIR/idle.sock --not-when-fullscreen"

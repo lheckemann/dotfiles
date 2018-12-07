@@ -1,29 +1,44 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-  i3Configured = pkgs.callPackage ./i3.nix {};
   lock = callPackage ./locker {};
+  i3Configured = lib.hiPrio (
+    runCommand "i3-with-config" {
+      nativeBuildInputs = [ makeWrapper ];
+    } ''
+      mkdir -p $out/bin
+      mkdir -p $out/etc
+      cp ${./i3/config} $out/etc/i3.conf
+      cp ${./i3/status.conf} $out/etc/i3status.conf
+      makeWrapper ${i3}/bin/i3 $out/bin/i3 --add-flags "-c ~/.nix-profile/etc/i3.conf"
+      makeWrapper ${i3status}/bin/i3status $out/bin/i3status --add-flags '-c ~/.nix-profile/etc/i3status.conf'
+      install -Dm0755 ${./status.sh} $out/bin/wrap-i3status
+    ''
+  );
   xsession = writeScriptBin "xsession" ''
     #!${stdenv.shell}
-    export XCURSOR_PATH=/run/current-system/sw/share/icons \
-           SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh
-    ${pkgs.redshift}/bin/redshift -l 48:11 -t 5500:2800 &
-    [[ -r $HOME/.background-image ]] && ${pkgs.feh}/bin/feh --bg-max $HOME/.background-image
-    ${pkgs.dunst}/bin/dunst \
+    export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
+           SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
+           EDITOR='emacsclient -a "" -n'
+    xrdb -merge - <<EOF
+    Xcursor.theme: Adwaita
+    EOF
+    ${redshift}/bin/redshift -l 48:11 -t 5500:2800 &
+    [[ -r $HOME/.background-image ]] && ${feh}/bin/feh --bg-max $HOME/.background-image
+    ${dunst}/bin/dunst \
         -padding 15 \
         -horizontal_padding 20 \
-        -dmenu ${pkgs.dmenu}/bin/dmenu \
+        -dmenu ${dmenu}/bin/dmenu \
         -fn "Liberation Sans 12" \
         -context_key XF86LaunchB &
     exec ${i3Configured}/bin/i3
   '';
-  mupdf = pkgs.mupdf.overrideAttrs (o: {
+in import ./default.nix // {
+  mupdf = mupdf.overrideAttrs (o: {
     patches = (o.patches or []) ++ [./0001-x11-accept-commands-on-stdin-as-well.patch];
   });
-in import ./default.nix // {
   inherit
     i3Configured
     lock
-    mupdf
     xsession
     ;
   inherit (pkgs)
@@ -44,7 +59,8 @@ in import ./default.nix // {
     graphicsmagick
     gnupg # Override the non-graphical one from default.nix
     i3status
-    keepassx2
+    inkscape
+    keepassxc
     kvm
     libreoffice
     mpv
@@ -64,16 +80,15 @@ in import ./default.nix // {
     zeal
     ;
   inherit (pkgs.xorg) xbacklight;
-  i3 = pkgs.lib.lowPrio pkgs.i3;
-  inherit (pkgs.gnome3) eog dconf nautilus networkmanagerapplet;
-  switch-user = pkgs.writeScriptBin "switch-user" ''
-    ${pkgs.dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
+  i3 = lib.lowPrio i3;
+  switch-user = writeScriptBin "switch-user" ''
+    ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
   '';
-  emacs = pkgs.callPackage ./emacs.nix {};
-  reconfigure = pkgs.writeShellScriptBin "reconfigure" ''
+  emacs = callPackage ./emacs.nix {};
+  reconfigure = writeShellScriptBin "reconfigure" ''
     nix-env -f ~/dotfiles/graphical.nix -ir -I nixpkgs=$HOME/nixpkgs-live
   '';
-  st = pkgs.st.override {
-    patches = [ ./st-font.patch ];
+  st = st.override {
+    patches = [ ./st-font.patch ./st-terminfo-cursor-shape.patch ];
   };
 }
