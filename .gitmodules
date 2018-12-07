@@ -1,7 +1,3 @@
-[submodule "nixpkgs-overlay/nox"]
-	path = nox
-	url = https://github.com/lheckemann/nox/
-
 [submodule "jellybeans.vim"]
 	path = jellybeans.vim
 	url = https://github.com/lheckemann/jellybeans.vim/
