@@ -1,8 +1,7 @@
+{ pkgs ? import <nixpkgs> {} }: with pkgs;
 let
-  pkgs = import <nixpkgs> {};
-  inherit (pkgs) writeScriptBin stdenv;
-  lock = import ./locker;
   i3Configured = pkgs.callPackage ./i3.nix {};
+  lock = callPackage ./locker {};
   xsession = writeScriptBin "xsession" ''
     #!${stdenv.shell}
     export XCURSOR_PATH=/run/current-system/sw/share/icons \
