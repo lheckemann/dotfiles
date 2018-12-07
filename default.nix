@@ -25,8 +25,8 @@ let
     done
   '';
   nix-prefetch-github = writeShellScriptBin "nix-prefetch-github" ''
-    export PATH=${lib.escapeShellArg (lib.makeBinPath [git bash nix-prefetch-url])}
-    exec ${./nix-prefetch-github.sh}
+    export PATH=${lib.escapeShellArg (lib.makeBinPath [git bash nix gnutar gzip coreutils])}
+    exec bash ${./nix-prefetch-github.sh} "$@"
   '';
 in
   {
@@ -35,6 +35,7 @@ in
       tmuxConfigured
       tmuxMan
       zshrc
+      nix-prefetch-github
       openPort
       ;
     inherit (pkgs)
