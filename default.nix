@@ -39,22 +39,26 @@ in
     inherit (pkgs)
       binutils # mostly for strings
       fbterm
-      fish
+      fd
       fzf
       gdb
       syncthing
       htop
       inotify-tools
       indent
+      isync
       jq
+      khal
       lsof
       man-pages
+      mcabber
       moreutils
       mosh
       ncdu
+      neomutt
       nethack
+      notmuch
       nix-index
-      nix-repl
       nixops
       nmap
       pandoc
@@ -67,6 +71,7 @@ in
       tmuxp
       units
       unzip
+      vdirsyncer
       youtube-dl
       ;
     inherit (pkgs.bind) dnsutils;
