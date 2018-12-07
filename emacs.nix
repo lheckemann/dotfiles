@@ -9,6 +9,7 @@
     (evil-mode)
     (xterm-mouse-mode)
     (require 'magit)
+    (require 'notmuch) ;; notmuch files are included in share/emacs/site-lisp directly by the package
   ''
 , haskellPackages
 , runCommandNoCC
