@@ -85,9 +85,6 @@ in (callPackage ./default.nix {}) // {
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
   '';
   emacs = callPackage ./emacs.nix {};
-  reconfigure = writeShellScriptBin "reconfigure" ''
-    nix-env -f ~/dotfiles/graphical.nix -ir -I nixpkgs=$HOME/nixpkgs-live
-  '';
   st = st.override {
     patches = [ ./st-font.patch ./st-terminfo-cursor-shape.patch ];
   };
