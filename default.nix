@@ -73,6 +73,7 @@ in
       tmuxp
       units
       unzip
+      vagrant
       vdirsyncer
       youtube-dl
       ;

@@ -28,5 +28,6 @@ let
     yaml-mode
     rust-mode
     coffee-mode
+    php-mode
   ]);
 in emacsWithPackages packagesFun
