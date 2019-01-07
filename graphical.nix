@@ -18,7 +18,7 @@ let
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
-           EDITOR='emacsclient -a "" -n'
+           EDITOR='emacsclient -a ""'
     xrdb -merge - <<EOF
     Xcursor.theme: Adwaita
     EOF
