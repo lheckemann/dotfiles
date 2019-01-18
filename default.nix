@@ -56,6 +56,7 @@ in
       mcabber
       moreutils
       mosh
+      msmtp
       ncdu
       neomutt
       nethack

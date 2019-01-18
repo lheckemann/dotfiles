@@ -73,13 +73,12 @@ in (callPackage ./default.nix {}) // {
     socat
     sqliteman
     tdesktop
-    thunderbird
     vlc
     xidlehook
     xsel
     zeal
     ;
-  inherit (pkgs.xorg) xbacklight;
+  inherit (gnome3) eog;
   i3 = lib.lowPrio i3;
   switch-user = writeScriptBin "switch-user" ''
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
