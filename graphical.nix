@@ -29,6 +29,7 @@ let
         -dmenu ${dmenu}/bin/dmenu \
         -fn "Liberation Sans 12" \
         -context_key XF86LaunchB &
+    gpg-connect-agent /bye
     exec ${i3Configured}/bin/i3
   '';
 in (callPackage ./default.nix {}) // {
@@ -42,37 +43,33 @@ in (callPackage ./default.nix {}) // {
     ;
   inherit (pkgs)
     alacritty
-    arandr
     audacity
     chromium
     compton
     dfeet
-    dillo
     dmenu
     endless-sky
     evince
     feh
     firefox
     gimp
-    gitg
     graphicsmagick
     gnupg # Override the non-graphical one from default.nix
     i3status
     inkscape
-    keepassxc
     kvm
     libreoffice
     mpv
     mumble
     noto-fonts
     noto-fonts-emoji
+    pass
     pavucontrol
     redshift
-    rustracer
     scrot
     socat
-    sqliteman
     tdesktop
+    terminus_font
     vlc
     xidlehook
     xsel
