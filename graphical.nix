@@ -27,8 +27,9 @@ let
         -padding 15 \
         -horizontal_padding 20 \
         -dmenu ${dmenu}/bin/dmenu \
-        -fn "Liberation Sans 12" \
-        -context_key XF86LaunchB &
+        -fn "Liberation Sans 18" \
+        -history_key Redo \
+        -context_key SunProps &
     gpg-connect-agent /bye
     exec ${i3Configured}/bin/i3
   '';
