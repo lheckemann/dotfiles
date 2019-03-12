@@ -76,7 +76,8 @@ in (callPackage ./default.nix {}) // {
     xsel
     zeal
     ;
-  inherit (gnome3) eog;
+  inherit (gnome3) eog dconf;
+  inherit (python3Packages) binwalk;
   i3 = lib.lowPrio i3;
   switch-user = writeScriptBin "switch-user" ''
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
