@@ -1,7 +1,7 @@
 { pkgs ? import <nixpkgs> {} }: with pkgs;
 let
   confs = linkFarm "confs" [
-    { name = "etc/tmux.conf"; path = ./tmux.conf; }
+    { name = "etc/tmux.conf"; path = "${./tmux.conf}"; }
   ];
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
