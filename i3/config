@@ -89,8 +89,6 @@ bindsym $mod+a focus parent
 
 # switch to workspace
 bindsym $mod+1 workspace 1
-assign [instance="MainTerm"] → 1
-exec st -c MainTerm -e sh -c 'tmux a || exec tmux'
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3; exec --no-startup-id "pkill -CONT -U $UID -f '/\.?firefox' || MOZ_USE_XINPUT2=1 firefox"
 assign [class="Firefox"] → 3
