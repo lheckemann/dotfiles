@@ -99,6 +99,7 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+assign [class="Qemu-system-x86_64"] → 0-vms
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace 1
