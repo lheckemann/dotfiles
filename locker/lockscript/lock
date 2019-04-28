@@ -2,6 +2,8 @@
 
 export GST_PLUGIN_SYSTEM_PATH_1_0=@gstPluginsPath@
 
+pkill -STOP -U $UID -f '/\.?firefox'
+
 image_file=/run/user/$UID/screen_lock.png
 resolution=$(@xdpyinfo@/bin/xdpyinfo | grep dimensions | awk '{print $2}')
 w=${resolution%%x*}
