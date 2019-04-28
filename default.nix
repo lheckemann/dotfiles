@@ -16,11 +16,16 @@ let
     destination = "/etc/zshrc";
   };
   openPort = writeShellScriptBin "openport" ''
-    set -ex
-    [[ -n "$1" ]]
+    set -e
+    trace() {
+      printf "%q " "$@"
+      echo
+      "$@"
+    }
+    trace [ -n "$1" ]
     for prog in iptables ip6tables ; do
       for protocol in tcp udp ; do
-        $prog -I INPUT 1 -p $protocol -m $protocol --dport "$1" -j ACCEPT
+        trace $prog -I INPUT 1 -p $protocol -m $protocol --dport "$1" -j ACCEPT
       done
     done
   '';
