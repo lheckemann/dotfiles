@@ -79,7 +79,7 @@ desktop-nographic = basic // {
   gnupg = gnupg.override {guiSupport = false;};
   texlive = texlive.combined.scheme-small;
 };
-desktop-full = desktop-nographic // {
+desktop-full = desktop-nographic // rec {
   inherit (pkgs)
     alacritty audacity chromium compton dfeet dmenu endless-sky
     evince feh firefox gimp graphicsmagick
@@ -92,7 +92,7 @@ desktop-full = desktop-nographic // {
   inherit (python3Packages) binwalk;
   emacs = callPackage ./emacs.nix {};
   lock = callPackage ./locker {};
-  i3 = lib.lowPrio i3;
+  i3 = lib.lowPrio pkgs.i3;
   i3Configured = lib.hiPrio (
     runCommand "i3-with-config" {
       nativeBuildInputs = [ makeWrapper ];
