@@ -39,16 +39,41 @@ let
     exec nix-shell '<nixpkgs>' -A "$1" --run 'runHook unpackPhase'
   '';
 
+  vim = ((vimUtils.makeCustomizable pkgs.vim).customize {
+    name = "vim";
+    vimrcConfig = {
+      customRC = ''
+        syntax on
+        command! -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
+        command! -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
+        Spaces 4
+        set is si ai ic hls mouse=a ttymouse=xterm2 backspace=2 laststatus=2 statusline=%f\ %l+%c/%L\ %p%%
+        noremap <ScrollWheelUp> <C-y>
+        noremap <ScrollWheelDown> <C-e>
+
+        if exists($TMUX) || $TERM == 'alacritty'
+          " normal mode: default cursor
+          let &t_EI = "\<Esc>[0 q"
+          " insert mode: vertical line
+          let &t_SI = "\<Esc>[6 q"
+          " replace mode: underline
+          let &t_SR = "\<Esc>[3 q"
+        endif
+      '';
+      packages.m.start = with pkgs.vimPlugins; [ vim-nix ];
+    };
+  });
+
 in rec {
 basicLight = {
-  inherit confs tmuxConfigured nix-prefetch-github src openPort;
-  inherit (pkgs) binutils fd htop jq lsof moreutils ncdu strace units;
+  inherit confs tmuxConfigured nix-prefetch-github src openPort vim;
+  inherit (pkgs) binutils file htop jq lsof moreutils ncdu pv strace tcpdump units;
   inherit (pkgs.bind) dnsutils;
 };
 basic = basicLight // {
   # So that `nix-env -f dotfiles -i` installs the basic set
   recurseForDerivations = true;
-  inherit (pkgs) ripgrep;
+  inherit (pkgs) git fd ripgrep;
 };
 desktop-nographic = basic // {
   inherit (pkgs)
@@ -78,9 +103,11 @@ desktop-nographic = basic // {
     ;
   gnupg = gnupg.override {guiSupport = false;};
   texlive = texlive.combined.scheme-small;
+  inherit (python3Packages) binwalk;
 };
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
+    autorandr arandr
     alacritty audacity chromium compton dfeet dmenu endless-sky
     evince feh firefox gimp graphicsmagick
     gnupg # Replace the non-graphical one from desktop-nographic
@@ -89,7 +116,6 @@ desktop-full = desktop-nographic // rec {
     tdesktop terminus_font vlc xidlehook xsel youtube-dl
     ;
   inherit (gnome3) eog dconf;
-  inherit (python3Packages) binwalk;
   emacs = callPackage ./emacs.nix {};
   lock = callPackage ./locker {};
   i3 = lib.lowPrio pkgs.i3;
