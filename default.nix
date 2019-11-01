@@ -122,11 +122,15 @@ desktop-full = desktop-nographic // rec {
     alacritty audacity chromium compton dfeet dmenu endless-sky
     evince feh firefox gimp graphicsmagick
     gnupg # Replace the non-graphical one from desktop-nographic
-    i3status inkscape kvm libreoffice mpv mumble mupdf noto-fonts
-    noto-fonts-emoji pass pavucontrol redshift scrot socat
+    i3status inkscape kvm libreoffice mpv mumble noto-fonts
+    pass pavucontrol redshift scrot socat
     tdesktop terminus_font vlc xidlehook xsel youtube-dl
     ;
-  inherit (gnome3) eog dconf;
+  noto-fonts-emoji = lib.hiPrio pkgs.noto-fonts-emoji;
+  mupdf = pkgs.mupdf.overrideAttrs (o: {
+      patches = (o.patches or []) ++ [ ./0001-x11-accept-commands-on-stdin-as-well.patch ];
+  });
+  inherit (gnome3) eog dconf adwaita-icon-theme;
   emacs = callPackage ./emacs.nix {};
   lock = callPackage ./locker {};
   i3 = lib.lowPrio pkgs.i3;
