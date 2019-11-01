@@ -85,6 +85,7 @@ basic = basicLight // {
 };
 desktop-nographic = basic // {
   inherit (pkgs)
+    borgbackup
     gdb
     syncthing
     inotify-tools
@@ -95,18 +96,20 @@ desktop-nographic = basic // {
     mosh
     msmtp
     notmuch
+    nix-diff
     nix-index
     nixops
     nmap
     pandoc
+    picocom
     potrace
+    pwgen
     ripgrep
     sqliteInteractive
     sshfs
     sshuttle
     tmuxp
     unzip
-    vagrant
     vdirsyncer
     ;
   gnupg = gnupg.override {guiSupport = false;};
