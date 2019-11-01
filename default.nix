@@ -69,6 +69,14 @@ basicLight = {
   inherit confs tmuxConfigured nix-prefetch-github src openPort vim;
   inherit (pkgs) binutils file htop jq lsof moreutils ncdu pv strace tcpdump units;
   inherit (pkgs.bind) dnsutils;
+  build-on = pkgs.writeShellScriptBin "build-on" ''
+    set -ex
+    host="$1"
+    shift
+    drv=$(nix-instantiate "$@")
+    nix-copy-closure --to "$host" "$drv"
+    nix-store --store ssh-ng://"$host" -r "$drv"
+  '';
 };
 basic = basicLight // {
   # So that `nix-env -f dotfiles -i` installs the basic set
