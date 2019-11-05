@@ -119,7 +119,7 @@ desktop-nographic = basic // {
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
     autorandr arandr
-    alacritty audacity chromium compton dfeet dmenu bemenu endless-sky
+    alacritty audacity chromium compton dfeet dmenu endless-sky
     evince feh firefox gimp graphicsmagick
     gnupg # Replace the non-graphical one from desktop-nographic
     i3status inkscape kvm libreoffice mpv mumble noto-fonts
@@ -203,6 +203,15 @@ desktop-full = desktop-nographic // rec {
       sleep 5
     done
   '';
+  bemenu = pkgs.bemenu.overrideAttrs (_: {
+    src = fetchFromGitHub {
+      owner = "hexd0t";
+      repo = "bemenu";
+      rev = "d6165784ecd9dafbf9fde6aac14a0e4e983c1f1d";
+      sha256 = "1zq0hyg6xjilxpnxglgzzafxrn0bic0mc4q6dlx7q4m9sdhzcmhf";
+    };
+    cmakeFlags = ["-DBEMENU_WAYLAND_RENDERER=ON" "-DBEMENU_X11_RENDERER=OFF"];
+  });
 
   switch-user = writeScriptBin "switch-user" ''
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
