@@ -119,7 +119,7 @@ desktop-nographic = basic // {
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
     autorandr arandr
-    alacritty audacity chromium compton dfeet dmenu endless-sky
+    alacritty audacity chromium compton dfeet dmenu bemenu endless-sky
     evince feh firefox gimp graphicsmagick
     gnupg # Replace the non-graphical one from desktop-nographic
     i3status inkscape kvm libreoffice mpv mumble noto-fonts
@@ -166,6 +166,44 @@ desktop-full = desktop-nographic // rec {
     gpg-connect-agent /bye
     exec ${i3Configured}/bin/i3
   '';
+  sway-session = writeScriptBin "sway-session" ''
+    #!${stdenv.shell}
+    export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
+           SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
+           EDITOR='emacsclient -a ""'
+    gpg-connect-agent /bye
+    exec sway
+  '';
+  screenshot = pkgs.runCommand "screenshot" {
+    src = fetchFromGitHub {
+      owner = "yschaeff";
+      repo = "sway_screenshots";
+      rev = "c94a4f286c88f73acd4a82515820ac1d2cb0ae7f";
+      sha256 = "1i5zdas3qkd6l70g5rqnf72g10zc6i64yadrivicd0q2cskyv106";
+    };
+    nativeBuildInputs = [ pkgs.makeWrapper ];
+  } ''
+    runHook unpackPhase
+    cd $sourceRoot
+    mkdir -p $out/bin
+    cat >$out/bin/screenshot - ${~/projects/sway_screenshots/screenshot.sh} <<EOF
+    #!${pkgs.runtimeShell}
+    export PATH=${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
+    EOF
+    chmod a+x $out/bin/screenshot
+  '';
+  sway-status = pkgs.writeShellScriptBin "sway-status" ''
+    while true ; do
+      bats=""
+      for cap in /sys/class/power_supply/*/capacity ; do
+        bats+=" $(<$cap)% "
+      done
+      date=$(date '+%Y-%m-%d %H:%M')
+      echo "$bats $date"
+      sleep 5
+    done
+  '';
+
   switch-user = writeScriptBin "switch-user" ''
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
   '';
