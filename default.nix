@@ -204,6 +204,14 @@ desktop-full = desktop-nographic // rec {
     };
     cmakeFlags = ["-DBEMENU_WAYLAND_RENDERER=ON" "-DBEMENU_X11_RENDERER=OFF"];
   });
+  passmenu = lib.hiPrio (pkgs.runCommandNoCC "passmenu" {} ''
+    mkdir -p $out/bin
+    cat >$out/bin/passmenu - ${./passmenu.sh} <<EOF
+    #!${pkgs.runtimeShell}
+    export PATH=${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ bemenu pass-wayland findutils coreutils gnused gawk ydotool utillinux wl-clipboard ]))}
+    EOF
+    chmod +x $out/bin/passmenu
+  '');
 
   switch-user = writeScriptBin "switch-user" ''
     ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
