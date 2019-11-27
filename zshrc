@@ -83,18 +83,6 @@ closure() {
     nix-store -qR "$@" | xargs du -chd0 | sort -h
 }
 
-
-technical-details() {
-    printf '- System: '
-    nixos-version
-    printf '- Nix version: '
-    nix-env --version
-    printf '- Nixpkgs version: '
-    nix-instantiate --eval '<nixpkgs>' -A lib.nixpkgsVersion
-    printf '- Sandboxing enabled: '
-    grep build-use-sandbox /etc/nix/nix.conf | sed s/.*=//
-}
-
 storepath() {
     readlink -f $(whence -p "$@")
 }
