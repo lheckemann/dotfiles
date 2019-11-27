@@ -147,7 +147,6 @@ desktop-full = desktop-nographic // rec {
       cp ${./i3/status.conf} $out/etc/i3status.conf
       makeWrapper ${i3}/bin/i3 $out/bin/i3 --add-flags "-c ~/.nix-profile/etc/i3.conf"
       makeWrapper ${i3status}/bin/i3status $out/bin/i3status --add-flags '-c ~/.nix-profile/etc/i3status.conf'
-      install -Dm0755 ${./status.sh} $out/bin/wrap-i3status
     ''
   );
   xsession = writeScriptBin "xsession" ''
