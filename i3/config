@@ -160,8 +160,13 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
 bindsym $mod+BackSpace exec --no-startup-id "echo -n $'\x02' | socat - unix-connect:$XDG_RUNTIME_DIR/idle.sock"
 bindsym $mod+Shift+d exec "drama"
 bindsym $mod+p exec "passmenu"
+bindsym Help exec "mpv ~/dotfiles/dundundun.webm"
 
 bindsym $mod+Mod1+Right move workspace to output right
 bindsym $mod+Mod1+Left move workspace to output left
+bindsym $mod+Mod1+Down move workspace to output down
+bindsym $mod+Mod1+Up move workspace to output up
+bindsym XF86Display exec "autorandr --change && sleep 5 && $HOME/.fehbg"
+bindsym Shift+XF86Display exec "autorandr mobile"
 exec "rm $XDG_RUNTIME_DIR/idle.sock; xidlehook --timer primary 300 lock '' --socket $XDG_RUNTIME_DIR/idle.sock --not-when-fullscreen"
 exec "redshift -l 48:11 -t 5500:2800"
