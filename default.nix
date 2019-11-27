@@ -151,7 +151,7 @@ desktop-full = desktop-nographic // rec {
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
-           EDITOR='emacsclient -a ""'
+           EDITOR='env TERM=xterm-256color emacsclient -nw -c'
     xrdb -merge - <<EOF
     Xcursor.theme: Adwaita
     EOF
@@ -170,8 +170,9 @@ desktop-full = desktop-nographic // rec {
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
-           EDITOR='emacsclient -a ""'
-    gpg-connect-agent /bye
+           EDITOR='env TERM=xterm-256color emacsclient -nw -c' \
+           QT_QPA_PLATFORM=wayland \
+           MOZ_ENABLE_WAYLAND=1
     exec sway
   '';
   screenshot = pkgs.runCommand "screenshot" {
