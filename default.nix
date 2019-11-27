@@ -195,17 +195,6 @@ desktop-full = desktop-nographic // rec {
     EOF
     chmod a+x $out/bin/screenshot
   '';
-  sway-status = pkgs.writeShellScriptBin "sway-status" ''
-    while true ; do
-      bats=""
-      for cap in /sys/class/power_supply/*/capacity ; do
-        bats+=" $(<$cap)% "
-      done
-      date=$(date '+%Y-%m-%d %H:%M')
-      echo "$bats $date"
-      sleep 5
-    done
-  '';
   bemenu = pkgs.bemenu.overrideAttrs (_: {
     src = fetchFromGitHub {
       owner = "hexd0t";
