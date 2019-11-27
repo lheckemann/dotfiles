@@ -121,7 +121,7 @@ desktop-full = desktop-nographic // rec {
   inherit (pkgs)
     autorandr arandr
     alacritty audacity chromium compton dfeet dmenu endless-sky
-    evince feh firefox gimp graphicsmagick
+    evince feh firefox font-awesome gimp graphicsmagick
     gnupg # Replace the non-graphical one from desktop-nographic
     i3status i3status-rust inkscape kvm libreoffice mako mpv mumble noto-fonts
     pass-wayland pavucontrol redshift-wlr scrot socat
