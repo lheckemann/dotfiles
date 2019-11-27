@@ -13,7 +13,9 @@
   ''
 , haskellPackages
 , runCommandNoCC
-, emacsWithPackages }:
+, emacsPackagesFor
+, emacs26-nox
+, emacs-nox ? emacs26-nox }:
 let
   emacsConfig = writeTextFile {
     name = "default.el";
@@ -29,5 +31,12 @@ let
     rust-mode
     coffee-mode
     php-mode
+    dhall-mode
+    docbook
+    company
+    lsp-mode
+    lsp-ui
+    lsp-haskell
+    typescript-mode
   ]);
-in emacsWithPackages packagesFun
+in (emacsPackagesFor emacs-nox).emacsWithPackages packagesFun
