@@ -39,6 +39,8 @@
 let
   confs = linkFarm "confs" [
     { name = "etc/tmux.conf"; path = "${./tmux.conf}"; }
+    { name = "etc/sway/config"; path = "${./sway-config}"; }
+    { name = "etc/i3status-rust.toml"; path = "${./i3status-rust.toml}"; }
   ];
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
@@ -220,7 +222,7 @@ desktop-full = desktop-nographic // rec {
            EDITOR='env TERM=xterm-256color emacsclient -nw -c' \
            QT_QPA_PLATFORM=wayland \
            MOZ_ENABLE_WAYLAND=1
-    exec sway
+    exec sway -c ~/.nix-profile/etc/sway/config
   '';
   bemenu = pkgs.bemenu.overrideAttrs (_: {
     src = fetchFromGitHub {

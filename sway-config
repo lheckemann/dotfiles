@@ -1,0 +1,168 @@
+# super
+set $mod Mod4
+
+set $left h
+set $down j
+set $up k
+set $right l
+set $term alacritty
+set $menu bemenu-run --fn 'Hack 13' | xargs swaymsg exec --
+
+output * bg ~/.background-image fit #000000
+
+output eDP-1 resolution 2560x1440 position 0,360 scale 2
+
+# 4k secondary
+# ------------
+#output eDP-1 resolution 2560x1440 position 0,360 scale 2
+## home
+#output 'Samsung Electric Company U28E590 HTPM111113' resolution 3840x2160 position 1280,0 scale 2
+## work
+#output 'Samsung Electric Company U28E590 HTPJ202145' resolution 3840x2160 position 1280,0 scale 2
+#output 'Samsung Electric Company U28E590 HTPJ202425' resolution 3840x2160 position 3200,0 scale 2
+#output 'Dell Inc. DELL P2411H NRPP515J4TGU' resolution 1920x1080 position 3200,0
+
+# WQHD secondary
+# --------------
+
+# home
+output 'Samsung Electric Company U28E590 HTPM111113' resolution 3840x2160 position 1280,360 scale 2
+
+output 'Samsung Electric Company U28E590 HTPJ202145' resolution 2560x1440 position 1280,360 scale 1.5
+# tertiary monitor position depends on scale
+#output 'Samsung Electric Company U28E590 HTPJ202425' resolution 2560x1440 position 3840,360 scale 1
+output 'Samsung Electric Company U28E590 HTPJ202425' resolution 2560x1440 position 2986,360 scale 1.5
+#output 'Samsung Electric Company U28E590 HTPJ202425' resolution 2560x1440 position 2560,360 scale 2
+
+exec swayidle -w \
+    timeout 290 'light -O; light -U 5' \
+         resume 'light -I' \
+    timeout 300 'swaymsg "output * dpms off"' \
+         resume 'swaymsg "output * dpms on"' \
+    timeout 305 'swaylock -f -c 000030' \
+    before-sleep 'swaylock -f -c 000030'
+
+exec xrdb -merge - <<<"Xcursor.theme: Adwaita"
+
+input * xkb_layout "gb"
+input * xkb_options "caps:escape"
+input * tap enabled
+
+floating_modifier $mod normal
+bindsym $mod+Return exec $term
+bindsym $mod+Shift+q kill
+bindsym $mod+d exec $menu
+bindsym $mod+Shift+c reload
+bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+bindsym $mod+a focus parent
+
+bindsym $mod+$left focus left
+bindsym $mod+$down focus down
+bindsym $mod+$up focus up
+bindsym $mod+$right focus right
+bindsym $mod+Left focus left
+bindsym $mod+Down focus down
+bindsym $mod+Up focus up
+bindsym $mod+Right focus right
+
+bindsym $mod+Shift+$left move left
+bindsym $mod+Shift+$down move down
+bindsym $mod+Shift+$up move up
+bindsym $mod+Shift+$right move right
+bindsym $mod+Shift+Left move left
+bindsym $mod+Shift+Down move down
+bindsym $mod+Shift+Up move up
+bindsym $mod+Shift+Right move right
+
+bindsym $mod+Alt+$left move workspace to output left
+bindsym $mod+Alt+$down move workspace to output down
+bindsym $mod+Alt+$up move workspace to output up
+bindsym $mod+Alt+$right move workspace to output right
+bindsym $mod+Alt+Left move workspace to output left
+bindsym $mod+Alt+Down move workspace to output down
+bindsym $mod+Alt+Up move workspace to output up
+bindsym $mod+Alt+Right move workspace to output right
+
+bindsym $mod+1 workspace 1
+bindsym $mod+2 workspace 2
+bindsym $mod+3 workspace 3; exec "pkill -CONT -U $UID -f '/\.?firefox' || MOZ_ENABLE_WAYLAND=1 firefox"
+bindsym $mod+4 workspace 4
+bindsym $mod+5 workspace 5
+bindsym $mod+6 workspace 6
+bindsym $mod+7 workspace 7
+bindsym $mod+8 workspace 8
+bindsym $mod+9 workspace 9
+bindsym $mod+0 workspace 10
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
+
+bindsym $mod+b splith
+bindsym $mod+v splitv
+
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
+
+bindsym $mod+f fullscreen
+
+bindsym $mod+Shift+space floating toggle
+bindsym $mod+space focus mode_toggle
+
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus scratchpad show
+
+mode "resize" {
+    bindsym $left resize shrink width 10px
+    bindsym $down resize grow height 10px
+    bindsym $up resize shrink height 10px
+    bindsym $right resize grow width 10px
+    bindsym Left resize shrink width 10px
+    bindsym Down resize grow height 10px
+    bindsym Up resize shrink height 10px
+    bindsym Right resize grow width 10px
+
+    bindsym Return mode "default"
+    bindsym Escape mode "default"
+}
+bindsym $mod+r mode "resize"
+
+bar top {
+    position top
+    status_command i3status-rs ~/.nix-profile/etc/i3status-rust.toml
+    font Hack 8
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #404040 #323232 #bbbbbb
+    }
+}
+
+bindsym XF86AudioRaiseVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ +2%"
+bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAULT_SINK@ -2%"
+bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
+bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 10"
+bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
+bindsym $mod+BackSpace exec swaylock -c 000030
+bindsym $mod+p exec "passmenu"
+bindsym Print exec "screenshot"
+bindsym --no-repeat           F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalk
+bindsym --no-repeat --release F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
+
+for_window [title="Firefox - Sharing Indicator"] {
+  floating enable
+  sticky enable
+  inhibit_idle open
+  border none
+}
+for_window [app_id="Alacritty"] border pixel 1
+
+exec "redshift -m wayland -l 48:11 -t 5500:2800"
+exec "mako"
