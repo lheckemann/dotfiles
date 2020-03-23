@@ -24,14 +24,14 @@ let
     text = emacsConfigText;
   };
   packagesFun = ps: [ emacsConfig ] ++ (with ps; [
-    evil markdown-mode nix-mode
+    evil
+    markdown-mode
+    nix-mode
     haskell-mode
     sudo-edit
     magit
     yaml-mode
     rust-mode
-    coffee-mode
-    php-mode
     dhall-mode
     docbook
     company
@@ -39,5 +39,6 @@ let
     lsp-ui
     lsp-haskell
     typescript-mode
+    counsel
   ]);
 in (emacsPackagesFor (callPackage ./emacs-wayland.nix {})).emacsWithPackages packagesFun
