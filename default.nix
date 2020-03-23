@@ -1,4 +1,24 @@
-{ pkgs ? import <nixpkgs> {} }: with pkgs;
+{ pkgs ? import <nixpkgs> {
+  overlays = [ (self: super: {
+    wlroots = super.wlroots.overrideAttrs (o: {
+      src = super.fetchFromGitHub {
+        owner = "swaywm";
+        repo = "wlroots";
+        rev = "34303e1b47defc7aca518983ac3aaea6c881d112";
+        sha256 = "0g7l23p9fzksi5prmcjry09s2sagxg8416lvrydfvd0q7njnrvvc";
+      };
+    });
+    sway-unwrapped = super.sway-unwrapped.overrideAttrs (o: {
+      version = "sway-unwrapped-2020-03-23-unstable";
+      src = super.fetchFromGitHub {
+        owner = "swaywm";
+        repo = "sway";
+        rev = "e553e38270afa28ac7da8caf1d7e06890f476086";
+        sha256 = "01yzpahwvp75wvw3ng5bm7zwyw8kx3nw1cg2acddcp64r77464hz";
+      };
+    });
+  }) ];
+} }: with pkgs;
 let
   confs = linkFarm "confs" [
     { name = "etc/tmux.conf"; path = "${./tmux.conf}"; }
