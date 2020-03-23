@@ -17,6 +17,23 @@
         sha256 = "01yzpahwvp75wvw3ng5bm7zwyw8kx3nw1cg2acddcp64r77464hz";
       };
     });
+    sway_screenshot = super.runCommand "sway_screenshot" {
+      src = super.fetchFromGitHub {
+        owner = "yschaeff";
+        repo = "sway_screenshots";
+        rev = "ad27b1b6e42f536b61dd5d8d0a3fe26c60017c41";
+        sha256 = "1m53d020m549y76dj1nn11k82z24z78sh2jhsl6b9avxkwk32ycw";
+      };
+    } ''
+      runHook unpackPhase
+      cd $sourceRoot
+      mkdir -p $out/bin
+      cat >$out/bin/screenshot - screenshot.sh <<EOF
+      #!${pkgs.runtimeShell}
+      export PATH=PATH:${super.lib.escapeShellArg (super.lib.makeBinPath (with self; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
+      EOF
+      chmod a+x $out/bin/screenshot
+    '';
   }) ];
 } }: with pkgs;
 let
@@ -147,7 +164,7 @@ desktop-full = desktop-nographic // rec {
     hack-font
     i3status i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
     pass-wayland pavucontrol redshift-wlr rdesktop scrot socat
-    sway
+    sway sway_screenshot
     tdesktop terminus_font tigervnc vlc xidlehook xsel youtube-dl
     wdisplays wl-clipboard
     ;
@@ -204,24 +221,6 @@ desktop-full = desktop-nographic // rec {
            QT_QPA_PLATFORM=wayland \
            MOZ_ENABLE_WAYLAND=1
     exec sway
-  '';
-  screenshot = pkgs.runCommand "screenshot" {
-    src = fetchFromGitHub {
-      owner = "yschaeff";
-      repo = "sway_screenshots";
-      rev = "c94a4f286c88f73acd4a82515820ac1d2cb0ae7f";
-      sha256 = "1i5zdas3qkd6l70g5rqnf72g10zc6i64yadrivicd0q2cskyv106";
-    };
-    nativeBuildInputs = [ pkgs.makeWrapper ];
-  } ''
-    runHook unpackPhase
-    cd $sourceRoot
-    mkdir -p $out/bin
-    cat >$out/bin/screenshot - ${~/projects/sway_screenshots/screenshot.sh} <<EOF
-    #!${pkgs.runtimeShell}
-    export PATH=PATH:${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
-    EOF
-    chmod a+x $out/bin/screenshot
   '';
   bemenu = pkgs.bemenu.overrideAttrs (_: {
     src = fetchFromGitHub {
