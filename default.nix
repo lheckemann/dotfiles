@@ -157,7 +157,7 @@ desktop-full = desktop-nographic // rec {
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
-           EDITOR='env TERM=xterm-256color emacsclient -nw -c'
+           EDITOR='editor'
     xrdb -merge - <<EOF
     Xcursor.theme: Adwaita
     EOF
@@ -195,7 +195,7 @@ desktop-full = desktop-nographic // rec {
     mkdir -p $out/bin
     cat >$out/bin/screenshot - ${~/projects/sway_screenshots/screenshot.sh} <<EOF
     #!${pkgs.runtimeShell}
-    export PATH=${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
+    export PATH=PATH:${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
     EOF
     chmod a+x $out/bin/screenshot
   '';
