@@ -122,16 +122,20 @@ desktop-full = desktop-nographic // rec {
     autorandr arandr
     alacritty audacity chromium compton dfeet dmenu endless-sky
     evince feh firefox font-awesome gimp graphicsmagick
+    glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
-    i3status i3status-rust inkscape kvm libreoffice mako mpv mumble noto-fonts
-    pass-wayland pavucontrol redshift-wlr scrot socat
-    tdesktop terminus_font vlc xidlehook xsel youtube-dl
-    wl-clipboard
+    hack-font
+    i3status i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
+    pass-wayland pavucontrol redshift-wlr rdesktop scrot socat
+    sway
+    tdesktop terminus_font tigervnc vlc xidlehook xsel youtube-dl
+    wdisplays wl-clipboard
     ;
   noto-fonts-emoji = lib.hiPrio pkgs.noto-fonts-emoji;
   mupdf = pkgs.mupdf.overrideAttrs (o: {
       patches = (o.patches or []) ++ [ ./0001-x11-accept-commands-on-stdin-as-well.patch ];
   });
+  mumble = pkgs.mumble.overrideAttrs (o: { patches = o.patches ++ [ ./mumble-dbus-ptt.patch ]; });
   inherit (androidenv.androidPkgs_9_0) platform-tools;
   inherit (gnome3) eog dconf adwaita-icon-theme;
   emacs = callPackage ./emacs.nix {};

@@ -1,0 +1,25 @@
+--- a/src/mumble/DBus.cpp
++++ b/src/mumble/DBus.cpp
+@@ -101,3 +101,11 @@
+ bool MumbleDBus::isSelfDeaf() {
+ 	return g.s.bDeaf;
+ }
++
++void MumbleDBus::startTalk() {
++	g.mw->on_PushToTalk_triggered(true, 0);
++}
++
++void MumbleDBus::stopTalk() {
++	g.mw->on_PushToTalk_triggered(false, 0);
++}
+--- a/src/mumble/DBus.h
++++ b/src/mumble/DBus.h
+@@ -52,6 +52,8 @@
+ 		void setSelfDeaf(bool deafen);
+ 		bool isSelfMuted();
+ 		bool isSelfDeaf();
++                void startTalk();
++                void stopTalk();
+ };
+ 
+ #endif
