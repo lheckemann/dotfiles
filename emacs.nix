@@ -14,6 +14,7 @@
 , haskellPackages
 , runCommandNoCC
 , emacsPackagesFor
+, callPackage
 , emacs26-nox
 , emacs-nox ? emacs26-nox }:
 let
@@ -39,4 +40,4 @@ let
     lsp-haskell
     typescript-mode
   ]);
-in (emacsPackagesFor emacs-nox).emacsWithPackages packagesFun
+in (emacsPackagesFor (callPackage ./emacs-wayland.nix {})).emacsWithPackages packagesFun
