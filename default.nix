@@ -139,6 +139,10 @@ desktop-full = desktop-nographic // rec {
   inherit (androidenv.androidPkgs_9_0) platform-tools;
   inherit (gnome3) eog dconf adwaita-icon-theme;
   emacs = callPackage ./emacs.nix {};
+  editor = pkgs.writeShellScriptBin "editor" ''
+    export TERM=xterm-256color
+    exec emacsclient -nw -c -- "$@"
+  '';
   lock = callPackage ./locker {};
   i3 = lib.lowPrio pkgs.i3;
   i3Configured = lib.hiPrio (
