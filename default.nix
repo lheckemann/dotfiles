@@ -40,7 +40,8 @@ let
   confs = linkFarm "confs" [
     { name = "etc/tmux.conf"; path = "${./tmux.conf}"; }
     { name = "etc/sway/config"; path = "${./sway-config}"; }
-    { name = "etc/i3status-rust.toml"; path = "${./i3status-rust.toml}"; }
+    { name = "etc/i3status-rs.toml"; path = "${./i3status-rs.toml}"; }
+    { name = "etc/mako.conf"; path = "${./mako.conf}"; }
   ];
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
