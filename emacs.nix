@@ -15,8 +15,9 @@
 , runCommandNoCC
 , emacsPackagesFor
 , callPackage
-, emacs26-nox
-, emacs-nox ? emacs26-nox }:
+, notmuch
+, emacs
+}:
 let
   emacsConfig = writeTextFile {
     name = "default.el";
@@ -41,4 +42,4 @@ let
     typescript-mode
     counsel
   ]);
-in (emacsPackagesFor (callPackage ./emacs-wayland.nix {})).emacsWithPackages packagesFun
+in (emacsPackagesFor emacs).emacsWithPackages packagesFun
