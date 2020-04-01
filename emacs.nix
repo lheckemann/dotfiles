@@ -9,7 +9,8 @@
     (evil-mode)
     (xterm-mouse-mode)
     (require 'magit)
-    (require 'notmuch) ;; notmuch files are included in share/emacs/site-lisp directly by the package
+    (require 'notmuch)
+    (counsel-mode)
   ''
 , haskellPackages
 , runCommandNoCC
@@ -39,7 +40,9 @@ let
     lsp-mode
     lsp-ui
     lsp-haskell
+    transpose-frame
     typescript-mode
     counsel
+    notmuch
   ]);
 in (emacsPackagesFor emacs).emacsWithPackages packagesFun
