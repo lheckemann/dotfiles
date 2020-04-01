@@ -37,12 +37,12 @@
   }) ];
 } }: with pkgs;
 let
-  confs = linkFarm "confs" [
+  confs = lib.hiPrio (linkFarm "confs" [
     { name = "etc/tmux.conf"; path = "${./tmux.conf}"; }
     { name = "etc/sway/config"; path = "${./sway-config}"; }
     { name = "etc/i3status-rs.toml"; path = "${./i3status-rs.toml}"; }
     { name = "etc/mako.conf"; path = "${./mako.conf}"; }
-  ];
+  ]);
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
     exec ${tmux}/bin/tmux -f ~/.nix-profile/etc/tmux.conf -S "/run/user/$(id -u)/tmux.1000" "$@"
