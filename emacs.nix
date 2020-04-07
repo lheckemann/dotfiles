@@ -11,6 +11,7 @@
     (require 'magit)
     (require 'notmuch)
     (counsel-mode)
+    (global-set-key (kbd "C-x f") 'counsel-rg)
   ''
 , haskellPackages
 , runCommandNoCC
