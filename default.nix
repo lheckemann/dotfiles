@@ -59,11 +59,6 @@ let
   tmuxMan = runCommandNoCC "tmux-man" {} ''
     ln -s ${tmux.man} $out
   '';
-  zshrc = writeTextFile {
-    name = "zshrc";
-    text = builtins.readFile ./agnoster.zsh-theme + builtins.readFile ./zshrc;
-    destination = "/etc/zshrc";
-  };
   openPort = writeShellScriptBin "openport" ''
     set -e
     trace() {
