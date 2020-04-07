@@ -37,9 +37,10 @@
       runHook unpackPhase
       cd $sourceRoot
       mkdir -p $out/bin
-      cat >$out/bin/screenshot - screenshot.sh <<EOF
+      cat >$out/bin/screenshot - <(sed '/MENU=/d' screenshot.sh) <<EOF
       #!${pkgs.runtimeShell}
-      export PATH=PATH:${super.lib.escapeShellArg (super.lib.makeBinPath (with self; [ procps dmenu coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder ]))}
+      export PATH=PATH:${super.lib.escapeShellArg (super.lib.makeBinPath (with self; [ procps coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder bemenu ]))}
+      MENU="bemenu --fn Hack"
       EOF
       chmod a+x $out/bin/screenshot
     '';
