@@ -17,6 +17,15 @@
         sha256 = "01yzpahwvp75wvw3ng5bm7zwyw8kx3nw1cg2acddcp64r77464hz";
       };
     });
+    bemenu = super.bemenu.overrideAttrs (_: {
+      src = super.fetchFromGitHub {
+        owner = "hexd0t";
+        repo = "bemenu";
+        rev = "d6165784ecd9dafbf9fde6aac14a0e4e983c1f1d";
+        sha256 = "1zq0hyg6xjilxpnxglgzzafxrn0bic0mc4q6dlx7q4m9sdhzcmhf";
+      };
+      cmakeFlags = ["-DBEMENU_WAYLAND_RENDERER=ON" "-DBEMENU_X11_RENDERER=OFF"];
+    });
     sway_screenshot = super.runCommand "sway_screenshot" {
       src = super.fetchFromGitHub {
         owner = "yschaeff";
@@ -225,15 +234,7 @@ desktop-full = desktop-nographic // rec {
            MOZ_ENABLE_WAYLAND=1
     exec sway -c ~/.nix-profile/etc/sway/config
   '';
-  bemenu = pkgs.bemenu.overrideAttrs (_: {
-    src = fetchFromGitHub {
-      owner = "hexd0t";
-      repo = "bemenu";
-      rev = "d6165784ecd9dafbf9fde6aac14a0e4e983c1f1d";
-      sha256 = "1zq0hyg6xjilxpnxglgzzafxrn0bic0mc4q6dlx7q4m9sdhzcmhf";
-    };
-    cmakeFlags = ["-DBEMENU_WAYLAND_RENDERER=ON" "-DBEMENU_X11_RENDERER=OFF"];
-  });
+
   passmenu = lib.hiPrio (pkgs.runCommandNoCC "passmenu" {} ''
     mkdir -p $out/bin
     cat >$out/bin/passmenu - ${./passmenu.sh} <<EOF
