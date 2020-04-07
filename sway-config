@@ -50,6 +50,7 @@ input * tap enabled
 
 floating_modifier $mod normal
 bindsym $mod+Return exec $term
+bindsym $mod+q kill
 bindsym $mod+Shift+q kill
 bindsym $mod+d exec $menu
 bindsym $mod+Shift+c reload
