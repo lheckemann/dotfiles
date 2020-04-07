@@ -2,3 +2,4 @@ tmux/resurrect/
 /shell-local
 result
 local
+/nixops-deployments.nix

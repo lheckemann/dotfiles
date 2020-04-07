@@ -160,6 +160,11 @@ desktop-nographic = basic // {
     ;
   gnupg = gnupg.override {guiSupport = false;};
   texlive = texlive.combined.scheme-small;
+  nixopses =
+    lib.recurseIntoAttrs (
+      lib.mapAttrs
+        (name: settings: lib.hiPrio (callPackage ./nixops-wrapper.nix ({inherit name;} // settings)))
+        (import ./nixops-deployments.nix));
   inherit (python3Packages) binwalk;
 };
 desktop-full = desktop-nographic // rec {
