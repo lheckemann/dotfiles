@@ -142,7 +142,7 @@ desktop-nographic = basic // {
     mosh
     msmtp
     notmuch
-    nix-diff
+    #nix-diff
     nix-index
     nixops
     nmap
