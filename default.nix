@@ -170,7 +170,9 @@ desktop-nographic = basic // {
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
     autorandr arandr
-    alacritty audacity chromium compton dfeet dmenu endless-sky
+    alacritty audacity
+    bemenu
+    chromium compton dfeet dmenu endless-sky
     evince feh firefox font-awesome gimp graphicsmagick
     glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
