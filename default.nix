@@ -44,6 +44,14 @@
       EOF
       chmod a+x $out/bin/screenshot
     '';
+    nix-bisect = super.callPackage (
+      super.fetchFromGitHub {
+        owner = "timokau";
+        repo = "nix-bisect";
+        rev = "v0.4.0";
+        sha256 = "1akxs605dma8xdixj62l48nk145nss9d1a8l8k0wxn5hwkqfr4vy";
+      }
+    ) {};
   }) ];
 } }: with pkgs;
 let
@@ -142,6 +150,7 @@ desktop-nographic = basic // {
     mosh
     msmtp
     notmuch
+    nix-bisect
     #nix-diff
     nix-index
     nixops
