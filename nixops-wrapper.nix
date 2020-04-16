@@ -5,6 +5,7 @@
 }:
 writeShellScriptBin name ''
   export NIXOPS_DEPLOYMENT=${name}
+  ${pre}
   if [[ " $*" = *\ deploy\ * ]] && [[ "$*" != *\ --dry-activate* ]] && [[ "$*" != *\ --build-only* ]] ; then
      read -p "really deploy? " confirm
      [[ $confirm = y ]] || exit
