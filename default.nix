@@ -221,7 +221,6 @@ desktop-full = desktop-nographic // rec {
   xsession = writeScriptBin "xsession" ''
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
-           SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
            EDITOR='editor'
     xrdb -merge - <<EOF
     Xcursor.theme: Adwaita
@@ -244,8 +243,8 @@ desktop-full = desktop-nographic // rec {
            EDITOR='editor' \
            QT_QPA_PLATFORM=wayland \
            MOZ_ENABLE_WAYLAND=1
-    systemctl import-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND SSH_AUTH_SOCK XCURSOR_PATH
-    dbus-update-activation-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND SSH_AUTH_SOCK XCURSOR_PATH
+    systemctl import-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND XCURSOR_PATH
+    dbus-update-activation-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND XCURSOR_PATH
     exec sway -c ~/.nix-profile/etc/sway/config
   '';
 
