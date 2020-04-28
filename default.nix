@@ -151,7 +151,7 @@ desktop-nographic = basic // {
     msmtp
     notmuch
     nix-bisect
-    #nix-diff
+    nix-diff
     nix-index
     nixops
     nmap
