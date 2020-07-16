@@ -3,7 +3,7 @@
 script=$(basename "$0")
 prefix=${PASSWORD_STORE_DIR-~/.password-store}
 password=$(find -L "$prefix" -type f -name '*.gpg' -printf '%P\n' |
-                sed 's/\.gpg$//' | bemenu --fn Terminus -p "" -i)
+                sed 's/\.gpg$//' | bemenu --fn Hack -p "" -i --hf=#00ffff)
 
 [[ -n $password ]] || exit
 
