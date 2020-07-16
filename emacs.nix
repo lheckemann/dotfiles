@@ -6,8 +6,8 @@
     (setq whitespace-style '(tab-mark face trailing tabs))
     (global-whitespace-mode)
     (require 'evil)
+    (evil-set-initial-state 'vterm-mode 'emacs)
     (evil-mode)
-    (xterm-mouse-mode)
     (require 'magit)
     (require 'notmuch)
     (counsel-mode)
@@ -44,6 +44,8 @@ let
     transpose-frame
     typescript-mode
     counsel
-    notmuch
+    notmuch.emacs
+    jq-mode
+    vterm
   ]);
 in (emacsPackagesFor emacs).emacsWithPackages packagesFun
