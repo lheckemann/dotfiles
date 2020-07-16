@@ -22,15 +22,6 @@
         sha256 = "0r3b7h778l9i20z3him9i2qsaynpn9y78hzfgv3cqi8fyry2c4f9";
       };
     });
-    bemenu = super.bemenu.overrideAttrs (_: {
-      src = super.fetchFromGitHub {
-        owner = "hexd0t";
-        repo = "bemenu";
-        rev = "d6165784ecd9dafbf9fde6aac14a0e4e983c1f1d";
-        sha256 = "1zq0hyg6xjilxpnxglgzzafxrn0bic0mc4q6dlx7q4m9sdhzcmhf";
-      };
-      cmakeFlags = ["-DBEMENU_WAYLAND_RENDERER=ON" "-DBEMENU_X11_RENDERER=OFF"];
-    });
     sway_screenshot = super.runCommand "sway_screenshot" {
       src = super.fetchFromGitHub {
         owner = "yschaeff";
