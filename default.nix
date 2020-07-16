@@ -97,31 +97,6 @@ let
     exec nix-shell '<nixpkgs>' -A "$1" --run 'runHook unpackPhase'
   '';
 
-  vim = ((vimUtils.makeCustomizable pkgs.vim).customize {
-    name = "vim";
-    vimrcConfig = {
-      customRC = ''
-        syntax on
-        command! -nargs=1 Spaces set shiftwidth=<args> softtabstop=<args> tabstop=17 expandtab autoindent
-        command! -nargs=1 Tabs set shiftwidth=<args> softtabstop=<args> tabstop=<args> noexpandtab autoindent
-        Spaces 4
-        set is si ai ic hls mouse=a ttymouse=xterm2 backspace=2 laststatus=2 statusline=%f\ %l+%c/%L\ %p%%
-        noremap <ScrollWheelUp> <C-y>
-        noremap <ScrollWheelDown> <C-e>
-
-        if exists($TMUX) || $TERM == 'alacritty'
-          " normal mode: default cursor
-          let &t_EI = "\<Esc>[0 q"
-          " insert mode: vertical line
-          let &t_SI = "\<Esc>[6 q"
-          " replace mode: underline
-          let &t_SR = "\<Esc>[3 q"
-        endif
-      '';
-      packages.m.start = with pkgs.vimPlugins; [ vim-nix ];
-    };
-  });
-
 in rec {
 basicLight = {
   inherit confs tmuxConfigured nix-prefetch-github src openPort vim;
@@ -151,7 +126,6 @@ desktop-nographic = basic // {
     isync
     khal
     man-pages
-    mcabber
     mosh
     msmtp
     notmuch
@@ -160,20 +134,15 @@ desktop-nographic = basic // {
     nix-index
     nixops
     nmap
-    pandoc
     picocom
-    potrace
     pwgen
     ripgrep
     sqliteInteractive
     sshfs
-    sshuttle
-    tmuxp
     unzip
     vdirsyncer
     ;
   gnupg = gnupg.override {guiSupport = false;};
-  texlive = texlive.combined.scheme-small;
   nixopses =
     lib.recurseIntoAttrs (
       lib.mapAttrs
@@ -183,18 +152,20 @@ desktop-nographic = basic // {
 };
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
-    autorandr arandr
     alacritty audacity
     bemenu
-    chromium compton dfeet dmenu endless-sky
-    evince feh firefox font-awesome gimp graphicsmagick
+    chromium dfeet
+    ddcutil
+    endless-sky
+    evince feh firefox-wayland gimp graphicsmagick
     glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
     hack-font
-    i3status i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
-    pass-wayland pavucontrol redshift-wlr rdesktop scrot socat
+    i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
+    kanshi
+    pass-wayland pavucontrol redshift-wlr rdesktop remmina socat
     sway sway_screenshot
-    tdesktop terminus_font tigervnc vlc xidlehook xsel youtube-dl
+    tdesktop terminus_font tigervnc vlc youtube-dl
     wdisplays wl-clipboard
     ;
   noto-fonts-emoji = lib.hiPrio pkgs.noto-fonts-emoji;
@@ -208,38 +179,6 @@ desktop-full = desktop-nographic // rec {
   editor = pkgs.writeShellScriptBin "editor" ''
     export TERM=xterm-256color
     exec emacsclient -nw -c -- "$@"
-  '';
-  lock = callPackage ./locker {};
-  i3 = lib.lowPrio pkgs.i3;
-  i3Configured = lib.hiPrio (
-    runCommand "i3-with-config" {
-      nativeBuildInputs = [ makeWrapper ];
-    } ''
-      mkdir -p $out/bin
-      mkdir -p $out/etc
-      cp ${./i3/config} $out/etc/i3.conf
-      cp ${./i3/status.conf} $out/etc/i3status.conf
-      makeWrapper ${i3}/bin/i3 $out/bin/i3 --add-flags "-c ~/.nix-profile/etc/i3.conf"
-      makeWrapper ${i3status}/bin/i3status $out/bin/i3status --add-flags '-c ~/.nix-profile/etc/i3status.conf'
-    ''
-  );
-  xsession = writeScriptBin "xsession" ''
-    #!${stdenv.shell}
-    export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
-           EDITOR='editor'
-    xrdb -merge - <<EOF
-    Xcursor.theme: Adwaita
-    EOF
-    [[ -r $HOME/.background-image ]] && ${feh}/bin/feh --bg-max $HOME/.background-image
-    ${dunst}/bin/dunst \
-        -padding 15 \
-        -horizontal_padding 20 \
-        -dmenu ${dmenu}/bin/dmenu \
-        -fn "Liberation Sans 18" \
-        -history_key Redo \
-        -context_key SunProps &
-    gpg-connect-agent /bye
-    exec ${i3Configured}/bin/i3
   '';
   sway-session = writeScriptBin "sway-session" ''
     #!${stdenv.shell}
@@ -261,9 +200,5 @@ desktop-full = desktop-nographic // rec {
     EOF
     chmod +x $out/bin/passmenu
   '');
-
-  switch-user = writeScriptBin "switch-user" ''
-    ${dbus}/bin/dbus-send --print-reply --system --dest=org.freedesktop.DisplayManager /org/freedesktop/DisplayManager/Seat0 org.freedesktop.DisplayManager.Seat.SwitchToGreeter
-  '';
 };
 }
