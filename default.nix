@@ -175,7 +175,9 @@ desktop-full = desktop-nographic // rec {
   mumble = pkgs.mumble.overrideAttrs (o: { patches = o.patches ++ [ ./mumble-dbus-ptt.patch ]; });
   inherit (androidenv.androidPkgs_9_0) platform-tools;
   inherit (gnome3) eog dconf adwaita-icon-theme;
-  emacs = callPackage ./emacs.nix { emacs = callPackage ./emacs-wayland.nix {}; };
+  emacs-wayland = callPackage ./emacs-wayland.nix {};
+  emacs = lib.hiPrio (callPackage ./emacs.nix { emacs = emacs-wayland; });
+  emacs-x = callPackage ./emacs.nix {};
   editor = pkgs.writeShellScriptBin "editor" ''
     export TERM=xterm-256color
     exec emacsclient -nw -c -- "$@"
