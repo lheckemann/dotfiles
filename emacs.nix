@@ -33,6 +33,7 @@ let
     haskell-mode
     sudo-edit
     magit
+    forge
     yaml-mode
     rust-mode
     dhall-mode
