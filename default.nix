@@ -4,17 +4,22 @@
       src = super.fetchFromGitHub {
         owner = "swaywm";
         repo = "wlroots";
-        rev = "34303e1b47defc7aca518983ac3aaea6c881d112";
-        sha256 = "0g7l23p9fzksi5prmcjry09s2sagxg8416lvrydfvd0q7njnrvvc";
+        rev = "refs/tags/0.11.0";
+        sha256 = "08d5d52m8wy3imfc6mdxpx8swhh2k4s1gmfaykg02j59z84awc6p";
       };
+      patches = (o.patches or []) ++ [(super.fetchpatch {
+        url = https://github.com/alejor/wlroots/commit/a11f13a97f6355a84c578ad5355b3cf4e43e7246.patch;
+        sha256 = "0i2x9rrndm3rx71l59d10j736man8p4pifpx7hwlcb055rhrylmr";
+      })];
+      mesonFlags = (o.mesonFlags or []) ++ ["-Dlogind-provider=systemd"];
     });
     sway-unwrapped = super.sway-unwrapped.overrideAttrs (o: {
-      version = "sway-unwrapped-2020-03-23-unstable";
+      version = "1.5";
       src = super.fetchFromGitHub {
         owner = "swaywm";
         repo = "sway";
-        rev = "e553e38270afa28ac7da8caf1d7e06890f476086";
-        sha256 = "01yzpahwvp75wvw3ng5bm7zwyw8kx3nw1cg2acddcp64r77464hz";
+        rev = "refs/tags/1.5";
+        sha256 = "0r3b7h778l9i20z3him9i2qsaynpn9y78hzfgv3cqi8fyry2c4f9";
       };
     });
     bemenu = super.bemenu.overrideAttrs (_: {
