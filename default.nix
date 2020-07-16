@@ -196,12 +196,7 @@ desktop-full = desktop-nographic // rec {
   '';
 
   passmenu = lib.hiPrio (pkgs.runCommandNoCC "passmenu" {} ''
-    mkdir -p $out/bin
-    cat >$out/bin/passmenu - ${./passmenu.sh} <<EOF
-    #!${pkgs.runtimeShell}
-    export PATH=${lib.escapeShellArg (lib.makeBinPath (with pkgs; [ bemenu pass-wayland findutils coreutils gnused gawk ydotool utillinux wl-clipboard ]))}
-    EOF
-    chmod +x $out/bin/passmenu
+    install -Dm0755 ${./passmenu.sh} $out/bin/passmenu
   '');
 };
 }
