@@ -6,7 +6,7 @@ set $down j
 set $up k
 set $right l
 set $term alacritty
-set $menu bemenu-run --fn 'Hack 13' | xargs swaymsg exec --
+set $menu bemenu-run --fn Hack | xargs swaymsg exec --
 
 output * bg ~/.background-image fit #000000
 
