@@ -148,7 +148,9 @@ desktop-full = desktop-nographic // rec {
     chromium dfeet
     ddcutil
     endless-sky
-    evince feh firefox-wayland gimp graphicsmagick
+    evince feh firefox-wayland
+    font-awesome_4
+    gimp graphicsmagick
     glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
     hack-font
