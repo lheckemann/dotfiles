@@ -178,12 +178,14 @@ desktop-full = desktop-nographic // rec {
   sway-session = writeScriptBin "sway-session" ''
     #!${stdenv.shell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
+           XDG_CONFIG_DIRS=$HOME/.nix-profile:$XDG_CONFIG_DIRS
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
            EDITOR='editor' \
            QT_QPA_PLATFORM=wayland \
            MOZ_ENABLE_WAYLAND=1 \
            XDG_BACKEND=wayland
-    systemctl import-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND XCURSOR_PATH XDG_BACKEND
+    exec &>~/.cache/sway-session.log
+    systemctl --user import-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND XCURSOR_PATH XDG_BACKEND
     dbus-update-activation-environment QT_QPA_PLATFORM MOZ_ENABLE_WAYLAND XCURSOR_PATH XDG_BACKEND
     exec sway -c ~/.nix-profile/etc/sway/config
   '';
