@@ -1,6 +1,6 @@
-{ emacs26, fetchFromGitHub, wayland, wayland-protocols
+{ emacs27, fetchFromGitHub, wayland, wayland-protocols
 , autoreconfHook, texinfo, enableDebugging, lib }:
-enableDebugging (emacs26.overrideAttrs (
+enableDebugging (emacs27.overrideAttrs (
   { buildInputs, configureFlags ? [], postPatch ? "", nativeBuildInputs ? [], ... }:
   {
     /*
@@ -13,15 +13,15 @@ enableDebugging (emacs26.overrideAttrs (
     src = fetchFromGitHub {
       owner = "masm11";
       repo = "emacs";
-      rev = "f88789bd3e87111809e3db25e2604a0f58c17e92";
-      sha256 = "10m40qpvnbxy98h84lvlp1f5zpqqarbxihjn7x1v4072hf2fhj3q";
+      rev = "2d5e81ce9487217f87c954af0c501a9515b67413";
+      sha256 = "18kd82h1ib1ldar2ikcf9w1jdqhjmwbak8yccbbga4yk3szymyja";
     };
 
     patches = [];
     buildInputs = buildInputs ++ [ wayland wayland-protocols];
     nativeBuildInputs = nativeBuildInputs ++ [ autoreconfHook texinfo ];
 
-    configureFlags = configureFlags ++ [ "--without-x" "--with-cairo" "--with-modules" ];
+    configureFlags = configureFlags ++ [ "--without-x" "--with-cairo" "--with-modules" "--with-pgtk" ];
 
     /*
     postPatch = ''
