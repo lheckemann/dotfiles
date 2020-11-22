@@ -38,6 +38,7 @@ let
     { name = "etc/sway/config"; path = "${./sway-config}"; }
     { name = "etc/i3status-rs.toml"; path = "${./i3status-rs.toml}"; }
     { name = "etc/mako.conf"; path = "${./mako.conf}"; }
+    { name = "etc/alacritty.yml"; path = "${./alacritty.yml}"; }
   ]);
   tmuxConfigured = writeScriptBin "tmux" ''
     #!${stdenv.shell}
@@ -125,7 +126,7 @@ desktop-nographic = basic // {
 };
 desktop-full = desktop-nographic // rec {
   inherit (pkgs)
-    alacritty audacity
+    audacity
     bemenu
     chromium dfeet
     ddcutil
@@ -143,6 +144,10 @@ desktop-full = desktop-nographic // rec {
     tdesktop terminus_font tigervnc vlc youtube-dl
     wdisplays wl-clipboard
     ;
+  alacritty = pkgs.writeScriptBin "alacritty" ''
+    #!${pkgs.runtimeShell}
+    exec ${pkgs.alacritty}/bin/alacritty --config-file $HOME/.nix-profile/etc/alacritty.yml "$@"
+  '';
   noto-fonts-emoji = lib.hiPrio pkgs.noto-fonts-emoji;
   mupdf = pkgs.mupdf.overrideAttrs (o: {
       patches = (o.patches or []) ++ [ ./0001-x11-accept-commands-on-stdin-as-well.patch ];
