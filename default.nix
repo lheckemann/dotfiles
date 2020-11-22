@@ -74,7 +74,7 @@ let
 in rec {
 basicLight = {
   inherit confs tmuxConfigured nix-prefetch-github src openPort vim;
-  inherit (pkgs) binutils file htop jq lsof moreutils ncdu pv strace tcpdump units;
+  inherit (pkgs) binutils file htop jq lsof moreutils ncdu pv rsync strace tcpdump units;
   inherit (pkgs) lnav;
   inherit (pkgs.bind) dnsutils;
   build-on = pkgs.writeShellScriptBin "build-on" ''
