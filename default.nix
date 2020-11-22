@@ -94,6 +94,8 @@ basic = basicLight // {
 desktop-nographic = basic // {
   inherit (pkgs)
     borgbackup
+    dnsmasq
+    esphome
     gdb
     syncthing
     inotify-tools
@@ -106,12 +108,14 @@ desktop-nographic = basic // {
     nix-bisect
     nix-diff
     nix-index
+    nix-tree
     nixops
     nmap
     picocom
     pwgen
     ripgrep
     sqliteInteractive
+    sipcalc
     sshfs
     unzip
     vdirsyncer
@@ -142,6 +146,7 @@ desktop-full = desktop-nographic // rec {
     pass-wayland pavucontrol redshift-wlr rdesktop remmina socat
     sway sway_screenshot
     tdesktop terminus_font tigervnc vlc youtube-dl
+    virt-manager
     wdisplays wl-clipboard
     ;
   alacritty = pkgs.writeScriptBin "alacritty" ''
@@ -155,6 +160,7 @@ desktop-full = desktop-nographic // rec {
   mumble = pkgs.mumble.overrideAttrs (o: { patches = o.patches ++ [ ./mumble-dbus-ptt.patch ]; });
   inherit (androidenv.androidPkgs_9_0) platform-tools;
   inherit (gnome3) eog dconf adwaita-icon-theme;
+  inherit (pkgs.xorg) xhost;
   emacs-wayland = callPackage ./emacs-wayland.nix {};
   emacs = lib.hiPrio (callPackage ./emacs.nix { emacs = emacs-wayland; });
   emacs-x = callPackage ./emacs.nix {};
