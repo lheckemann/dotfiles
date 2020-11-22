@@ -1,27 +1,5 @@
 { pkgs ? import <nixpkgs> {
   overlays = [ (self: super: {
-    wlroots = super.wlroots.overrideAttrs (o: {
-      src = super.fetchFromGitHub {
-        owner = "swaywm";
-        repo = "wlroots";
-        rev = "refs/tags/0.11.0";
-        sha256 = "08d5d52m8wy3imfc6mdxpx8swhh2k4s1gmfaykg02j59z84awc6p";
-      };
-      patches = (o.patches or []) ++ [(super.fetchpatch {
-        url = https://github.com/alejor/wlroots/commit/a11f13a97f6355a84c578ad5355b3cf4e43e7246.patch;
-        sha256 = "0i2x9rrndm3rx71l59d10j736man8p4pifpx7hwlcb055rhrylmr";
-      })];
-      mesonFlags = (o.mesonFlags or []) ++ ["-Dlogind-provider=systemd"];
-    });
-    sway-unwrapped = super.sway-unwrapped.overrideAttrs (o: {
-      version = "1.5";
-      src = super.fetchFromGitHub {
-        owner = "swaywm";
-        repo = "sway";
-        rev = "refs/tags/1.5";
-        sha256 = "0r3b7h778l9i20z3him9i2qsaynpn9y78hzfgv3cqi8fyry2c4f9";
-      };
-    });
     sway_screenshot = super.runCommand "sway_screenshot" {
       src = super.fetchFromGitHub {
         owner = "yschaeff";
@@ -48,6 +26,10 @@
         sha256 = "1akxs605dma8xdixj62l48nk145nss9d1a8l8k0wxn5hwkqfr4vy";
       }
     ) {};
+
+    sway = super.enableDebugging super.sway;
+    sway-unwrapped = super.enableDebugging super.sway-unwrapped;
+    wlroots = super.enableDebugging super.wlroots;
   }) ];
 } }: with pkgs;
 let
