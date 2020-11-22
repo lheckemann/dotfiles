@@ -12,12 +12,6 @@ driver = "upower"
 device = "battery_BAT0"
 
 [[block]]
-block = "battery"
-driver = "upower"
-device = "battery_BAT1"
-
-
-[[block]]
 block = "disk_space"
 path = "/"
 alias = "/"
@@ -35,16 +29,11 @@ alert = 10.0
 
 [[block]]
 block = "net"
-device = "wlp4s0"
+device = "wlp3s0"
 signal_strength = true
 ssid = true
 speed_up = false
 speed_down = false
-
-#[[block]]
-#block = "net"
-#hide_missing = true
-#device = "enp0s31f6"
 
 [[block]]
 block = "temperature"
