@@ -10,8 +10,6 @@ set $menu bemenu-run --fn Hack | xargs swaymsg exec --
 
 output * bg ~/.background-image fit #000000
 
-output eDP-1 resolution 2560x1440 position 0,0 scale 1.6
-
 exec swayidle -w \
     timeout 290 'light -O; light -S 1' \
          resume 'light -I' \
@@ -25,6 +23,7 @@ exec xrdb -merge - <<<"Xcursor.theme: Adwaita"
 input * xkb_layout "gb"
 input * xkb_options "caps:escape"
 input * tap enabled
+input 2:7:SynPS/2_Synaptics_TouchPad pointer_accel 0.4
 
 floating_modifier $mod normal
 bindsym $mod+Return exec $term
@@ -132,8 +131,10 @@ bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
 bindsym $mod+BackSpace exec swaylock -c 000030
 bindsym $mod+p exec "passmenu"
 bindsym Print exec "screenshot"
-bindsym --no-repeat           F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalk
-bindsym --no-repeat --release F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
+bindsym --no-repeat  XF86Explorer  exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
+bindsym --no-repeat  XF86Favorites exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
+bindsym --no-repeat            F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalk
+bindsym --no-repeat --release  F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
 
 for_window [title="Firefox - Sharing Indicator"] {
   floating enable
