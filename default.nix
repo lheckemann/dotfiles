@@ -121,6 +121,7 @@ desktop-nographic = basic // {
     vdirsyncer
     ;
   gnupg = gnupg.override {guiSupport = false;};
+  install-nixos = pkgs.writeScriptBin "install-nixos" (builtins.readFile ./install-nixos.sh);
   nixopses =
     lib.recurseIntoAttrs (
       lib.mapAttrs
