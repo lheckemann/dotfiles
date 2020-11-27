@@ -19,7 +19,7 @@ inst() {
                 ;;
         esac
     done
-    : "{system:?pass system with -s}" "${host:?pass host with -h}"
+    : "${system:?pass system with -s}" "${host:?pass host with -h}"
     if [[ "$system" = *.drv ]]; then
         system=$(nix-store -r "$system")
     fi
