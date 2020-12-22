@@ -1,8 +1,11 @@
 #!/usr/bin/env bash
 set -exuo pipefail
 
+PROGRAM_NAME="$0"
+
 inst() {
     local system="" host="" action="install"
+    local -a nixCopyArgs
     while [[ "$#" -gt 0 ]] ; do
         case "$1" in
             -s)
@@ -17,13 +20,21 @@ inst() {
                 action="$2"
                 shift 2
                 ;;
+            --substitute)
+                nixCopyArgs+=(-s)
+                shift
+                ;;
+            *)
+                echo 'Usage: $PROGRAM_NAME -s <system> -h <host> [-a <action>] [--substitute]'
+                exit -1
+                ;;
         esac
     done
     : "${system:?pass system with -s}" "${host:?pass host with -h}"
     if [[ "$system" = *.drv ]]; then
         system=$(nix-store -r "$system")
     fi
-    nix copy --to  ssh://root@"$host" "$system"
+    nix copy "${nixCopyArgs[@]}" --to ssh://root@"$host" "$system"
     case "$action" in
         install)
             ssh -t root@"$host" nix copy --no-require-sigs "$system" --to /mnt
