@@ -187,5 +187,11 @@ desktop-full = desktop-nographic // rec {
   passmenu = lib.hiPrio (pkgs.runCommandNoCC "passmenu" {} ''
     install -Dm0755 ${./passmenu.sh} $out/bin/passmenu
   '');
+
+  bgssh = writeScriptBin "bgssh" ''
+    #!${pkgs.runtimeShell}
+    ssh -o ServerAliveInterval=10 "$1" true
+    ssh "$1" 'while sleep 10; do date; done' >/dev/null &
+  '';
 };
 }
