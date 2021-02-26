@@ -1,36 +1,39 @@
-{ pkgs ? import <nixpkgs> {
-  overlays = [ (self: super: {
-    sway_screenshot = super.runCommand "sway_screenshot" {
-      src = super.fetchFromGitHub {
-        owner = "yschaeff";
-        repo = "sway_screenshots";
-        rev = "ad27b1b6e42f536b61dd5d8d0a3fe26c60017c41";
-        sha256 = "1m53d020m549y76dj1nn11k82z24z78sh2jhsl6b9avxkwk32ycw";
-      };
-    } ''
-      runHook unpackPhase
-      cd $sourceRoot
-      mkdir -p $out/bin
-      cat >$out/bin/screenshot - <(sed '/MENU=/d' screenshot.sh) <<EOF
-      #!${pkgs.runtimeShell}
-      export PATH=PATH:${super.lib.escapeShellArg (super.lib.makeBinPath (with self; [ procps coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder bemenu ]))}
-      MENU="bemenu --fn Hack"
-      EOF
-      chmod a+x $out/bin/screenshot
-    '';
-    nix-bisect = super.callPackage (
-      super.fetchFromGitHub {
-        owner = "timokau";
-        repo = "nix-bisect";
-        rev = "v0.4.0";
-        sha256 = "1akxs605dma8xdixj62l48nk145nss9d1a8l8k0wxn5hwkqfr4vy";
-      }
-    ) {};
-
-    sway = super.enableDebugging super.sway;
-    sway-unwrapped = super.enableDebugging super.sway-unwrapped;
-    wlroots = super.enableDebugging super.wlroots;
-  }) ];
+{ sources ? import ./nix/sources.nix {}
+, pkgs ? import sources.nixpkgs {
+  overlays = [
+    (self: super: {
+      sway_screenshot = super.runCommand "sway_screenshot" {
+        src = super.fetchFromGitHub {
+          owner = "yschaeff";
+          repo = "sway_screenshots";
+          rev = "ad27b1b6e42f536b61dd5d8d0a3fe26c60017c41";
+          sha256 = "1m53d020m549y76dj1nn11k82z24z78sh2jhsl6b9avxkwk32ycw";
+        };
+      } ''
+        runHook unpackPhase
+        cd $sourceRoot
+        mkdir -p $out/bin
+        cat >$out/bin/screenshot - <(sed '/MENU=/d' screenshot.sh) <<EOF
+        #!${pkgs.runtimeShell}
+        export PATH=PATH:${super.lib.escapeShellArg (super.lib.makeBinPath (with self; [ procps coreutils sway xdg-user-dirs feh grim slurp jq wl-clipboard libnotify wf-recorder bemenu ]))}
+        MENU="bemenu --fn Hack"
+        EOF
+        chmod a+x $out/bin/screenshot
+      '';
+      nix-bisect = super.callPackage (
+        super.fetchFromGitHub {
+          owner = "timokau";
+          repo = "nix-bisect";
+          rev = "v0.4.0";
+          sha256 = "1akxs605dma8xdixj62l48nk145nss9d1a8l8k0wxn5hwkqfr4vy";
+        }
+      ) {};
+      sway = super.enableDebugging super.sway;
+      sway-unwrapped = super.enableDebugging super.sway-unwrapped;
+      wlroots = super.enableDebugging super.wlroots;
+    })
+    (import sources.emacs-overlay)
+  ];
 } }: with pkgs;
 let
   confs = lib.hiPrio (linkFarm "confs" [
