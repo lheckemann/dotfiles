@@ -165,8 +165,7 @@ desktop-full = desktop-nographic // rec {
   inherit (androidenv.androidPkgs_9_0) platform-tools;
   inherit (gnome3) eog dconf adwaita-icon-theme;
   inherit (pkgs.xorg) xhost;
-  emacs-wayland = callPackage ./emacs-wayland.nix {};
-  emacs = lib.hiPrio (callPackage ./emacs.nix { emacs = emacs-wayland; });
+  emacs = lib.hiPrio (callPackage ./emacs.nix { emacs = pkgs.emacsPgtkGcc; });
   emacs-x = callPackage ./emacs.nix {};
   editor = pkgs.writeShellScriptBin "editor" ''
     export TERM=xterm-256color
