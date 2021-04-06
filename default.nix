@@ -107,7 +107,9 @@ desktop-nographic = basic // {
     syncthing
     inotify-tools
     isync
+    k9s
     khal
+    kubectl
     man-pages
     mosh
     msmtp
