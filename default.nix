@@ -84,9 +84,13 @@ basicLight = {
     set -ex
     host="$1"
     shift
-    drv=$(nix-instantiate "$@")
-    nix-copy-closure --to "$host" "$drv"
-    nix-store --store ssh-ng://"$host" -r "$drv"
+    if [[ "$1" = *.drv ]] ; then
+      drvs="$1"
+    else
+      drvs=$(nix-instantiate "$@")
+    fi
+    nix-copy-closure --to "$host" $drvs
+    nix-store --store ssh-ng://"$host" -r $drvs --keep-going
   '';
 };
 basic = basicLight // {
