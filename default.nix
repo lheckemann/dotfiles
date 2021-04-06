@@ -146,7 +146,9 @@ desktop-full = desktop-nographic // rec {
     ddcutil
     endless-sky
     evince feh firefox-wayland
+    ffmpeg-full
     font-awesome_4
+    gammastep
     gimp graphicsmagick
     glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
