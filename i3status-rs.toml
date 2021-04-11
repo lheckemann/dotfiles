@@ -7,6 +7,16 @@ icons = "awesome"
 #interval = 5
 
 [[block]]
+block = "custom"
+command = "khal list -d card_local now '8 hours' -f '{start-time} {title}' --day-format '' | head -n1"
+interval = 300
+
+[[block]]
+block = "custom"
+command = "khal list -a card_local now '8 hours' -f '{title}' --day-format '' | grep -v 'No events' | head -n1"
+interval = 3600
+
+[[block]]
 block = "battery"
 driver = "upower"
 device = "battery_BAT0"
