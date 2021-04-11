@@ -180,9 +180,9 @@ desktop-full = desktop-nographic // rec {
     exec emacsclient -nw -c -- "$@"
   '';
   sway-session = writeScriptBin "sway-session" ''
-    #!${stdenv.shell}
+    #!${pkgs.runtimeShell}
     export XCURSOR_PATH=${gnome3.adwaita-icon-theme}/share/icons \
-           XDG_CONFIG_DIRS=$HOME/.nix-profile:$XDG_CONFIG_DIRS
+           XDG_CONFIG_DIRS=$HOME/.nix-profile:$XDG_CONFIG_DIRS \
            SSH_AUTH_SOCK=/run/user/1000/gnupg/S.gpg-agent.ssh \
            EDITOR='editor' \
            QT_QPA_PLATFORM=wayland \
