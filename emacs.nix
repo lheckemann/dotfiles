@@ -5,6 +5,7 @@
     (set-variable 'inhibit-startup-screen t)
     (setq whitespace-style '(tab-mark face trailing tabs))
     (global-whitespace-mode)
+    (global-undo-tree-mode)
     (require 'evil)
     (evil-set-initial-state 'vterm-mode 'emacs)
     (evil-mode)
@@ -12,12 +13,15 @@
     (require 'notmuch)
     (counsel-mode)
     (global-set-key (kbd "C-x f") 'counsel-rg)
+    (global-set-key (kbd "C-c u") 'browse-url-at-point)
   ''
+, buildEnv
 , haskellPackages
 , runCommandNoCC
 , emacsPackagesFor
 , callPackage
 , notmuch
+, linkFarm
 , emacs
 }:
 let
@@ -42,11 +46,22 @@ let
     lsp-mode
     lsp-ui
     lsp-haskell
+    php-mode
     transpose-frame
     typescript-mode
     counsel
     notmuch.emacs
     jq-mode
+    undo-tree
     vterm
+    vterm-toggle
+    keyfreq
+    erlang
   ]);
-in (emacsPackagesFor emacs).emacsWithPackages packagesFun
+  nixpkgs-emacs = (emacsPackagesFor emacs).emacsWithPackages packagesFun;
+  my-emacs = buildEnv {
+    name = "emacs-packages";
+    paths = packagesFun (emacsPackagesFor emacs);
+    pathsToLink = ["/share/emacs"];
+  };
+in nixpkgs-emacs
