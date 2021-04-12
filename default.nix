@@ -187,7 +187,7 @@ desktop-full = desktop-nographic // rec {
   emacs-x = callPackage ./emacs.nix {};
   editor = pkgs.writeShellScriptBin "editor" ''
     export TERM=xterm-256color
-    exec emacsclient -nw -c -- "$@"
+    exec emacsclient -c -- "$@"
   '';
   sway-session = writeScriptBin "sway-session" ''
     #!${pkgs.runtimeShell}
