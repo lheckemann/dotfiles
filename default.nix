@@ -163,7 +163,9 @@ desktop-full = desktop-nographic // rec {
     hack-font
     i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
     kanshi
-    pass-wayland pavucontrol redshift-wlr rdesktop remmina socat
+    pass-wayland pavucontrol rdesktop remmina
+    signal-desktop socat
+    samba
     sway sway_screenshot
     tdesktop terminus_font tigervnc vlc youtube-dl
     virt-manager
