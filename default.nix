@@ -129,6 +129,14 @@ desktop-nographic = basic // {
     unzip
     vdirsyncer
     ;
+  trainspeed = writeShellScriptBin "trainspeed" ''
+    wls=$(wpa_cli -iwlp3s0 status)
+    if [[ "$wls" = *WIFI* ]] ; then
+      json=$(curl -v --resolve iceportal.de:443:172.18.1.110 https://iceportal.de/api1/rs/status)
+      speed=$(echo "$json" | jq .speed)
+      echo 🚂 $speed km/h
+    fi
+  '';
   gnupg = gnupg.override {guiSupport = false;};
   install-nixos = pkgs.writeScriptBin "install-nixos" (builtins.readFile ./install-nixos.sh);
   nixopses =
