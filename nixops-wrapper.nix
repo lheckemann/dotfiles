@@ -16,7 +16,7 @@ writeTextFile {
     ${pre}
     if [[ " $*" = *\ deploy\ * ]]; then
       case "$*" in
-        *\ --dry-activate* | *\ --build-only* | *\ --dry-run*) ;;
+        *\ --dry-activate* | *\ --build-only* | *\ --dry-run* | *\ --copy-only*) ;;
         *)
           read -rp "really deploy? " -N1 confirm
           echo
