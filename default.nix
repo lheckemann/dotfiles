@@ -114,6 +114,7 @@ desktop-nographic = basic // {
     mosh
     msmtp
     notmuch
+    niv
     nix-bisect
     nix-diff
     nix-index
