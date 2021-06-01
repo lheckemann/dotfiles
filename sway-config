@@ -135,13 +135,16 @@ bindsym --no-repeat  XF86Explorer  exec gdbus call -e -d net.sourceforge.mumble.
 bindsym --no-repeat  XF86Favorites exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
 bindsym --no-repeat            F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalk
 bindsym --no-repeat --release  F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
+bindsym $mod+m exec "vdirsyncer sync & mbsync -a && notmuch new && notmuch tag --batch --input ~/notmuch-tag-rules"
 
-for_window [title="Firefox - Sharing Indicator"] {
+for_window [title="Firefox .* Sharing Indicator"] {
   floating enable
   sticky enable
   inhibit_idle open
   border none
 }
+for_window [title="Ediff"] floating enable
+for_window [title="Close tabs.*"] floating enable
 for_window [app_id="Alacritty"] border pixel 1
 
 exec "gammastep -l 48:11 -t 5500:2800"
