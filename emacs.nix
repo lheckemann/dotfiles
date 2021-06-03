@@ -56,7 +56,6 @@ let
     vterm
     vterm-toggle
     keyfreq
-    erlang
   ]);
   nixpkgs-emacs = (emacsPackagesFor emacs).emacsWithPackages packagesFun;
   my-emacs = buildEnv {

@@ -28,9 +28,9 @@
           sha256 = "1akxs605dma8xdixj62l48nk145nss9d1a8l8k0wxn5hwkqfr4vy";
         }
       ) {};
-      sway = super.enableDebugging super.sway;
       sway-unwrapped = super.enableDebugging super.sway-unwrapped;
       wlroots = super.enableDebugging super.wlroots;
+      tigervnc = super.tigervnc.override { fontDirectories = []; };
     })
     (import sources.emacs-overlay)
   ];
