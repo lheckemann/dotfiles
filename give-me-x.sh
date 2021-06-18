@@ -3,7 +3,10 @@ setup() {
     local tmpDir xsocket passwd viewpasswd bold end
     tmpDir=$(mktemp -d --tmpdir give-me-x.XXXXXXXX)
     for i in {0..20} ; do
-        [[ -e /tmp/.X11-unix/X$i ]] || break
+        # Check if X display is available
+        ! [[ -e /tmp/.X11-unix/X$i ]] || continue
+        # Check if VNC port is available
+        netstat -ltnW | awk '{print $4}' | grep -Eq ":$((5900+i))\$" || break
     done
     export DISPLAY=:$i
     xsocket=/tmp/.X11-unix/X$i
