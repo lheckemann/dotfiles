@@ -218,4 +218,12 @@ desktop-full = desktop-nographic // rec {
     ssh "$1" 'while sleep 10; do date; done' >/dev/null &
   '';
 };
+give-me-x = { extraPackages ? [] }: mkShell {
+  name = "give-me-x";
+  nativeBuildInputs = let
+    packageNames = if lib.isList extraPackages then extraPackages else lib.splitString " " extraPackages;
+    packages = map (name: pkgs.${name}) packageNames;
+  in [ tigervnc icewm pwgen minica ] ++ packages;
+  shellHook = builtins.readFile ./give-me-x.sh;
+};
 }
