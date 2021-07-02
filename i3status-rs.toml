@@ -27,9 +27,10 @@ path = "/"
 alias = "/"
 info_type = "available"
 unit = "GB"
+format = "/ {available}"
 interval = 20
-warning = 10.0
-alert = 10.0
+warning = 100.0
+alert = 50.0
 
 #[[block]]
 #block = "memory"
@@ -40,14 +41,11 @@ alert = 10.0
 [[block]]
 block = "net"
 device = "wlp3s0"
-signal_strength = true
-ssid = true
-speed_up = false
-speed_down = false
+format = "{signal_strength} {ssid}"
 
 [[block]]
 block = "temperature"
-format = "{max}°C"
+format = "{max}C"
 collapsed = false
 
 #[[block]]
