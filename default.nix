@@ -162,11 +162,13 @@ desktop-full = desktop-nographic // rec {
     glib # for gdbus
     gnupg # Replace the non-graphical one from desktop-nographic
     hack-font
+    ipmitool
     i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
     kanshi
     pass-wayland pavucontrol rdesktop remmina
-    signal-desktop socat
     samba
+    signal-desktop socat
+    stunnel
     sway sway_screenshot
     tdesktop terminus_font tigervnc vlc youtube-dl
     virt-manager
