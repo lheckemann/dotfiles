@@ -29,8 +29,10 @@ info_type = "available"
 unit = "GB"
 format = "/ {available}"
 interval = 20
-warning = 100.0
-alert = 50.0
+warning = 100
+alert = 50
+unit = "GB"
+alert_absolute = true
 
 #[[block]]
 #block = "memory"
