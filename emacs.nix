@@ -38,6 +38,7 @@ let
     sudo-edit
     magit
     forge
+    flycheck
     yaml-mode
     rust-mode
     dhall-mode
@@ -46,6 +47,8 @@ let
     lsp-mode
     lsp-ui
     lsp-haskell
+    lsp-ivy
+    helm-lsp
     php-mode
     transpose-frame
     typescript-mode

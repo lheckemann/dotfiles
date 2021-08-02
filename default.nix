@@ -165,7 +165,9 @@ desktop-full = desktop-nographic // rec {
     ipmitool
     i3status-rust inkscape kvm libreoffice mako mpv noto-fonts
     kanshi
+    mpc_cli
     pass-wayland pavucontrol rdesktop remmina
+    rnix-lsp
     samba
     signal-desktop socat
     stunnel
