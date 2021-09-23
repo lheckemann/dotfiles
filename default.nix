@@ -1,5 +1,6 @@
 { sources ? import ./nix/sources.nix {}
-, pkgs ? import sources.nixpkgs {
+, nixpkgs ? sources.nixpkgs
+, pkgs ? import nixpkgs {
   overlays = [
     (self: super: {
       sway_screenshot = super.runCommand "sway_screenshot" {
