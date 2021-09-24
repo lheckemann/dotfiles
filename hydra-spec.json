@@ -1,0 +1,16 @@
+{
+    "enabled": 1,
+    "hidden": false,
+    "description": "Jobsets",
+    "nixexprinput": "src",
+    "nixexprpath": "hydra-jobs/jobsets.nix",
+    "checkinterval": 1800,
+    "schedulingshares": 100,
+    "enableemail": true,
+    "keepnr": 50,
+    "type": 0,
+    "inputs": {
+        "src": { "type": "git", "value": "https://git.sr.ht/~linuxhackerman/nix-config master", "emailresponsible": false },
+        "nixpkgs": { "type": "git", "value": "https://github.com/nixos/nixpkgs.git nixos-21.05", "emailresponsible": false }
+    }
+}
