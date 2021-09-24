@@ -20,7 +20,7 @@ rec {
     };
   };
   jobsets = rec {
-    sources = lib.recursiveUpdate defaults {
+    sources = pkgs.lib.recursiveUpdate defaults {
       nixexprpath = "nix/sources.nix";
     };
     /*
