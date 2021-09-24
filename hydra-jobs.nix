@@ -2,7 +2,7 @@
 , pkgs ? import nixpkgs {}
 , declInput ? {}
 }:
-rec {
+let
   defaults = {
     enabled = "1";
     hidden = false;
@@ -44,4 +44,4 @@ rec {
     };*/
   };
   jobsetsJSON = (pkgs.formats.json {}).generate jobsets;
-}
+in { jobsets = jobsetsJSON; }
