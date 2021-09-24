@@ -43,5 +43,5 @@ let
       };
     };*/
   };
-  jobsetsJSON = (pkgs.formats.json {}).generate jobsets;
+  jobsetsJSON = (pkgs.formats.json {}).generate "jobsets.json" jobsets;
 in { jobsets = jobsetsJSON; }
