@@ -3,7 +3,7 @@
     "hidden": false,
     "description": "Jobsets",
     "nixexprinput": "src",
-    "nixexprpath": "hydra-jobs/jobsets.nix",
+    "nixexprpath": "hydra-jobs.nix",
     "checkinterval": 1800,
     "schedulingshares": 100,
     "enableemail": true,
