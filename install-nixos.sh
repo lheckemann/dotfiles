@@ -39,8 +39,13 @@ inst() {
         esac
     done
     : "${system:?pass system with -s}" "${host:?pass host with -h}"
+    system="$(readlink -f $system)"
     if [[ "$system" = *.drv ]]; then
         system=$(nix-store --store "$from" -r "$system")
+    fi
+    if ! [[ -e "$system"/kernel ]] ; then
+        echo "is '$system' really a nixos system?"
+        exit 1
     fi
 
     if [[ -n "$mount" && "$action" != "install" ]] ; then
