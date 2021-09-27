@@ -138,6 +138,7 @@ bindsym --no-repeat  XF86Favorites exec gdbus call -e -d net.sourceforge.mumble.
 bindsym --no-repeat            F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.startTalk
 bindsym --no-repeat --release  F12 exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk
 bindsym $mod+m exec "vdirsyncer sync & mbsync -a && notmuch new && notmuch tag --batch --input ~/notmuch-tag-rules"
+bindsym $mod+z exec --no-startup-id "chromium --incognito --app=http://localhost:6681"
 
 for_window [title="Firefox .* Sharing Indicator"] {
   floating enable
