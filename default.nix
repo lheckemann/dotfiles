@@ -102,6 +102,7 @@ basic = basicLight // {
 desktop-nographic = basic // {
   inherit (pkgs)
     borgbackup
+    direnv
     dnsmasq
     esphome
     gdb
@@ -118,6 +119,7 @@ desktop-nographic = basic // {
     niv
     nix-bisect
     nix-diff
+    nix-direnv
     nix-index
     nix-tree
     nixops
@@ -168,6 +170,7 @@ desktop-full = desktop-nographic // rec {
     kanshi
     mpc_cli
     pass-wayland pavucontrol rdesktop remmina
+    rust-analyzer
     rnix-lsp
     samba
     signal-desktop socat
