@@ -1,9 +1,10 @@
 { nixpkgs ? <nixpkgs>
 , pkgs ? import nixpkgs {}
+, lib ? pkgs.lib
 , declInput ? {}
 }:
 let
-  defaults = {
+  blankJob = {
     enabled = "1";
     description = "";
     enableemail = false;
@@ -22,33 +23,29 @@ let
       };
     };
   };
+  defaultJob = lib.recursiveUpdate blankJob {
+    inputs = {
+      nixpkgs = {
+        type = "build";
+        value = "sources:nixpkgs";
+      };
+      emacs-overlay = {
+        type = "build";
+        value = "sources:emacs-overlay";
+      };
+    };
+  };
   jobsets = rec {
-    sources = pkgs.lib.recursiveUpdate defaults {
+    sources = lib.recursiveUpdate blankJob {
       nixexprpath = "nix/sources-hydra.nix";
       inputs.nixpkgs = {
         type = "git";
         value = "https://github.com/nixos/nixpkgs nixos-21.05";
       };
     };
-    /*
-    dotfiles = {
+    user-config = lib.recursiveUpdate defaultJob {
       nixexprpath = "default.nix";
-      keepnr = 50;
-      schedulingshares = 100;
-      checkinterval = 1800;
-      type = 0;
-      inputs = {
-        nix-config = {
-          type = "git";
-          value = "https://git.sr.ht/~linuxhackerman/nix-config master";
-          emailresponsible = false;
-        };
-        nixpkgs = {
-          type = "git";
-          value = "https://github.com/nixos/nixpkgs nixos-21.05";
-        };
-      };
-    };*/
+    };
   };
   jobsetsJSON = (pkgs.formats.json {}).generate "jobsets.json" jobsets;
 in { jobsets = jobsetsJSON; }
