@@ -7,6 +7,7 @@ let
     enabled = "1";
     description = "";
     enableemail = false;
+    emailoverride = "";
     hidden = false;
     nixexprinput = "nix-config";
     keepnr = 50;
