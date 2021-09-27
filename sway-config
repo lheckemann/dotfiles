@@ -24,6 +24,8 @@ input * xkb_layout "gb"
 input * xkb_options "caps:escape"
 input * tap enabled
 input 2:7:SynPS/2_Synaptics_TouchPad pointer_accel 0.4
+input "9094:17207:Raydium_Corporation_Raydium_Touch_System" map_to_output eDP-1
+
 
 floating_modifier $mod normal
 bindsym $mod+Return exec $term
