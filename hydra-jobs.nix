@@ -5,6 +5,8 @@
 let
   defaults = {
     enabled = "1";
+    description = "";
+    enableemail = false;
     hidden = false;
     nixexprinput = "nix-config";
     keepnr = 50;
