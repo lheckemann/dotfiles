@@ -1,4 +1,5 @@
 { nixpkgs }:
+let lib = import (nixpkgs + "/lib");
 {
-  sources = import ./sources.nix { pkgs = import nixpkgs {}; };
+  sources = lib.mapAttrs (_: value: value.outPath; } (import ./sources.nix { pkgs = import nixpkgs {}; });
 }
