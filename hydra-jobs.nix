@@ -24,7 +24,7 @@ let
   };
   jobsets = rec {
     sources = pkgs.lib.recursiveUpdate defaults {
-      nixexprpath = "nix/sources.nix";
+      nixexprpath = "nix/sources-hydra.nix";
     };
     /*
     dotfiles = {
