@@ -15,8 +15,9 @@ exec swayidle -w \
          resume 'light -I' \
     timeout 600 'swaymsg "output * dpms off"' \
          resume 'swaymsg "output * dpms on"' \
-    timeout 305 'swaylock -f -c 000030' \
-    before-sleep 'swaylock -f -c 000030'
+    timeout 305 'afk.py' \
+    before-sleep 'swaylock -f -c 003030'
+
 
 exec xrdb -merge - <<<"Xcursor.theme: Adwaita"
 
@@ -130,7 +131,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "pactl set-sink-volume @DEFAUL
 bindsym XF86AudioMute exec --no-startup-id "pactl set-sink-mute @DEFAULT_SINK@ toggle"
 bindsym XF86MonBrightnessUp exec --no-startup-id "light -A 10"
 bindsym XF86MonBrightnessDown exec --no-startup-id "light -U 10"
-bindsym $mod+BackSpace exec swaylock -c 000030
+bindsym $mod+BackSpace exec afk.py
 bindsym $mod+p exec "passmenu"
 bindsym Print exec "screenshot"
 bindsym --no-repeat  XF86Explorer  exec gdbus call -e -d net.sourceforge.mumble.mumble -o / -m net.sourceforge.mumble.Mumble.stopTalk

@@ -180,6 +180,10 @@ desktop-full = desktop-nographic // rec {
     virt-manager
     wdisplays wl-clipboard
     ;
+  afk = pkgs.writeScriptBin "afk.py" ''
+    #!${pkgs.python3.withPackages (ps: [ps.dbus-python])}/bin/python
+    ${builtins.readFile ./afk.py}
+  '';
   alacritty = pkgs.writeScriptBin "alacritty" ''
     #!${pkgs.runtimeShell}
     exec ${pkgs.alacritty}/bin/alacritty --config-file $HOME/.nix-profile/etc/alacritty.yml "$@"
