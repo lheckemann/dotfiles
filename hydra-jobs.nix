@@ -25,6 +25,10 @@ let
   jobsets = rec {
     sources = pkgs.lib.recursiveUpdate defaults {
       nixexprpath = "nix/sources-hydra.nix";
+      inputs.nixpkgs = {
+        type = "git";
+        value = "https://github.com/nixos/nixpkgs nixos-21.05";
+      };
     };
     /*
     dotfiles = {

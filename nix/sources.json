@@ -1,6 +1,7 @@
 {
     "emacs-overlay": {
         "branch": "master",
+        "builtin": false,
         "description": "Bleeding edge emacs overlay [maintainer=@adisbladis] ",
         "homepage": "",
         "owner": "nix-community",
@@ -13,6 +14,7 @@
     },
     "niv": {
         "branch": "master",
+        "builtin": false,
         "description": "Easy dependency management for Nix projects",
         "homepage": "https://github.com/nmattia/niv",
         "owner": "nmattia",
@@ -25,6 +27,7 @@
     },
     "nixpkgs": {
         "branch": "nixos-21.05",
+        "builtin": false,
         "description": "Nix Packages collection",
         "homepage": "",
         "owner": "NixOS",

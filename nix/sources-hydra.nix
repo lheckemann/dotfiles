@@ -1,1 +1,4 @@
-{ sources = import ./sources.nix {}; }
+{ nixpkgs }:
+{
+  sources = import ./sources.nix { pkgs = import nixpkgs {}; };
+}
