@@ -1,5 +1,6 @@
 { sources ? import ./nix/sources.nix {}
 , nixpkgs ? sources.nixpkgs
+, emacs-overlay ? sources.emacs-overlay
 , pkgs ? import nixpkgs {
   overlays = [
     (self: super: {
@@ -33,7 +34,7 @@
       wlroots = super.enableDebugging super.wlroots;
       tigervnc = super.tigervnc.override { fontDirectories = []; };
     })
-    (import sources.emacs-overlay)
+    (import emacs-overlay)
   ];
 } }: with pkgs;
 let
