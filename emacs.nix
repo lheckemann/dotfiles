@@ -8,12 +8,15 @@
     (global-undo-tree-mode)
     (require 'evil)
     (evil-set-initial-state 'vterm-mode 'emacs)
+    (evil-set-initial-state 'ivy-occur-mode 'emacs)
+    (evil-set-initial-state 'ivy-occur-grep-mode 'emacs)
     (evil-mode)
     (require 'magit)
     (require 'notmuch)
     (counsel-mode)
     (global-set-key (kbd "C-x f") 'counsel-rg)
     (global-set-key (kbd "C-c u") 'browse-url-at-point)
+    (direnv-mode)
   ''
 , buildEnv
 , haskellPackages
@@ -59,6 +62,8 @@ let
     vterm
     vterm-toggle
     keyfreq
+    direnv
+    scad-mode
   ]);
   nixpkgs-emacs = (emacsPackagesFor emacs).emacsWithPackages packagesFun;
   my-emacs = buildEnv {
