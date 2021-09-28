@@ -46,6 +46,12 @@ let
     user-config = lib.recursiveUpdate defaultJob {
       nixexprpath = "default.nix";
     };
+    user-config-unpinned = lib.recursiveUpdate defaultJob {
+      nixexprpath = "default.nix";
+      inputs.nixpkgs.value = "https://github.com/nixos/nixpkgs nixos-21.05";
+      checkinterval = 86400;
+      keepnr = 5;
+    };
   };
   jobsetsJSON = (pkgs.formats.json {}).generate "jobsets.json" jobsets;
 in { jobsets = jobsetsJSON; }
