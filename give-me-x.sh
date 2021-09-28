@@ -1,4 +1,5 @@
-#!/usr/bin/env bash
+#!/usr/bin/env nix-shell
+#!nix-shell -i bash -p tigervnc icewm pwgen minica
 setup() {
     local tmpDir xsocket passwd viewpasswd bold end
     tmpDir=$(mktemp -d --tmpdir give-me-x.XXXXXXXX)
@@ -38,11 +39,14 @@ setup() {
 ${bold}Display:${end} :$i (VNC port $((i + 5900)))
 ${bold}Password:${end} $passwd
 ${bold}View-only password:${end} $viewpasswd
-${bold}CA cert:${end} $tmpDir/minica.pem
+${bold}CA cert:${end} $tmpDir/minica.pem   ($(openssl x509 -in "$tmpDir/minica.pem" -noout -fingerprint))
+${bold}Server cert:${end} $tmpDir/cert.pem ($(openssl x509 -in "$tmpDir/cert.pem" -noout -fingerprint))
 
 Forward the port via SSH or make sure it is opened in the firewall to proceed.
 EOF
-
-    trap 'echo Shutting down Xvnc; kill '"$xvncpid"'; rm -rf '"$tmpDir" exit
+    bash
+    echo Cleaning up...
+    kill "$xvncpid"
+    rm -rf "$tmpDir"
 }
-setup
+{ setup; }
