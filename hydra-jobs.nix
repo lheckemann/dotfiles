@@ -52,6 +52,10 @@ let
         type = "git";
         value = "https://github.com/nixos/nixpkgs nixos-21.05";
       };
+      inputs.emacs-overlay = {
+        type = "git";
+        value = "https://github.com/nix-community/emacs-overlay master";
+      };
       checkinterval = 86400;
       keepnr = 5;
     };
